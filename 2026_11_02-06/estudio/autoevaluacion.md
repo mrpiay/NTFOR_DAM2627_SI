@@ -8,9 +8,9 @@ Si en una pregunta aparece algo que no has visto, búscalo en «Dónde consultar
 
 ---
 
-**1.** ¿Para qué se usan Kali y Parrot? ¿Por qué no se usan para el día a día y cómo se suelen arrancar?
+**1.** ¿Qué es WSL? ¿En qué se diferencia de una máquina virtual de VirtualBox?
 
-**2.** ¿Qué es una distribución de Linux? ¿Qué gestor de paquetes usan Ubuntu y Linux Mint? ¿Y Fedora?
+**2.** ¿Qué muestra `wsl --list --verbose`, en PowerShell? ¿Qué significan `NAME`, `STATE` y `VERSION 2`?
 
 **3.** Ejecuta estas cuatro órdenes. Copia lo que sale por pantalla.
 
@@ -32,7 +32,7 @@ ls /noexiste && echo hola
 ls -d /tmp && echo hola
 ```
 
-**7.** En Linux, ¿qué es `~`? ¿Y `/`?
+**7.** Con WSL, ¿qué es `/mnt/c`? ¿Cómo se llega desde Ubuntu a los archivos de Windows? ¿Y desde el Explorador de Windows a los archivos de Ubuntu?
 
 **8.** Ejecuta estas dos órdenes. Copia lo que sale por pantalla. ¿Qué diferencia hay entre el JDK y el JRE?
 
@@ -43,4 +43,4 @@ java -version
 
 **9.** Ejecuta `which javac`. Copia lo que sale por pantalla.
 
-**10.** Ejecuta `code --version`. Copia la primera línea que sale por pantalla.
+**10.** Con WSL, ¿qué indica **WSL: Ubuntu-24.04** abajo a la izquierda de VS Code? ¿Para qué sirve la extensión **WSL**?
