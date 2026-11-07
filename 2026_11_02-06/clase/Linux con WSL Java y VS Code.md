@@ -14,6 +14,7 @@ Al final, escribes el código en VS Code y compilas y ejecutas desde su terminal
 > - Sáltate el apartado 1.
 > - Haz el apartado 2 en tu terminal.
 > - En el apartado 3, descarga VS Code para Linux desde [code.visualstudio.com](https://code.visualstudio.com) (en Ubuntu, el paquete `.deb`) e instálalo con `sudo apt install ./code_*.deb`, desde la carpeta de la descarga. No instales la extensión WSL: `code .` abre VS Code directamente y su terminal (**Ctrl+ñ**) ya es el de tu Linux.
+> - Si tu Linux no es Ubuntu, las órdenes equivalentes están en «Otras distribuciones de Linux», al final.
 
 Para Java también hay IDE (entornos de desarrollo integrados) como Eclipse, IntelliJ IDEA o NetBeans, que compilan y ejecutan con un botón. VS Code es un editor, pero con extensiones se acerca a un IDE. Empezamos con VS Code y el terminal para ver qué hace cada paso, y lo aprendido te servirá después en cualquier IDE.
 
@@ -140,6 +141,20 @@ VS Code (Visual Studio Code) es un editor de código gratuito de Microsoft. Se i
 Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubuntu. En la vista de Extensiones salen en dos grupos: **Local - Installed** (Windows) y **WSL: Ubuntu-24.04**. Si una extensión sale atenuada, pulsa **Install in WSL: Ubuntu-24.04**.
 
 > **Nota:** mientras aprendes, conviene no instalar extensiones que escriben código por ti (autocompletado, asistentes) ni que marcan los errores mientras escribes. Así te encuentras los errores al compilar, lees lo que dice `javac` y aprendes de cada fallo.
+
+## Otras distribuciones de Linux
+
+Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distribución, estas son las equivalentes:
+
+| Para… | Ubuntu y Debian | Fedora | openSUSE | Arch |
+| --- | --- | --- | --- | --- |
+| Actualizar la lista de programas | `sudo apt update` | `sudo dnf check-update` | `sudo zypper refresh` | Se hace junto con la fila siguiente |
+| Instalar las versiones nuevas | `sudo apt upgrade` | `sudo dnf upgrade` | `sudo zypper update` | `sudo pacman -Syu` |
+| Instalar el JDK 21 | `sudo apt install openjdk-21-jdk` | `sudo dnf install java-21-openjdk-devel` | `sudo zypper install java-21-openjdk-devel` | `sudo pacman -S jdk21-openjdk` |
+| Instalar `zip` y `unzip` | `sudo apt install zip unzip` | `sudo dnf install zip unzip` | `sudo zypper install zip unzip` | `sudo pacman -S zip unzip` |
+| Instalar VS Code | Paquete `.deb` de code.visualstudio.com: `sudo apt install ./code_*.deb` | Paquete `.rpm`: `sudo dnf install ./code-*.rpm` | Paquete `.rpm`: `sudo zypper install ./code-*.rpm` | `sudo pacman -S code` (la versión libre, «Code - OSS») |
+
+Lo demás es igual en todas: `javac -version`, `java -version`, `code .` y el terminal de VS Code.
 
 ## Si algo falla
 
