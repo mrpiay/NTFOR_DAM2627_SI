@@ -12,11 +12,12 @@ Si en una pregunta aparece algo que no has visto, búscalo en «Dónde consultar
 
 **2.** En PowerShell, ejecuta `wsl --list --verbose`. Copia lo que sale por pantalla.
 
-**3.** En el terminal de Ubuntu, ejecuta estas tres órdenes. Copia lo que sale por pantalla.
+**3.** En el terminal de Ubuntu, ejecuta estas cuatro órdenes. Copia lo que sale por pantalla.
 
 ```bash
-whoami
-cd ~
+cd /mnt
+pwd
+cd ..
 pwd
 ```
 
@@ -31,7 +32,7 @@ ls /noexiste && echo hola
 ls -d /mnt && echo hola
 ```
 
-**7.** En el terminal de Ubuntu, ejecuta `ls /mnt/c`. Copia lo que sale por pantalla.
+**7.** ¿Qué es `/mnt/c`? ¿Cómo llegas desde Ubuntu a tus archivos de Windows? ¿Y desde el Explorador de Windows a tus archivos de Ubuntu?
 
 **8.** En el terminal de Ubuntu, ejecuta estas dos órdenes. Copia lo que sale por pantalla. ¿Qué diferencia hay entre el JDK y el JRE?
 

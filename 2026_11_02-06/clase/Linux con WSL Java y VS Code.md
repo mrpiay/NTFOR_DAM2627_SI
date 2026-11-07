@@ -69,7 +69,7 @@ Debe aparecer `Ubuntu-24.04` con `VERSION 2`.
 
 **Dónde viven tus archivos**
 
-- `~` (por ejemplo `/home/piay`) es tu carpeta personal en Linux. Guarda aquí tus proyectos, por ejemplo en `~/dam2627/prog`. Las herramientas de Linux trabajan más rápido con estos archivos.
+- `~` (por ejemplo `/home/ana`) es tu carpeta personal en Linux. Guarda aquí tus proyectos, por ejemplo en `~/dam2627/prog`. Las herramientas de Linux trabajan más rápido con estos archivos.
 - `/mnt/c` es el disco C: de Windows visto desde Linux.
 - Desde el Explorador de Windows puedes ver tus archivos de Linux en **Linux > Ubuntu**, en el panel izquierdo, o escribiendo `explorer.exe .` en el terminal de Ubuntu.
 
