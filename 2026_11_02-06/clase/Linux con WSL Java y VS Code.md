@@ -146,14 +146,15 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 
 Una **distribución** es un Linux completo: el núcleo (el kernel Linux), los programas básicos, un gestor de paquetes para instalar más y, normalmente, un escritorio. Todas ejecutan los mismos programas; cambian sobre todo el gestor de paquetes y el ritmo de actualizaciones.
 
-| Distribución | Cómo es | Gestor de paquetes |
+| Distribución | Descripción | Gestor de paquetes |
 | --- | --- | --- |
-| **Debian** | Una de las más antiguas. Muy estable: actualiza poco y con mucho cuidado. Es la base de Ubuntu y de Linux Mint | `apt` |
-| **Ubuntu** | Basada en Debian, la más usada en ordenadores personales y servidores. Saca versiones LTS (de soporte largo) cada dos años, como la 24.04 | `apt` |
-| **Linux Mint** | Basada en Ubuntu, con un escritorio parecido al de Windows. Muy usada por quien viene de Windows | `apt` |
-| **Fedora** | Patrocinada por Red Hat. Trae versiones recientes de los programas y saca una versión nueva cada seis meses | `dnf` |
-| **Arch** | Mínima: se instala casi pieza a pieza y se actualiza continuamente (*rolling release*). Pensada para quien quiere controlar todo | `pacman` |
-| **Manjaro** | Basada en Arch, pero con instalador y escritorio listos para usar | `pacman` |
+| **Debian** | Una de las más antiguas y la base de muchas otras (Ubuntu, Linux Mint, Kali, Parrot).<br>Muy estable: actualiza poco y con mucho cuidado.<br>Uso típico: servidores y equipos que tienen que funcionar años sin sorpresas. | `apt` |
+| **Ubuntu** | Basada en Debian; la más usada en ordenadores personales y en la nube.<br>Saca versiones LTS (de soporte largo) cada dos años, como la 24.04.<br>Uso típico: escritorio para programar, servidores y WSL. | `apt` |
+| **Linux Mint** | Basada en Ubuntu, con un escritorio parecido al de Windows.<br>Uso típico: ordenadores personales de quien viene de Windows o de equipos con pocos recursos. | `apt` |
+| **Fedora** | Patrocinada por Red Hat; trae versiones recientes de los programas y saca una versión nueva cada seis meses.<br>Uso típico: desarrollo de software y para aprender el entorno de Red Hat, muy usado en empresas. | `dnf` |
+| **Arch** | Mínima: se instala casi pieza a pieza y se actualiza continuamente (*rolling release*).<br>Uso típico: usuarios avanzados que quieren montar y controlar todo su sistema. | `pacman` |
+| **Manjaro** | Basada en Arch, pero con instalador y escritorio listos para usar.<br>Uso típico: tener programas muy actualizados sin montar el sistema a mano. | `pacman` |
+| **Kali** y **Parrot** | Basadas en Debian y especializadas en ciberseguridad: traen cientos de herramientas para auditorías de seguridad, pruebas de penetración y análisis forense.<br>No están pensadas para el uso diario; normalmente se usan en una máquina virtual o arrancando desde un USB.<br>Para esta guía, sus órdenes son las de Ubuntu (`apt`). | `apt` |
 
 Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distribución, estas son las equivalentes:
 
