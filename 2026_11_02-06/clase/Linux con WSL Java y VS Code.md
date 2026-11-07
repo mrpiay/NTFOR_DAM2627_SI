@@ -146,13 +146,13 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 
 Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distribución, estas son las equivalentes:
 
-| Para… | Ubuntu y Debian | Fedora | openSUSE | Arch |
-| --- | --- | --- | --- | --- |
-| Actualizar la lista de programas | `sudo apt update` | `sudo dnf check-update` | `sudo zypper refresh` | Se hace junto con la fila siguiente |
-| Instalar las versiones nuevas | `sudo apt upgrade` | `sudo dnf upgrade` | `sudo zypper update` | `sudo pacman -Syu` |
-| Instalar el JDK 21 | `sudo apt install openjdk-21-jdk` | `sudo dnf install java-21-openjdk-devel` | `sudo zypper install java-21-openjdk-devel` | `sudo pacman -S jdk21-openjdk` |
-| Instalar `zip` y `unzip` | `sudo apt install zip unzip` | `sudo dnf install zip unzip` | `sudo zypper install zip unzip` | `sudo pacman -S zip unzip` |
-| Instalar VS Code | Paquete `.deb` de code.visualstudio.com: `sudo apt install ./code_*.deb` | Paquete `.rpm`: `sudo dnf install ./code-*.rpm` | Paquete `.rpm`: `sudo zypper install ./code-*.rpm` | `sudo pacman -S code` (la versión libre, «Code - OSS») |
+| Para… | Ubuntu, Debian y Linux Mint | Fedora | Arch (y Manjaro) |
+| --- | --- | --- | --- |
+| Actualizar la lista de programas | `sudo apt update` | `sudo dnf check-update` | Se hace junto con la fila siguiente |
+| Instalar las versiones nuevas | `sudo apt upgrade` | `sudo dnf upgrade` | `sudo pacman -Syu` |
+| Instalar el JDK 21 | `sudo apt install openjdk-21-jdk` | `sudo dnf install java-21-openjdk-devel` | `sudo pacman -S jdk21-openjdk` |
+| Instalar `zip` y `unzip` | `sudo apt install zip unzip` | `sudo dnf install zip unzip` | `sudo pacman -S zip unzip` |
+| Instalar VS Code | Paquete `.deb` de code.visualstudio.com: `sudo apt install ./code_*.deb` | Paquete `.rpm`: `sudo dnf install ./code-*.rpm` | `sudo pacman -S code` (la versión libre, «Code - OSS») |
 
 Lo demás es igual en todas: `javac -version`, `java -version`, `code .` y el terminal de VS Code.
 
