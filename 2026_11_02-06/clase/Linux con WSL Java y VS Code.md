@@ -20,7 +20,7 @@ Requisitos: Windows 10 versión 2004 o superior (build 19041 o superior) o Windo
 
 **Instalación**
 
-1. Abre PowerShell como administrador: clic derecho en PowerShell y "Ejecutar como administrador".
+1. Abre PowerShell como administrador: escribe *PowerShell* en el menú Inicio, clic derecho > **Ejecutar como administrador** y acepta el aviso de Windows.
 2. Ejecuta:
 
    ```powershell
@@ -29,13 +29,15 @@ Requisitos: Windows 10 versión 2004 o superior (build 19041 o superior) o Windo
 
    `-d Ubuntu-24.04` elige la versión de Ubuntu: así todos tenemos la misma y con ella Java 21.
 
-3. Reinicia el ordenador.
+3. Reinicia el ordenador. Al volver, a veces Ubuntu se abre solo para terminar la instalación: si es así, sigue con el paso 4 en esa ventana.
 4. Abre **Ubuntu** desde el menú Inicio. La primera vez te pide un nombre de usuario y una contraseña de Linux. Son independientes de los de Windows, y la contraseña es la que te pedirá `sudo`. Al escribirla no se ve nada en pantalla: es normal.
 5. Actualiza los paquetes de Ubuntu:
 
    ```bash
    sudo apt update && sudo apt upgrade
    ```
+
+   Si pregunta `Do you want to continue? [Y/n]`, pulsa Intro para aceptar.
 
 **Qué es sudo**
 
@@ -102,7 +104,7 @@ javac -version
 java -version
 ```
 
-Los dos comandos deben mostrar la versión 21.
+Los dos comandos deben mostrar la versión 21: `javac 21.0.x` y `openjdk version "21.0.x"`. Si `apt install` pregunta `[Y/n]`, pulsa Intro para aceptar.
 
 ## 3. VS Code: el editor, conectado a Linux
 
@@ -119,13 +121,14 @@ VS Code (Visual Studio Code) es un editor de código gratuito de Microsoft. Se i
 1. Abre el terminal de Ubuntu y entra en la carpeta del proyecto:
 
    ```bash
+   mkdir -p ~/dam2627/prog/java-pr0
    cd ~/dam2627/prog/java-pr0
    code .
    ```
 
 2. La primera vez, VS Code descarga lo que necesita dentro de Ubuntu (el servidor de VS Code). Tarda unos segundos.
 3. Abajo a la izquierda debe aparecer **WSL: Ubuntu-24.04**. Si no aparece, estás editando como si fueran archivos de Windows: cierra y vuelve a abrir con `code .` desde Ubuntu.
-4. Abre el terminal integrado con **Terminal > New Terminal** o **Ctrl+ñ** (en teclado inglés, ``Ctrl+` ``). Es un bash de Ubuntu: desde ahí compilas con `javac` y ejecutas con `java`.
+4. Abre el terminal integrado con **Terminal > New Terminal** (en español, **Terminal > Nuevo terminal**) o **Ctrl+ñ** (en teclado inglés, ``Ctrl+` ``). Es un bash de Ubuntu: desde ahí compilas con `javac` y ejecutas con `java`.
 
 **Extensiones**
 
@@ -141,5 +144,6 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 | `wsl --list --verbose` muestra Ubuntu con `VERSION 1` | En PowerShell: `wsl --set-version Ubuntu-24.04 2` |
 | `javac` dice `command not found` | Falta el JDK: `sudo apt install openjdk-21-jdk` |
 | `E: Unable to locate package openjdk-21-jdk` | Falta actualizar la lista: `sudo apt update` y repite la instalación |
-| `code .` dice `command not found` | Cierra el terminal de Ubuntu y ábrelo de nuevo después de instalar VS Code |
+| `code .` dice `command not found` | Cierra el terminal de Ubuntu y ábrelo de nuevo después de instalar VS Code. Si sigue, en PowerShell `wsl --shutdown` y vuelve a abrir Ubuntu |
+| `wsl --install` da el error `0x80370102` | La virtualización está desactivada: actívala en la BIOS/UEFI (Intel VT-x, AMD-V o SVM) y repite |
 | Abajo a la izquierda de VS Code no pone **WSL: Ubuntu-24.04** | Cierra VS Code y vuelve a abrirlo con `code .` desde el terminal de Ubuntu |
