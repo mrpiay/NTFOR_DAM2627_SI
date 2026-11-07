@@ -1,8 +1,11 @@
 # Entrega · semana del 2 al 6 de noviembre
 
-| Qué | Cómo | Cuándo |
-|---|---|---|
-| **Autoevaluación** | Responde las preguntas de [`estudio/autoevaluacion.md`](../estudio/autoevaluacion.md) y sube tus respuestas, con el número de cada pregunta, a la tarea de Teams de esta semana | Hasta el **lunes 9 de noviembre**, a las 23:59 |
-| **Lo que has hecho** | Enséñalo en clase: tu entorno: Ubuntu en WSL, el JDK y VS Code conectado a Ubuntu, funcionando. No hace falta que esté terminado; lo puedes completar después, pero hay que enseñarlo | En la última clase de la semana: **viernes 6** |
+## Todas las semanas
 
-El martes siguiente, por la mañana, se publican en [`soluciones/`](../soluciones) las soluciones de la autoevaluación y cómo debe quedar lo de esta semana. Compáralo con lo tuyo.
+- **Autoevaluación.** El cuestionario está en [`estudio/autoevaluacion.md`](../estudio/autoevaluacion.md) desde el primer día de la semana. Respóndelo y sube tus respuestas, con el número de cada pregunta, a la tarea de Teams de la semana **antes del martes siguiente** (hasta el lunes a las 23:59). El martes se publican las soluciones en [`soluciones/`](../soluciones).
+
+## Esta semana
+
+| Qué | Cuándo |
+|---|---|
+| Autoevaluación de esta semana, en la tarea de Teams | Hasta el **lunes 9 de noviembre**, a las 23:59 |
