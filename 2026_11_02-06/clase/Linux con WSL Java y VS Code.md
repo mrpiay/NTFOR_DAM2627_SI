@@ -63,6 +63,8 @@ wsl --list --verbose
 
 Debe aparecer `Ubuntu-24.04` con `VERSION 2`.
 
+**WSL2 y VirtualBox.** Con WSL2 activo, VirtualBox funciona sobre la virtualización de Windows (Hyper-V) y las máquinas virtuales van más lentas. Es normal: siguen funcionando igual.
+
 **Dónde viven tus archivos**
 
 - `~` (por ejemplo `/home/piay`) es tu carpeta personal en Linux. Guarda aquí tus proyectos, por ejemplo en `~/dam2627/prog`. Las herramientas de Linux trabajan más rápido con estos archivos.
