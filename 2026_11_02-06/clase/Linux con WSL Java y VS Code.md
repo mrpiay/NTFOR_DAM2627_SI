@@ -168,6 +168,11 @@ Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distri
 
 Lo demás es igual en todas: `javac -version`, `java -version`, `code .` y el terminal de VS Code.
 
+Para saber más:
+
+- qué es una distribución y cómo se agrupan: [Distribución Linux, en Wikipedia](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_Linux);
+- un catálogo con todas las distribuciones, sus versiones y sus novedades: [DistroWatch](https://distrowatch.com/), en inglés.
+
 ## Si algo falla
 
 | Qué pasa | Qué hacer |
