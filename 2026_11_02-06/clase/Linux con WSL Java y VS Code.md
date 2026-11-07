@@ -10,6 +10,11 @@ Vamos a empezar a programar en Java preparando un entorno de desarrollo con tres
 
 Al final, escribes el código en VS Code y compilas y ejecutas desde su terminal, que es un terminal de Ubuntu.
 
+> **Si tu ordenador tiene Linux en lugar de Windows**, no necesitas WSL: tu Linux ya es el entorno.
+> - Sáltate el apartado 1.
+> - Haz el apartado 2 en tu terminal.
+> - En el apartado 3, descarga VS Code para Linux desde [code.visualstudio.com](https://code.visualstudio.com) (en Ubuntu, el paquete `.deb`) e instálalo con `sudo apt install ./code_*.deb`, desde la carpeta de la descarga. No instales la extensión WSL: `code .` abre VS Code directamente y su terminal (**Ctrl+ñ**) ya es el de tu Linux.
+
 Para Java también hay IDE (entornos de desarrollo integrados) como Eclipse, IntelliJ IDEA o NetBeans, que compilan y ejecutan con un botón. VS Code es un editor, pero con extensiones se acerca a un IDE. Empezamos con VS Code y el terminal para ver qué hace cada paso, y lo aprendido te servirá después en cualquier IDE.
 
 ## 1. WSL: Linux dentro de Windows
