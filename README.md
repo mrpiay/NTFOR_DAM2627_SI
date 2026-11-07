@@ -2,6 +2,18 @@
 
 Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por semana.
 
+## Fechas importantes
+
+Todas las semanas: el cuestionario de autoevaluación está disponible desde el primer día, sus respuestas se suben a Teams antes del martes siguiente (hasta el lunes a las 23:59) y el martes se publican sus soluciones. Además:
+
+| Fecha | Qué |
+|---|---|
+| — | Por ahora, ninguna más |
+
+## Programación
+
+Qué se trabaja en cada evaluación, cuándo y cómo se califica, con los objetivos y criterios de cada unidad: [`programacion/`](programacion).
+
 ## Cómo está organizado
 
 Cada semana tiene su carpeta, con las fechas de lunes a viernes: `2026_11_02-06` es la semana del 2 al 6 de noviembre. Dentro hay tres carpetas:
