@@ -8,4 +8,4 @@
 
 | Qué | Cuándo |
 |---|---|
-| Autoevaluación de esta semana, en la tarea de Teams | Hasta el **lunes 9 de noviembre**, a las 23:59 |
+| Autoevaluación: esta semana se entrega junto con la de la semana del 9 al 13, en una sola tarea de Teams | Hasta el **lunes 16 de noviembre**, a las 23:59 |

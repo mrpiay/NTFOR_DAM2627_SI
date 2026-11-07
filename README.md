@@ -8,7 +8,8 @@ Todas las semanas: el cuestionario de autoevaluación está disponible desde el 
 
 | Fecha | Qué |
 |---|---|
-| — | Por ahora, ninguna más |
+| Lunes 16 de noviembre, 23:59 | Entrega en Teams de las autoevaluaciones de las semanas del 2 al 6 y del 9 al 13, en una sola tarea |
+| Martes 17 de noviembre | Se publican las soluciones de esas dos autoevaluaciones |
 
 ## Programación
 
