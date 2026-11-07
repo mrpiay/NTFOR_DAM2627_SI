@@ -1,6 +1,6 @@
 # Autoevaluación · semana del 2 al 6 de noviembre
 
-Preguntas sobre «Linux con WSL, Java y VS Code». Puede que sufran modificaciones a lo largo de la semana. Responde poniendo el número de cada pregunta.
+Preguntas sobre «Ubuntu Linux, WSL, Java y VS Code». Puede que sufran modificaciones a lo largo de la semana. Responde poniendo el número de cada pregunta.
 
 En las preguntas con órdenes, ejecútalas en un terminal de Linux (el de Ubuntu en WSL o, si tu ordenador tiene Linux, su terminal), copia en tu respuesta lo que sale por pantalla y asegúrate de que lo entiendes: en las pruebas escritas tendrás que explicarlo sin ayuda de la IA.
 

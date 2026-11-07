@@ -1,4 +1,4 @@
-# Linux con WSL, Java y VS Code
+# Ubuntu Linux, WSL, Java y VS Code
 
 **Preparando el entorno de desarrollo para el módulo de Programación**
 
