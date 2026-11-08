@@ -6,7 +6,7 @@
 
 | UD | Inicio | Fin | Sesiones | Peso | Entrega |
 |---|---|---|---|---|---|
-| UD3 · Sistema operativo Linux. Administración y configuración. | vie 20 nov | jue 21 ene | 25 | 15 % | Scripts básicos para automatizar tareas de administración en Linux |
+| UD3 · Sistema operativo Linux. Administración y configuración. | mar 24 nov | jue 21 ene | 25 | 15 % | Scripts básicos para automatizar tareas de administración en Linux |
 | UD4 · Sistema operativo Windows. Administración y configuración. | jue 21 ene | mar 23 feb | 24 | 15 % | Scripts sencillos de administración en Windows (PowerShell) e informe de monitorización |
 
 Peso de estas unidades en el módulo: 30 % (la suma de los pesos de sus unidades, apartado 2.1 de la programación).

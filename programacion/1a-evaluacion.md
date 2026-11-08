@@ -7,7 +7,7 @@
 | UD | Inicio | Fin | Sesiones | Peso | Entrega |
 |---|---|---|---|---|---|
 | UD1 · Sistemas informáticos. Hardware y software. | vie 11 sep | mar 6 oct | 21 | 15 % | Análisis de las características de un equipo informático |
-| UD2 · Sistemas operativos. Instalación. | mar 6 oct | jue 19 nov | 31 | 20 % | Documentación del proceso de instalación: máquinas virtuales Linux y Windows con gestor de arranque |
+| UD2 · Sistemas operativos. Instalación. | mar 6 oct | jue 19 nov | 31 | 20 % | — |
 
 Peso de estas unidades en el módulo: 35 % (la suma de los pesos de sus unidades, apartado 2.1 de la programación).
 
@@ -19,8 +19,7 @@ Peso de estas unidades en el módulo: 35 % (la suma de los pesos de sus unidades
 | mar 6 oct | Entrega UD1 | Análisis de las características de un equipo informático |
 | mar 13 oct | Examen UD1 | Sistemas informáticos. Hardware y software. |
 | 3–6 nov | **Puesta en común y proyecto de diagnóstico** | No se avanza: se repasa y se completa lo que tocaba hasta la fecha y se preparan las próximas entregas y exámenes |
-| jue 19 nov | Entrega UD2 | Documentación del proceso de instalación: máquinas virtuales Linux y Windows con gestor de arranque |
-| jue 26 nov | Examen UD2 | Sistemas operativos. Instalación. |
+| vie 20 nov | Prueba UD2 | Sistemas operativos. Instalación: prueba escrita sobre Linux (WSL y órdenes) y el proyecto de máquinas virtuales, en lugar del examen |
 | vie 4 dic y jue 10 dic | **Repaso** | 1ª evaluación |
 | vie 11 dic | **Examen final** | 1ª evaluación |
 
@@ -44,9 +43,9 @@ Peso de estas unidades en el módulo: 35 % (la suma de los pesos de sus unidades
 | Del 19 al 23 de octubre | UD2 · Realización ejercicios y explicaciones teoricas |
 | Del 26 al 30 de octubre | UD2 · Realización ejercicios y explicaciones teoricas |
 | [Del 2 al 6 de noviembre](../2026_11_02-06) | **puesta en común y proyecto de diagnóstico** (no se avanza: se repasa y se completa lo que tocaba hasta la fecha) |
-| Del 9 al 13 de noviembre | UD2 · Realización ejercicios y explicaciones teoricas |
-| Del 16 al 20 de noviembre | UD2 · Realización ejercicios y explicaciones teoricas<br>UD3 · Realización ejercicios y explicaciones teoricas |
-| Del 23 al 27 de noviembre | UD3 · Realización ejercicios y explicaciones teoricas<br>**examen de la UD2** |
+| [Del 9 al 13 de noviembre](../2026_11_09-13) | UD2 · Realización ejercicios y explicaciones teoricas |
+| Del 16 al 20 de noviembre | UD2 · Realización ejercicios y explicaciones teoricas<br>**prueba escrita de la UD2** |
+| Del 23 al 27 de noviembre | UD3 · Realización ejercicios y explicaciones teoricas |
 | Del 30 de noviembre al 4 de diciembre | UD3 · Realización ejercicios y explicaciones teoricas<br>**repaso** o terminar lo pendiente · 1ª evaluación |
 | Del 7 al 11 de diciembre | **repaso** o terminar lo pendiente · 1ª evaluación<br>**examen final** · 1ª evaluación |
 | Del 14 al 18 de diciembre | UD3 · Realización ejercicios y explicaciones teoricas |
