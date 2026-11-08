@@ -158,7 +158,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 | *System → Motherboard* | *Chipset* PIIX3 | El chipset de la placa base |
 | *System → Motherboard* | *Boot Device Order (BIOS only)* | El orden de arranque, solo para BIOS: con UEFI lo lleva el propio firmware (se ve en el paso 4) |
 | *System → Motherboard* | *TPM Version* None, *UEFI* marcado, *Secure Boot* sin marcar | El firmware y su seguridad. Sin TPM 2.0 ni Secure Boot, esta máquina no cumple los requisitos de Windows 11 |
-| *System → Processor* | *Number of CPUs* 2 | El procesador. La barra está en verde hasta el número de **núcleos** reales de tu ordenador: más que eso perjudica al anfitrión |
+| *System → Processor* | *Number of CPUs* 2 | El procesador. Aquí «CPU» es un **procesador virtual**, y cada uno usa un núcleo de tu procesador real: un portátil tiene un solo chip (*Sockets: 1* en el Administrador de tareas), pero con varios **núcleos** (*Cores*), y cada núcleo puede llevar dos hilos (*Logical processors*). La barra está en verde hasta tus núcleos: más que eso perjudica al anfitrión |
 | *System → Acceleration* | *Paravirtualization Interface* Default, *Nested Paging* | Cómo usa la virtualización por hardware. Con *Default*, Ubuntu sabe que está en una máquina virtual (KVM) y colabora |
 | *Display* | *Video Memory* 16 MB, *Graphics Controller* VMSVGA | La tarjeta gráfica |
 | *Storage* | *Controller: IDE*, con el DVD | El controlador del DVD |
