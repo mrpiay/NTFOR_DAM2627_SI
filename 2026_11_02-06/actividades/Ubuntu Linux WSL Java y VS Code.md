@@ -45,7 +45,7 @@ Requisitos: Windows 10 versión 2004 o superior (build 19041 o superior) o Windo
 
    Si pregunta `Do you want to continue? [Y/n]`, pulsa Intro para aceptar.
 
-`sudo` ejecuta la orden como administrador y pide tu contraseña de Linux; `apt` es el gestor de paquetes: `update` actualiza la lista de programas y `upgrade` instala las versiones nuevas; `&&` encadena las dos. Lo explican los [apuntes de la UD3, apartados 1 y 2](../apuntes/UD3-linux.md#1-usuario-normal-y-administrador-sudo).
+`sudo` pide tu contraseña de Linux. Qué hacen `sudo`, `apt` y `&&`: [apuntes de la UD3, apartados 1 y 2](../apuntes/UD3-linux.md#1-usuario-normal-y-administrador-sudo).
 
 Para comprobar la instalación, en PowerShell:
 
@@ -59,12 +59,12 @@ Debe aparecer `Ubuntu-24.04` con `VERSION 2`.
 
 **Dónde guardar tus proyectos**
 
-- Guárdalos en tu carpeta personal de Linux, `~`, por ejemplo en `~/dam2627/prog` (qué son `~` y `/mnt/c`: [apuntes de la UD3, apartado 3](../apuntes/UD3-linux.md#3-el-sistema-de-archivos)).
+- Guárdalos en tu carpeta personal de Linux, `~`, por ejemplo en `~/dam2627/prog`, y no en `/mnt/c` (el disco C: de Windows), donde todo va más lento. Qué son `~` y `/mnt/c`: [apuntes de la UD3, apartado 3](../apuntes/UD3-linux.md#3-el-sistema-de-archivos).
 - Desde el Explorador de Windows puedes ver tus archivos de Linux en **Linux > Ubuntu**, en el panel izquierdo, o escribiendo `explorer.exe .` en el terminal de Ubuntu.
 
 ## 2. JDK: las herramientas para programar en Java
 
-El JDK (Java Development Kit) trae `javac`, el compilador, y `java`, que ejecuta lo compilado. Lleva dentro el JRE, que solo sirve para ejecutar programas ya compilados: para compilar los tuyos hace falta el JDK.
+El JDK (Java Development Kit) trae `javac`, el compilador, y `java`, que ejecuta lo compilado.
 
 **Instalación en Ubuntu**
 
@@ -78,6 +78,8 @@ sudo apt install openjdk-21-jdk zip unzip
 - `openjdk-21-jdk` instala el JDK de Java 21, una versión de soporte largo (LTS).
 - `zip` y `unzip` no son parte de Java, pero los necesitarás para entregar los proyectos.
 
+Si `apt install` pregunta `[Y/n]`, pulsa **Intro** para aceptar.
+
 Comprueba la instalación:
 
 ```bash
@@ -85,7 +87,7 @@ javac -version
 java -version
 ```
 
-Los dos comandos deben mostrar la versión 21: `javac 21.0.x` y `openjdk version "21.0.x"`. Si `apt install` pregunta `[Y/n]`, pulsa Intro para aceptar.
+Los dos comandos deben mostrar la versión 21: `javac 21.0.x` y `openjdk version "21.0.x"`.
 
 ## 3. VS Code: el editor, conectado a Linux
 
@@ -119,7 +121,7 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 
 ## 4. El terminal
 
-Las órdenes básicas del terminal (`ls`, `cd`, `mkdir`, `cat`, `mv`, `rm`, `less`…), la redirección (`>`, `>>`) y las tuberías (`|`) están en los [apuntes de la UD3](../apuntes/UD3-linux.md#4-órdenes-básicas).
+No hay que instalar nada más. Las órdenes que vas a usar en el terminal (`ls`, `cd`, `mkdir`, `touch`, `cat`, `mv`, `rm`, `less`…) están en los [apuntes de la UD3, apartado 4](../apuntes/UD3-linux.md#4-órdenes-básicas), y la redirección (`>`, `>>`) y las tuberías (`|`), en el [apartado 5](../apuntes/UD3-linux.md#5-redirección-y-tuberías).
 
 ## Otras distribuciones de Linux
 
