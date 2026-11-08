@@ -181,4 +181,4 @@ Lo básico que hay que saber de la UD2. Cada apartado tiene la idea clave, lo qu
 | `sudo apt install paquete` | Instala un programa |
 | `sudo apt remove paquete` | Lo desinstala |
 
-- En **Windows**, los programas se instalan desde la Microsoft Store, con su instalador o desde el terminal con `winget install`, y se quitan en *Configuración → Aplicaciones*.
+- En **Windows**, los programas se instalan desde la Microsoft Store, con su instalador o desde el terminal con `winget install`; se quitan en *Configuración → Aplicaciones* o con `winget uninstall`.

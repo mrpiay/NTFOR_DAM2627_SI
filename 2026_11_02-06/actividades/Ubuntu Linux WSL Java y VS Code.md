@@ -2,7 +2,7 @@
 
 **Preparando el entorno de desarrollo para el módulo de Programación**
 
-Vamos a empezar a programar en Java preparando un entorno de desarrollo con tres piezas, instaladas en este orden:
+Para empezar a programar en Java hace falta un entorno de desarrollo con tres piezas, instaladas en este orden:
 
 1. **WSL con Ubuntu:** un Linux dentro de Windows, donde viven tus proyectos y tu terminal.
 2. **JDK:** las herramientas de Java (`javac` y `java`), instaladas dentro de Ubuntu.
@@ -16,7 +16,7 @@ Al final, escribes el código en VS Code y compilas y ejecutas desde su terminal
 > - En el apartado 3, descarga VS Code para Linux desde [code.visualstudio.com](https://code.visualstudio.com) (en Ubuntu, el paquete `.deb`) e instálalo con `sudo apt install ./code_*.deb`, desde la carpeta de la descarga. No instales la extensión WSL: `code .` abre VS Code directamente y su terminal (**Ctrl+ñ**) ya es el de tu Linux.
 > - Si tu Linux no es Ubuntu, las órdenes equivalentes están en «Otras distribuciones de Linux», al final.
 
-Para Java también hay IDE (entornos de desarrollo integrados) como Eclipse, IntelliJ IDEA o NetBeans, que compilan y ejecutan con un botón. VS Code es un editor, pero con extensiones se acerca a un IDE. Empezamos con VS Code y el terminal para ver qué hace cada paso, y lo aprendido te servirá después en cualquier IDE.
+Para Java también hay IDE (entornos de desarrollo integrados) como Eclipse, IntelliJ IDEA o NetBeans, que compilan y ejecutan con un botón. VS Code es un editor, pero con extensiones se acerca a un IDE. Se empieza con VS Code y el terminal para ver qué hace cada paso, y lo aprendido te servirá después en cualquier IDE.
 
 ## 1. WSL: Linux dentro de Windows
 
@@ -33,7 +33,7 @@ Requisitos: Windows 10 versión 2004 o superior (build 19041 o superior) o Windo
    wsl --install -d Ubuntu-24.04
    ```
 
-   `-d Ubuntu-24.04` elige la versión de Ubuntu: así todos tenemos la misma y con ella Java 21.
+   `-d Ubuntu-24.04` elige la versión de Ubuntu: así la versión es la misma para todos, y con ella Java 21.
 
 3. Reinicia el ordenador. Al volver, a veces Ubuntu se abre solo para terminar la instalación: si es así, sigue con el paso 4 en esa ventana.
 4. Abre **Ubuntu** desde el menú Inicio. La primera vez te pide un nombre de usuario y una contraseña de Linux. Son independientes de los de Windows, y la contraseña es la que te pedirá `sudo`. Al escribirla no se ve nada en pantalla: es normal.

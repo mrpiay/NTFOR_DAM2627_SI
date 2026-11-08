@@ -53,7 +53,7 @@ Lo básico que hay que saber de la UD1. Cada apartado tiene la idea clave, lo qu
 
 **Lo que tienes que saber**
 
-- De más rápida a más lenta: **registros → caché (L1, L2, L3) → RAM → almacenamiento** (SSD, disco duro).
+- De más rápida a más lenta: **registros → caché (L1, L2, L3) → RAM → almacenamiento** (SSD, disco duro). En la caché, la L1 es la más rápida y pequeña, y la L3, la más lenta y grande.
 - La **RAM es volátil**: al apagar, se borra. El almacenamiento no.
 - Las memorias **ROM** y sus variantes (**PROM**, **EPROM**, **EEPROM** y la **flash**, que es su sucesora) **no son volátiles**. Guardan el firmware de la placa.
 - De la RAM importan la **capacidad** (GB), la **velocidad** (MT/s, como DDR5-5600), la **latencia** (CL: cuanto menor, mejor) y el **tipo**: **DDR5** en los equipos nuevos y DDR4 en muchos que aún se usan. No son intercambiables.
@@ -134,7 +134,7 @@ Lo básico que hay que saber de la UD1. Cada apartado tiene la idea clave, lo qu
 
 - **De sistema:** hace funcionar el equipo (sistema operativo, firmware, drivers, utilidades, software de virtualización como VirtualBox).
 - **De programación:** sirve para crear programas (editores, compiladores, IDE).
-- **De aplicación:** lo que usa la persona para su trabajo (ofimática, navegador, juegos).
+- **De aplicación:** lo que usa la persona para su trabajo (ofimática, como LibreOffice o Microsoft Office; navegador; juegos).
 - Para ejecutarse, un programa pasa del almacenamiento a la **RAM**, y de ahí la CPU lee sus instrucciones.
 
 ---

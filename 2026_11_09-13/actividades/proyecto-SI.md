@@ -71,7 +71,7 @@ La guía está probada con **VirtualBox 7.2** y **Windows 11**, los dos en ingl�
 
 Cada sesión dura 50 minutos.
 
-| Día | Sesión | Qué hacemos |
+| Día | Sesión | Qué se hace |
 |---|---|---|
 | Martes 10 | 13:00 | Empezar la descarga de la ISO (paso 0) y, mientras baja, leer el apartado 5 de los apuntes de la UD2 («Máquinas virtuales»). |
 | Martes 10 | 13:50 | **Paso 1** (crear la máquina) y **paso 2** (arrancarla sin sistema). |
@@ -94,7 +94,7 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
 
 1. **Empieza la descarga de la ISO**, que tarda: en [ubuntu.com/download/server](https://ubuntu.com/download/server), la de **Ubuntu Server 26.04 LTS** (el archivo `ubuntu-26.04.1-live-server-amd64.iso`). Windows la muestra con unos **2,7 GB**. Mientras baja, sigue con los puntos siguientes y lee el apartado 5 de los apuntes de la UD2 («Máquinas virtuales»).
 2. **Comprueba que la virtualización está activada:**
-   - en Windows: clic derecho en el botón Inicio (o **Windows + X**) → **Task Manager** (*Administrador de tareas*) → **Performance** (*Rendimiento*) → **CPU**: abajo a la derecha, **Virtualisation: Enabled** (*Virtualización: Habilitado*);
+   - en Windows: clic derecho en el botón Inicio (o **Windows + X**) → **Task Manager** (*Administrador de tareas*) → **Performance** (*Rendimiento*) → **CPU**: abajo a la derecha, **Virtualisation: Enabled** o **Virtualization: Enabled** (*Virtualización: Habilitado*);
    - en Linux, en el terminal: `lscpu | grep -i virtualiz` tiene que mostrar `VT-x` (Intel) o `AMD-V` (AMD).
 3. **Instala VirtualBox**, si no lo tienes:
    - en Windows: en [virtualbox.org](https://www.virtualbox.org/wiki/Downloads), *Windows hosts*; ejecuta el instalador con las opciones por defecto. Si pide instalar *Python* o *win32api* para las «Python bindings», no hacen falta: continúa sin ellas;
@@ -150,7 +150,7 @@ Con la máquina seleccionada en la lista, la pestaña **Details** (*Detalles*) m
 
 Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu carpeta personal: `ubuntu-arranque.vbox` (la configuración) y `ubuntu-arranque.vdi` (el disco).
 
-**El hardware de la máquina.** Cada ajuste de la máquina virtual es un componente de un ordenador, como los de los apuntes de la UD1. Para verlos, con la máquina seleccionada, pulsa **Settings** (*Configuración*) y, arriba a la izquierda, **Expert** (*Experto*): salen todos los ajustes. **Solo mira: no cambies nada** y sal con **Cancel**.
+**El hardware de la máquina.** Cada ajuste de la máquina virtual es un componente de un ordenador. Para verlos, con la máquina seleccionada, pulsa **Settings** (*Configuración*) y, arriba a la izquierda, **Expert** (*Experto*): salen todos los ajustes. **Solo mira: no cambies nada** y sal con **Cancel**.
 
 | Dónde, en *Settings* | Qué hay | El componente real |
 |---|---|---|
@@ -238,7 +238,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
 **Si te falla…**
 
-- *No sale el mensaje y la pantalla se queda en negro con un cursor*: espera unos segundos; si sigue igual, apaga la máquina y comprueba en **Settings → System** que *Enable EFI* está marcado.
+- *No sale el mensaje y la pantalla se queda en negro con un cursor*: espera unos segundos; si sigue igual, apaga la máquina y comprueba en **Settings → System → Motherboard**, en *Features*, que la casilla **UEFI** está marcada.
 - *Las teclas no hacen nada*: haz clic dentro de la ventana de la máquina para que el teclado vaya a ella.
 - *El ratón se queda dentro de la máquina y no sale*: pulsa la tecla anfitrión. Si no tienes Ctrl derecho y aún no la has cambiado, pulsa **Ctrl + Alt + Supr** y, en la pantalla de Windows, **Cancel** (*Cancelar*): recuperas el ratón. Después cámbiala como dice el punto 5 del paso 0.
 - *El cuadro «The virtual machine failed to boot» sale una y otra vez*: es porque el firmware reintenta el arranque. Marca **Do not show this dialog again** y pulsa **Cancel**.
@@ -285,7 +285,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    - **Upgrade to Ubuntu Pro:** **Skip for now** y **Continue**;
    - **SSH configuration:** deja **Install OpenSSH server** sin marcar;
    - **Featured server snaps:** no marques ninguno.
-4. **Empieza la instalación.** Formatear, copiar el sistema e instalar el kernel y GRUB tarda unos **5 minutos**. Después, *downloading and installing security updates* (las actualizaciones) tarda unos **20 minutos**. Pueden salir en rojo avisos como `watchdog: BUG: soft lockup - CPU#0 stuck for 90s!`: el kernel avisa de que un procesador virtual ha estado parado, por el modo *native API* del paso 2. **No pasa nada: espera.**
+4. **Empieza la instalación.** Formatear, copiar el sistema e instalar el kernel y GRUB tarda unos **5 minutos**. Después, *downloading and installing security updates* (las actualizaciones) tarda unos **20 minutos**. Pueden salir en rojo avisos como `watchdog: BUG: soft lockup - CPU#0 stuck for 90s!`: el kernel avisa de que un procesador virtual ha estado parado, por el modo *native API* del paso 2. **No pasa nada: espera.** Mientras tanto, abajo sale el botón **Cancel update and reboot**: no lo pulses, espera a que salga **Reboot Now**.
 
    ![Instalando, con avisos de soft lockup](img/13-instalando-soft-lockup.png)
 
@@ -393,7 +393,14 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    ls /boot
    ```
 
-   `vmlinuz-…` es el kernel; `initrd.img-…`, su ayudante, que prepara lo necesario para montar la raíz; `grub`, la carpeta de configuración de GRUB; `efi`, donde está montada la partición EFI. Los nombres terminan en la versión del kernel, y hay **dos versiones**: `7.0.0-30` (la que traía la ISO) y `7.0.0-43` (la que instalaron las actualizaciones del paso 3). `vmlinuz` e `initrd.img` apuntan al kernel actual, y `vmlinuz.old` e `initrd.img.old`, al anterior. Se ve mejor en el paso 5, con `tree`.
+   ```
+   System.map-7.0.0-30-generic  config-7.0.0-43-generic      initrd.img                   vmlinuz.old
+   System.map-7.0.0-43-generic  efi                          initrd.img-7.0.0-30-generic  vmlinuz
+   config-7.0.0-30-generic      grub                         initrd.img-7.0.0-43-generic  vmlinuz-7.0.0-30-generic
+   initrd.img.old               vmlinuz-7.0.0-43-generic
+   ```
+
+   `vmlinuz-…` es el kernel; `initrd.img-…`, su ayudante, que prepara lo necesario para montar la raíz; `grub`, la carpeta de configuración de GRUB; `efi`, donde está montada la partición EFI. Los nombres terminan en la versión del kernel, y hay **dos versiones**: `7.0.0-30` (la que traía la ISO) y `7.0.0-43` (la que instalaron las actualizaciones del paso 3). Los números dependen del día en que se instala: en tu máquina pueden ser otros. `vmlinuz` e `initrd.img` apuntan al kernel actual, y `vmlinuz.old` e `initrd.img.old`, al anterior. Se ve mejor en el paso 5, con `tree`.
 
 6. **Los parámetros que GRUB le pasó al kernel en este arranque:**
 
@@ -532,7 +539,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    sudo poweroff
    ```
 
-   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*), junto a *Details*, y pulsa **Take** (*Tomar*). Nombre: `Actualizado`, y **OK**. Con la máquina apagada, la instantánea guarda solo el disco y la configuración: ocupa menos y, al volver a ella, la máquina arranca limpia. Desde ese momento, VirtualBox escribe los cambios del disco en un archivo aparte (en *Settings → Storage*, el disco pasa a ser *differencing*, de diferencias): así se puede volver atrás.
+   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*): es el icono de la cámara, justo a la derecha del de *Details*. Arriba aparecen los botones **Take** (*Tomar*), **Delete**, **Restore**… Con *Current State* seleccionado, pulsa **Take**. Nombre: `Actualizado`, y **OK**. Con la máquina apagada, la instantánea guarda solo el disco y la configuración: ocupa menos y, al volver a ella, la máquina arranca limpia. Desde ese momento, VirtualBox escribe los cambios del disco en un archivo aparte (en *Settings → Storage*, el disco pasa a ser *differencing*, de diferencias): así se puede volver atrás.
 
    ![La lista de instantáneas](img/15-instantaneas.png)
 
@@ -569,7 +576,7 @@ GRUB_TIMEOUT_STYLE=hidden
 GRUB_TIMEOUT=0
 ```
 
-Con un solo sistema, Ubuntu oculta el menú (`hidden`) y no espera nada (`0`). La primera línea del archivo avisa de que también cuentan los archivos de `/etc/default/grub.d/`. Edítalo con nano (como en la guía de la semana pasada):
+Con un solo sistema, Ubuntu oculta el menú (`hidden`) y no espera nada (`0`). La primera línea del archivo avisa de que también cuentan los archivos de `/etc/default/grub.d/`. Edítalo con **nano**, el editor de texto del terminal. Se maneja solo con el teclado: las **flechas** mueven el cursor, se escribe donde está el cursor y **Retroceso** o **Supr** borran; abajo salen sus atajos (`^` es **Ctrl**):
 
 ```bash
 sudo nano /etc/default/grub
@@ -630,7 +637,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
 **Pista.**
 
-1. **Lo que hace una entrada.** Reinicia (`sudo reboot`). En el menú de GRUB, con *Ubuntu* seleccionado, pulsa **e**. Se ve lo que hace esa entrada:
+1. **Lo que hace una entrada.** Reinicia (`sudo reboot`). En el menú de GRUB, pulsa una **flecha** (abajo y arriba) para parar la cuenta atrás y, con *Ubuntu* seleccionado, pulsa **e**. Se ve lo que hace esa entrada:
 
    ![Una entrada de GRUB por dentro](img/17-grub-editar-entrada.png)
 
@@ -644,7 +651,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
    ![Opciones avanzadas](img/18-grub-opciones-avanzadas.png)
 
-   Hay una entrada para cada kernel instalado y, debajo de cada una, la misma con `(recovery mode)`. El primero es el actual, `7.0.0-43`; el otro es el **anterior**, `7.0.0-30`: si una actualización instala un kernel que falla, se arranca desde aquí con el anterior.
+   Hay una entrada para cada kernel instalado y, debajo de cada una, la misma con `(recovery mode)`. El primero es el actual (aquí, `7.0.0-43`); el otro es el **anterior** (`7.0.0-30`): si una actualización instala un kernel que falla, se arranca desde aquí con el anterior.
 3. **El modo de recuperación.** Elige **`Ubuntu, with Linux 7.0.0-43-generic (recovery mode)`**. Arranca un sistema mínimo y aparece el **Recovery Menu**:
 
    ![El modo de recuperación](img/19-recovery-menu.png)
@@ -667,6 +674,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
 **Si te falla…**
 
+- *En «Advanced options» solo hay un kernel*: el instalador no instaló actualizaciones del kernel. Todo lo demás funciona igual; el kernel anterior aparecerá cuando una actualización instale uno nuevo.
 - *`mount: bad usage`*: has escrito las dos órdenes en la misma línea. Escribe `mount -o remount,rw /`, **Intro**, y después `passwd` con tu usuario.
 - *`passwd: Authentication token manipulation error`*: el disco sigue en solo lectura. Falta `mount -o remount,rw /`.
 - *`passwd: user 'alumno' does not exist`*: escribe tu nombre de usuario, el del paso 3.
