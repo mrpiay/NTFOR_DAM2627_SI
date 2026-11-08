@@ -486,7 +486,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
    ![La lista de instantáneas](img/15-instantaneas.png)
 
-   En la lista, la máquina pasa a llamarse `ubuntu-arranque (Actualizado)`: muestra su última instantánea.
+   En la lista, la máquina pasa a llamarse `ubuntu-arranque (Actualizado)`: muestra su última instantánea. El icono de cada instantánea dice cómo se tomó: con una flecha verde, con la máquina encendida; sin ella, apagada.
 
 **Comprueba que…**
 
@@ -498,7 +498,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
 - *`Temporary failure resolving…` o `Could not resolve…`*: la máquina no tiene red. Comprueba en **Settings → Network** que el adaptador 1 está conectado a **NAT** y reinicia la máquina.
 - *`Could not get lock /var/lib/dpkg/lock…`*: el sistema está instalando actualizaciones por su cuenta. Espera unos minutos y repite.
-- *No ves el botón «Take»*: haz clic derecho en *Current State*, en la pestaña *Snapshots*, y elige **Take…**.
+- *No ves el botón «Take»*: con la pestaña *Snapshots* abierta, usa el menú **Snapshot → Take…** (*Instantánea → Tomar…*), o **Ctrl+Mayús+T**.
 
 ---
 
@@ -658,7 +658,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
    ![Restaurar la instantánea](img/21-restaurar-instantanea.png)
 
-6. **Inicia la máquina.**
+6. **Inicia la máquina.** Restaurar no la enciende: la deja apagada, como estaba al tomar la instantánea. Haz clic en **Current State** (o en la máquina, a la izquierda) y pulsa **Start**: con una instantánea seleccionada, *Start* sale en gris.
 
 **Comprueba que…**
 
