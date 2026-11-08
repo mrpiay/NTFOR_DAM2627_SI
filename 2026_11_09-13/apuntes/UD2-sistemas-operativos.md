@@ -88,9 +88,9 @@ Lo básico que hay que saber de la UD2. Cada apartado tiene la idea clave, lo qu
 - **Anfitrión** (*host*): el ordenador real. **Invitado** (*guest*): la máquina virtual. **Hipervisor:** el programa que crea las máquinas y les reparte los recursos del anfitrión.
 - **Tipo 1** (nativo): funciona directamente sobre el hardware; en servidores (VMware ESXi, Hyper-V, Proxmox). **Tipo 2** (alojado): funciona como un programa dentro de un sistema (VirtualBox, VMware Workstation).
 - Para que vaya rápida, el procesador necesita la **virtualización por hardware** activada en el firmware (Intel VT-x o AMD-V).
-- Si en Windows está activo **Hyper-V** (lo usan WSL y algunas funciones de seguridad), VirtualBox funciona por encima de él (en VirtualBox, *native API*): funciona, pero más despacio.
+- Si en Windows está activo **Hyper-V** (lo usan WSL y algunas funciones de seguridad), VirtualBox funciona por encima de él (en VirtualBox, *native API*): funciona, pero más despacio, porque, entre otras cosas, queda desactivada la traducción de memoria por hardware (*Nested Paging*).
 - Una máquina son unos pocos archivos: su configuración (`.vbox`) y su **disco virtual** (`.vdi`), que puede ser **dinámico** (crece según se usa) o de **tamaño fijo** (más rápido).
-- Una **instantánea** guarda el estado de la máquina para volver a él si algo sale mal. Mejor tomarla con la máquina apagada: guarda solo el disco y la configuración.
+- Una **instantánea** guarda el estado de la máquina para volver a él si algo sale mal. Mejor tomarla con la máquina apagada: guarda solo el disco y la configuración, ocupa menos y, al volver a ella, la máquina arranca limpia. Desde ese momento, el hipervisor escribe los cambios del disco en un archivo aparte, un **disco de diferencias** (*differencing*): así se puede volver atrás.
 - Usos: probar sistemas y programas sin riesgo, aprender, aprovechar un servidor para muchos servicios, y copias de seguridad.
 - Los **contenedores** (Docker) son otra forma de virtualizar, más ligera: comparten el kernel del anfitrión. Se ven en la UD6.
 
@@ -101,6 +101,35 @@ Lo básico que hay que saber de la UD2. Cada apartado tiene la idea clave, lo qu
 | Dónde se instala | Directamente sobre el hardware | Dentro de un sistema operativo |
 | Uso típico | Servidores | Ordenadores personales, aprendizaje |
 | Ejemplos | VMware ESXi, Hyper-V, Proxmox | VirtualBox, VMware Workstation |
+
+### El hardware de una máquina virtual
+
+Cada ajuste de la máquina virtual es un componente de un ordenador. En VirtualBox se ven en *Settings*, en modo *Expert*:
+
+| Dónde, en *Settings* | Qué hay | El componente real |
+|---|---|---|
+| *System → Motherboard* | *Base Memory* 2048 MB | La memoria RAM |
+| *System → Motherboard* | *Chipset* PIIX3 | El chipset de la placa base |
+| *System → Motherboard* | *Boot Device Order (BIOS only)* | El orden de arranque, solo para BIOS: con UEFI lo lleva el propio firmware |
+| *System → Motherboard* | *TPM Version* None, *UEFI* marcado, *Secure Boot* sin marcar | El firmware y su seguridad. Sin TPM 2.0 ni Secure Boot, esta máquina no cumple los requisitos de Windows 11 |
+| *System → Processor* | *Number of CPUs* 2 | El procesador. Aquí «CPU» es un **procesador virtual**, y cada uno usa un núcleo de tu procesador real: un portátil tiene un solo chip (*Sockets: 1* en el Administrador de tareas), pero con varios **núcleos** (*Cores*), y cada núcleo puede llevar dos hilos (*Logical processors*). La barra está en verde hasta tus núcleos: más que eso perjudica al anfitrión |
+| *System → Acceleration* | *Paravirtualization Interface* Default, *Nested Paging* | Cómo usa la virtualización por hardware. Con *Default*, Ubuntu sabe que está en una máquina virtual (KVM) y colabora |
+| *Display* | *Video Memory* 16 MB, *Graphics Controller* VMSVGA | La tarjeta gráfica |
+| *Storage* | *Controller: IDE*, con el DVD | El controlador del DVD |
+| *Storage* | *Controller: SATA*, tipo AHCI, con el disco en *SATA Port 0* | El controlador de disco y su puerto |
+| *Storage* (clic en el `.vdi`) | *Virtual size* 25 GB, *Actual size* (lo que ocupa de verdad), *Dynamically allocated* | El disco, dinámico: crece según se usa |
+| *Network → Adapter 1* | *Attached to* NAT, *Adapter Type* Intel PRO/1000 MT Desktop, *MAC Address* | La tarjeta de red y su dirección física (MAC). Hay hasta 4 |
+| *USB* | USB 2.0 (OHCI + EHCI) | El controlador USB |
+
+- En VirtualBox, una «CPU» es un **procesador virtual**, y cada uno usa un núcleo del procesador real. Un ordenador suele tener un solo chip (*Sockets: 1*), con varios **núcleos** (*Cores*), y cada núcleo puede llevar dos **hilos** (*Logical processors*). No conviene dar a la máquina más procesadores que núcleos tiene el anfitrión.
+- **Paravirtualización:** el sistema invitado sabe que está en una máquina virtual y colabora con el hipervisor, para ir más rápido (en Linux, con la interfaz KVM).
+
+### La red de la máquina: NAT
+
+- Con **NAT**, la máquina sale a Internet a través del anfitrión, pero desde fuera no se la ve. VirtualBox le da una dirección por DHCP.
+- **`10.0.2.15/24`** es la dirección **IPv4 privada** que da el NAT de VirtualBox: todas las máquinas con NAT reciben esa misma. `/24` indica que la red son las direcciones `10.0.2.x`.
+- La que empieza por **`fd`** es una dirección **IPv6 privada** de esa misma red.
+- La tarjeta de red tiene además su dirección física, la **MAC**, que es fija: se ve en el instalador, en el menú de arranque del firmware (arranque por red, PXE) y en *Settings → Network*.
 
 ---
 
@@ -148,7 +177,7 @@ Lo básico que hay que saber de la UD2. Cada apartado tiene la idea clave, lo qu
 
 **Lo que tienes que saber**
 
-- Las fases: **firmware** (POST y búsqueda en el orden de arranque) → **gestor de arranque** → **kernel** → primeros servicios (en Linux, **systemd**) → **inicio de sesión**.
+- Las fases: **firmware** (POST y búsqueda en el orden de arranque) → **gestor de arranque** → **kernel** → primeros servicios (en Linux, **systemd**) → **inicio de sesión**. Entre el kernel y systemd, en Linux trabaja el **initrd**, un pequeño sistema en memoria que prepara lo necesario para montar la raíz.
 - **UEFI** frente a BIOS: arranca más rápido, busca los cargadores en la partición EFI, tiene su propio menú de arranque y **Secure Boot** (solo arranca programas firmados).
 - **GRUB** (Linux): su configuración se cambia en `/etc/default/grub` (menú, tiempo de espera, entrada por defecto) y se aplica con `sudo update-grub`, que genera `/boot/grub/grub.cfg`. Ese archivo no se edita a mano.
 - **Windows Boot Manager** (Windows): su configuración es el **BCD**, que se consulta y cambia con `bcdedit`. Carga `winload.efi`, que carga el kernel de Windows.
@@ -162,6 +191,15 @@ Lo básico que hay que saber de la UD2. Cada apartado tiene la idea clave, lo qu
 | Gestor de arranque | GRUB | Windows Boot Manager |
 | Su configuración | `/etc/default/grub` → `update-grub` → `grub.cfg` | El BCD, con `bcdedit` |
 | Recuperación | Modo de recuperación de GRUB | WinRE |
+
+Lo que se ve al arrancar dice en qué fase falla, y eso dice dónde mirar:
+
+| Lo que ves | Dónde falla | Qué revisar |
+|---|---|---|
+| Un mensaje del firmware, como `No bootable option or device was found` | El firmware no encuentra nada que arrancar | El orden de arranque, el disco, la partición EFI |
+| `grub>` o `grub rescue>` | GRUB arranca, pero no encuentra su configuración | `/boot/grub` y la configuración de GRUB |
+| Mensajes del kernel y una consola de emergencia | El kernel no puede montar la raíz | Los parámetros del kernel, el disco |
+| Un servicio que falla y se queda esperando | systemd | Los servicios |
 
 ---
 

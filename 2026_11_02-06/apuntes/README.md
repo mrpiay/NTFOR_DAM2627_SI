@@ -5,6 +5,7 @@ Los apuntes de las unidades de esta semana.
 | Archivo | Qué es |
 |---|---|
 | [`UD1-hardware-y-software.md`](UD1-hardware-y-software.md) | Lo básico de la UD1: sistema informático, procesador, memoria, placa base, almacenamiento, fuente y periféricos, drivers, software, puesta en marcha y prevención de riesgos |
+| [`UD3-linux.md`](UD3-linux.md) | Lo básico del terminal de Linux (UD3): `sudo`, `apt`, el sistema de archivos, las órdenes básicas, la redirección y las tuberías, y las distribuciones |
 
 Cada archivo tiene lo básico de una unidad. Las preguntas del [cuestionario](../cuestionario.md) se responden con ellos y con el proyecto, y las de la prueba escrita salen de lo mismo.
 

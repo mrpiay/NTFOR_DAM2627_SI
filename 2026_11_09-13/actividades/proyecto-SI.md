@@ -152,20 +152,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
 **El hardware de la máquina.** Cada ajuste de la máquina virtual es un componente de un ordenador. Para verlos, con la máquina seleccionada, pulsa **Settings** (*Configuración*) y, arriba a la izquierda, **Expert** (*Experto*): salen todos los ajustes. **Solo mira: no cambies nada** y sal con **Cancel**.
 
-| Dónde, en *Settings* | Qué hay | El componente real |
-|---|---|---|
-| *System → Motherboard* | *Base Memory* 2048 MB | La memoria RAM |
-| *System → Motherboard* | *Chipset* PIIX3 | El chipset de la placa base |
-| *System → Motherboard* | *Boot Device Order (BIOS only)* | El orden de arranque, solo para BIOS: con UEFI lo lleva el propio firmware (se ve en el paso 4) |
-| *System → Motherboard* | *TPM Version* None, *UEFI* marcado, *Secure Boot* sin marcar | El firmware y su seguridad. Sin TPM 2.0 ni Secure Boot, esta máquina no cumple los requisitos de Windows 11 |
-| *System → Processor* | *Number of CPUs* 2 | El procesador. Aquí «CPU» es un **procesador virtual**, y cada uno usa un núcleo de tu procesador real: un portátil tiene un solo chip (*Sockets: 1* en el Administrador de tareas), pero con varios **núcleos** (*Cores*), y cada núcleo puede llevar dos hilos (*Logical processors*). La barra está en verde hasta tus núcleos: más que eso perjudica al anfitrión |
-| *System → Acceleration* | *Paravirtualization Interface* Default, *Nested Paging* | Cómo usa la virtualización por hardware. Con *Default*, Ubuntu sabe que está en una máquina virtual (KVM) y colabora |
-| *Display* | *Video Memory* 16 MB, *Graphics Controller* VMSVGA | La tarjeta gráfica |
-| *Storage* | *Controller: IDE*, con el DVD | El controlador del DVD |
-| *Storage* | *Controller: SATA*, tipo AHCI, con el disco en *SATA Port 0* | El controlador de disco y su puerto |
-| *Storage* (clic en el `.vdi`) | *Virtual size* 25 GB, *Actual size* (lo que ocupa de verdad), *Dynamically allocated* | El disco, dinámico: crece según se usa |
-| *Network → Adapter 1* | *Attached to* NAT, *Adapter Type* Intel PRO/1000 MT Desktop, *MAC Address* | La tarjeta de red y su dirección física (MAC). Hay hasta 4 |
-| *USB* | USB 2.0 (OHCI + EHCI) | El controlador USB |
+Localiza cada ajuste en la tabla «[El hardware de una máquina virtual](../apuntes/UD2-sistemas-operativos.md#el-hardware-de-una-máquina-virtual)» de los apuntes de la UD2, que dice a qué componente de un ordenador corresponde.
 
 En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
@@ -230,7 +217,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
    Elige **Power off the machine** y **OK**: sin sistema, desenchufarla no estropea nada.
 
-**El motor de VirtualBox.** En la barra de abajo de la ventana de la máquina hay un icono con un chip verde. Si pasas el ratón por encima, dice cómo funciona: si en **Execution Engine** pone **native API**, VirtualBox está funcionando a través de **Hyper-V**, el hipervisor de Windows, porque está activo (lo usan WSL y algunas funciones de seguridad de Windows). Funciona igual, pero más despacio en los momentos de mucho trabajo, como la instalación del paso 3: entre otras cosas, la traducción de memoria por hardware queda desactivada (*Nested Paging: Inactive*).
+**El motor de VirtualBox.** En la barra de abajo de la ventana de la máquina hay un icono con un chip verde. Si pasas el ratón por encima, dice cómo funciona: si en **Execution Engine** pone **native API**, VirtualBox está funcionando a través de **Hyper-V**, el hipervisor de Windows, porque está activo (lo usan WSL y algunas funciones de seguridad de Windows). Funciona igual, pero más despacio en los momentos de mucho trabajo, como la instalación del paso 3 (por qué: [apuntes de la UD2, apartado 5](../apuntes/UD2-sistemas-operativos.md#5-máquinas-virtuales)).
 
 ![El motor de VirtualBox](img/05-motor-native-api.png)
 
@@ -267,7 +254,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    - si sale **Installer update available**, elige **Continue without updating**;
    - **Keyboard configuration:** **Layout** *Spanish*, **Variant** *Spanish*;
    - **Choose the type of installation:** deja **Ubuntu Server** y **no marques** *Search for third-party drivers*;
-   - **Network configuration:** la máquina recibe una dirección automáticamente (DHCP, por la red NAT de VirtualBox). Junto a `enp0s3`, la tarjeta de red virtual, salen dos: **`10.0.2.15/24`** (*DHCPv4*), la dirección IPv4 privada que da el NAT de VirtualBox (la máquina sale a Internet a través de tu ordenador, pero desde fuera no se la ve; todas las máquinas con NAT reciben esa misma), y otra que empieza por **`fd`** (*DHCPv6*), la IPv6 privada de esa misma red. `/24` indica que la red son las direcciones `10.0.2.x`. No cambies nada;
+   - **Network configuration:** la máquina recibe una dirección automáticamente. Junto a `enp0s3`, la tarjeta de red virtual, salen dos: **`10.0.2.15/24`** (*DHCPv4*) y otra que empieza por **`fd`** (*DHCPv6*). Qué son: «[La red de la máquina: NAT](../apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2. No cambies nada;
    - **Proxy configuration:** vacío;
    - **Ubuntu archive mirror configuration:** el instalador comprueba la réplica de la que descargará los paquetes (`es.archive.ubuntu.com`). Cuando arriba diga **This mirror location passed tests**, pulsa **Done**, aunque el registro de abajo termine en `Reading package lists...`;
    - **Guided storage configuration:** deja marcado **Use an entire disk**, el de 25 GB, y **desmarca** **Set up this disk as an LVM group**. Así las particiones quedan simples y se ven tal cual;
@@ -400,7 +387,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    initrd.img.old               vmlinuz-7.0.0-43-generic
    ```
 
-   `vmlinuz-…` es el kernel; `initrd.img-…`, su ayudante, que prepara lo necesario para montar la raíz; `grub`, la carpeta de configuración de GRUB; `efi`, donde está montada la partición EFI. Los nombres terminan en la versión del kernel, y hay **dos versiones**: `7.0.0-30` (la que traía la ISO) y `7.0.0-43` (la que instalaron las actualizaciones del paso 3). Los números dependen del día en que se instala: en tu máquina pueden ser otros. `vmlinuz` e `initrd.img` apuntan al kernel actual, y `vmlinuz.old` e `initrd.img.old`, al anterior. Se ve mejor en el paso 5, con `tree`.
+   `vmlinuz-…` es el kernel; `initrd.img-…`, su ayudante (el *initrd*); `grub`, la carpeta de configuración de GRUB; `efi`, donde está montada la partición EFI. Los nombres terminan en la versión del kernel, y hay **dos versiones**: `7.0.0-30` (la que traía la ISO) y `7.0.0-43` (la que instalaron las actualizaciones del paso 3). Los números dependen del día en que se instala: en tu máquina pueden ser otros. `vmlinuz` e `initrd.img` apuntan al kernel actual, y `vmlinuz.old` e `initrd.img.old`, al anterior. Se ve mejor en el paso 5, con `tree`.
 
 6. **Los parámetros que GRUB le pasó al kernel en este arranque:**
 
@@ -539,7 +526,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    sudo poweroff
    ```
 
-   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*): es el icono de la cámara, justo a la derecha del de *Details*. Arriba aparecen los botones **Take** (*Tomar*), **Delete**, **Restore**… Con *Current State* seleccionado, pulsa **Take**. Nombre: `Actualizado`, y **OK**. Con la máquina apagada, la instantánea guarda solo el disco y la configuración: ocupa menos y, al volver a ella, la máquina arranca limpia. Desde ese momento, VirtualBox escribe los cambios del disco en un archivo aparte (en *Settings → Storage*, el disco pasa a ser *differencing*, de diferencias): así se puede volver atrás.
+   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*): es el icono de la cámara, justo a la derecha del de *Details*. Arriba aparecen los botones **Take** (*Tomar*), **Delete**, **Restore**… Con *Current State* seleccionado, pulsa **Take**. Nombre: `Actualizado`, y **OK**. Con la máquina apagada, al volver a ella arranca limpia (cómo funciona una instantánea: [apuntes de la UD2, apartado 5](../apuntes/UD2-sistemas-operativos.md#5-máquinas-virtuales)).
 
    ![La lista de instantáneas](img/15-instantaneas.png)
 
@@ -609,7 +596,7 @@ Adding boot menu entry for UEFI Firmware Settings ...
 done
 ```
 
-`update-grub` lee `/etc/default/grub` (y `kdump-tools.cfg`, de donde sale el parámetro `crashkernel` del paso 4), encuentra los dos kernels y escribe `/boot/grub/grub.cfg`. Sin él, el cambio no tiene efecto: GRUB no lee `/etc/default/grub`. El aviso de `os-prober` dice que GRUB no busca otros sistemas en otras particiones (un Windows en el mismo disco, por ejemplo): aquí no hay otro, así que es normal.
+`update-grub` lee `/etc/default/grub` (y `kdump-tools.cfg`, de donde sale el parámetro `crashkernel` del paso 4), encuentra los dos kernels y escribe `/boot/grub/grub.cfg`, que es lo que lee GRUB al arrancar ([apuntes de la UD2, apartado 8](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque)). El aviso de `os-prober` dice que GRUB no busca otros sistemas en otras particiones (un Windows en el mismo disco, por ejemplo): aquí no hay otro, así que es normal.
 
 Reinicia:
 
@@ -702,14 +689,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
    Lista lo que ve: `(hd0)`, el disco; `(hd0,gpt1)`, la partición EFI; `(hd0,gpt2)`, la raíz; `(cd0)`, el DVD; y `(memdisk)` y `(proc)`, discos internos del propio GRUB, en memoria. Desde aquí se podría arrancar a mano, pero lo práctico es volver al estado anterior.
 
-   Lo que se ve al arrancar dice en qué fase falla, y eso dice dónde mirar:
-
-   | Lo que ves | Dónde falla | Qué revisar |
-   |---|---|---|
-   | Un mensaje del firmware, como `No bootable option or device was found` (paso 2) | El firmware no encuentra nada que arrancar | El orden de arranque, el disco, la partición EFI |
-   | `grub>` o `grub rescue>` (este paso) | GRUB arranca, pero no encuentra su configuración | `/boot/grub` y la configuración de GRUB |
-   | Mensajes del kernel y una consola de emergencia | El kernel no puede montar la raíz | Los parámetros del kernel, el disco |
-   | Un servicio que falla y se queda esperando | systemd | Los servicios |
+   `grub>` dice que GRUB ha arrancado pero no tiene su configuración: el fallo está en la fase 2. Qué se ve cuando falla cada fase: «Compara», en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
 
 4. **Apaga la máquina:** **File → Close… → Power off the machine**.
 5. **Restaura la instantánea.** En la ventana principal de VirtualBox, pestaña *Snapshots*: clic derecho en **`Antes de romper`** → **Restore…** (*Restaurar*). El cuadro ofrece guardar antes el estado actual (**Create a snapshot of the current machine state**): déjalo **desmarcado**, porque el estado actual es el roto, y pulsa **Restore**.

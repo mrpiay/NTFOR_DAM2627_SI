@@ -16,7 +16,7 @@ Al final, escribes el código en VS Code y compilas y ejecutas desde su terminal
 > - En el apartado 3, descarga VS Code para Linux desde [code.visualstudio.com](https://code.visualstudio.com) (en Ubuntu, el paquete `.deb`) e instálalo con `sudo apt install ./code_*.deb`, desde la carpeta de la descarga. No instales la extensión WSL: `code .` abre VS Code directamente y su terminal (**Ctrl+ñ**) ya es el de tu Linux.
 > - Si tu Linux no es Ubuntu, las órdenes equivalentes están en «Otras distribuciones de Linux», al final.
 
-Para Java también hay IDE (entornos de desarrollo integrados) como Eclipse, IntelliJ IDEA o NetBeans, que compilan y ejecutan con un botón. VS Code es un editor, pero con extensiones se acerca a un IDE. Se empieza con VS Code y el terminal para ver qué hace cada paso, y lo aprendido te servirá después en cualquier IDE.
+Se trabaja con VS Code y el terminal, y no con un IDE (Eclipse, IntelliJ IDEA, NetBeans), para ver qué hace cada paso.
 
 ## 1. WSL: Linux dentro de Windows
 
@@ -45,23 +45,7 @@ Requisitos: Windows 10 versión 2004 o superior (build 19041 o superior) o Windo
 
    Si pregunta `Do you want to continue? [Y/n]`, pulsa Intro para aceptar.
 
-**Qué es sudo**
-
-En Linux, tu usuario normal no puede cambiar el sistema, por ejemplo instalar programas. `sudo` ("superuser do") ejecuta un solo comando con permisos de administrador, llamado `root` en Linux.
-
-- Escribe `sudo` delante del comando: `sudo apt install zip`.
-- Te pide tu contraseña de Linux, la que creaste al instalar Ubuntu, y durante unos minutos no vuelve a pedirla.
-- Úsalo solo cuando haga falta, como al instalar o actualizar. Para compilar, ejecutar o crear carpetas en tu `~` no se necesita.
-
-En los comandos de instalación también aparece `apt`, el gestor de paquetes de Ubuntu, que descarga e instala programas:
-
-| Comando | Qué hace |
-| --- | --- |
-| `sudo apt update` | Actualiza la lista de programas disponibles; no instala nada |
-| `sudo apt upgrade` | Instala las versiones nuevas de lo que ya tienes |
-| `sudo apt install <programa>` | Instala un programa |
-
-`&&` une dos comandos: el segundo solo se ejecuta si el primero termina bien.
+`sudo` ejecuta la orden como administrador y pide tu contraseña de Linux; `apt` es el gestor de paquetes: `update` actualiza la lista de programas y `upgrade` instala las versiones nuevas; `&&` encadena las dos. Lo explican los [apuntes de la UD3, apartados 1 y 2](../apuntes/UD3-linux.md#1-usuario-normal-y-administrador-sudo).
 
 Para comprobar la instalación, en PowerShell:
 
@@ -73,23 +57,14 @@ Debe aparecer `Ubuntu-24.04` con `VERSION 2`.
 
 **WSL2 y VirtualBox.** Con WSL2 activo, VirtualBox funciona sobre la virtualización de Windows (Hyper-V) y las máquinas virtuales van más lentas. Es normal: siguen funcionando igual.
 
-**Dónde viven tus archivos**
+**Dónde guardar tus proyectos**
 
-- `~` (por ejemplo `/home/ana`) es tu carpeta personal en Linux. Guarda aquí tus proyectos, por ejemplo en `~/dam2627/prog`. Las herramientas de Linux trabajan más rápido con estos archivos.
-- `/mnt/c` es el disco C: de Windows visto desde Linux.
+- Guárdalos en tu carpeta personal de Linux, `~`, por ejemplo en `~/dam2627/prog` (qué son `~` y `/mnt/c`: [apuntes de la UD3, apartado 3](../apuntes/UD3-linux.md#3-el-sistema-de-archivos)).
 - Desde el Explorador de Windows puedes ver tus archivos de Linux en **Linux > Ubuntu**, en el panel izquierdo, o escribiendo `explorer.exe .` en el terminal de Ubuntu.
 
 ## 2. JDK: las herramientas para programar en Java
 
-El JDK (Java Development Kit) es lo que necesitas para programar en Java. Incluye el JRE, que solo sirve para ejecutar programas, y le añade las herramientas de desarrollo.
-
-| Herramienta | Para qué sirve |
-| --- | --- |
-| `javac` | Compilador: convierte los `.java` en bytecode (`.class`) |
-| `java` | Arranca la máquina virtual (JVM) y ejecuta el bytecode |
-| JRE | Máquina virtual y librerías para ejecutar programas; viene dentro del JDK |
-
-Con el JRE solo podrías ejecutar programas ya compilados. Para compilar los tuyos necesitas el JDK.
+El JDK (Java Development Kit) trae `javac`, el compilador, y `java`, que ejecuta lo compilado. Lleva dentro el JRE, que solo sirve para ejecutar programas ya compilados: para compilar los tuyos hace falta el JDK.
 
 **Instalación en Ubuntu**
 
@@ -142,48 +117,13 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 
 > **Nota:** mientras aprendes, conviene no instalar extensiones que escriben código por ti (autocompletado, asistentes) ni que marcan los errores mientras escribes. Así te encuentras los errores al compilar, lees lo que dice `javac` y aprendes de cada fallo.
 
-## 4. Órdenes básicas del terminal
+## 4. El terminal
 
-Las órdenes que más se usan en el terminal de Linux. Cada una se escribe y se ejecuta con **Intro**; casi todas aceptan opciones, que empiezan por `-`.
-
-| Orden | Qué hace | Ejemplo |
-|---|---|---|
-| `pwd` | Dice en qué carpeta estás | `pwd` |
-| `ls` | Lista lo que hay en la carpeta; `-R` también lo de dentro de cada subcarpeta | `ls`, `ls -R` |
-| `cd` | Cambia de carpeta; `cd ..` sube una, y `cd` solo vuelve a tu carpeta personal | `cd /tmp/prueba` |
-| `mkdir` | Crea una carpeta; `-p` crea también las intermedias que falten | `mkdir -p a/b` |
-| `touch` | Crea un archivo vacío (o, si ya existe, solo actualiza su fecha) | `touch notas.txt` |
-| `echo` | Escribe un texto en la pantalla | `echo "hola"` |
-| `>` | Manda lo que sale de una orden a un archivo, **sustituyendo** lo que tuviera | `echo "uno" > notas.txt` |
-| `>>` | Lo mismo, pero **añadiendo** al final, sin borrar lo que había | `echo "dos" >> notas.txt` |
-| `cat` | Muestra el contenido de un archivo | `cat notas.txt` |
-| `\|` (tubería) | Pasa lo que sale de una orden como entrada de la siguiente | `cat notas.txt \| sort` |
-| `sort` | Ordena las líneas alfabéticamente | `sort notas.txt` |
-| `mv` | Mueve un archivo a otra carpeta o le cambia el nombre | `mv notas.txt a/`, `mv a.txt b.txt` |
-| `cp` | Copia un archivo | `cp notas.txt copia.txt` |
-| `rm` | Borra un archivo; una carpeta solo con `-r` (todo lo de dentro también, sin preguntar ni papelera) | `rm notas.txt`, `rm -r a` |
-| `less` | Muestra un archivo largo página a página: flechas o **Espacio** para moverse, `/palabra` e **Intro** para buscar (`n`, la siguiente), `q` para salir | `less /etc/services` |
-| `man` | El manual de una orden (se maneja como `less`) | `man ls` |
-
-Algunas carpetas y una orden especiales:
-
-- **`~`** es tu carpeta personal (`/home/tu_usuario`): ahí trabajas con tus archivos.
-- **`/tmp`** es la carpeta de archivos temporales: cualquier usuario puede escribir en ella, y se vacía al reiniciar. Sirve para hacer pruebas.
-- **`sudo`** ejecuta una orden como administrador y pide tu contraseña. Hace falta para cambiar el sistema (instalar programas con `apt`, tocar carpetas como `/etc` o `/usr`), pero no para trabajar en `~` o en `/tmp`.
+Las órdenes básicas del terminal (`ls`, `cd`, `mkdir`, `cat`, `mv`, `rm`, `less`…), la redirección (`>`, `>>`) y las tuberías (`|`) están en los [apuntes de la UD3](../apuntes/UD3-linux.md#4-órdenes-básicas).
 
 ## Otras distribuciones de Linux
 
-Una **distribución** es un Linux completo: el núcleo (el kernel Linux), los programas básicos, un gestor de paquetes para instalar más y, normalmente, un escritorio. Todas ejecutan los mismos programas; cambian sobre todo el gestor de paquetes y el ritmo de actualizaciones.
-
-| Distribución | Descripción | Gestor de paquetes |
-| --- | --- | --- |
-| **Debian** | Una de las más antiguas y la base de muchas otras (Ubuntu, Linux Mint, Kali, Parrot).<br>Muy estable: actualiza poco y con mucho cuidado.<br>Uso típico: servidores y equipos que tienen que funcionar años sin sorpresas. | `apt` |
-| **Ubuntu** | Basada en Debian; la más usada en ordenadores personales y en la nube.<br>Saca versiones LTS (de soporte largo) cada dos años, como la 24.04.<br>Uso típico: escritorio para programar, servidores y WSL. | `apt` |
-| **Linux Mint** | Basada en Ubuntu, con un escritorio parecido al de Windows.<br>Uso típico: ordenadores personales de quien viene de Windows o de equipos con pocos recursos. | `apt` |
-| **Fedora** | Patrocinada por Red Hat; trae versiones recientes de los programas y saca una versión nueva cada seis meses.<br>Uso típico: desarrollo de software y para aprender el entorno de Red Hat, muy usado en empresas. | `dnf` |
-| **Arch** | Mínima: se instala casi pieza a pieza y se actualiza continuamente (*rolling release*).<br>Uso típico: usuarios avanzados que quieren montar y controlar todo su sistema. | `pacman` |
-| **Manjaro** | Basada en Arch, pero con instalador y escritorio listos para usar.<br>Uso típico: tener programas muy actualizados sin montar el sistema a mano. | `pacman` |
-| **Kali** y **Parrot** | Basadas en Debian y especializadas en ciberseguridad: traen cientos de herramientas para auditorías de seguridad, pruebas de penetración y análisis forense.<br>No están pensadas para el uso diario; normalmente se usan en una máquina virtual o arrancando desde un USB.<br>Para esta guía, sus órdenes son las de Ubuntu (`apt`). | `apt` |
+Si tu Linux no es Ubuntu, cambian sobre todo las órdenes para instalar (qué es una distribución: [apuntes de la UD3, apartado 6](../apuntes/UD3-linux.md#6-distribuciones-de-linux)).
 
 Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distribución, estas son las equivalentes:
 
@@ -196,11 +136,6 @@ Esta guía usa las órdenes de Ubuntu (`apt`). Si tu ordenador tiene otra distri
 | Instalar VS Code | Paquete `.deb` de code.visualstudio.com: `sudo apt install ./code_*.deb` | Paquete `.rpm`: `sudo dnf install ./code-*.rpm` | `sudo pacman -S code` (la versión libre, «Code - OSS») |
 
 Lo demás es igual en todas: `javac -version`, `java -version`, `code .` y el terminal de VS Code.
-
-Para saber más:
-
-- qué es una distribución y cómo se agrupan: [Distribución Linux, en Wikipedia](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_Linux);
-- un catálogo con todas las distribuciones, sus versiones y sus novedades: [DistroWatch](https://distrowatch.com/), en inglés.
 
 ## Si algo falla
 
