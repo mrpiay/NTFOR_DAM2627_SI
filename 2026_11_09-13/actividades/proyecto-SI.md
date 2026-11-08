@@ -55,7 +55,7 @@ La guía está probada con **VirtualBox 7.2** y **Windows 11**, los dos en ingl�
 
 | Qué | Pasos |
 |---|---|
-| Qué es una máquina virtual; crearla y configurarla (memoria, procesadores, firmware, disco) | 1 |
+| Qué es una máquina virtual; crearla y configurarla (memoria, procesadores, firmware, disco); su hardware, comparado con el de un ordenador real | 1 y 4 |
 | El firmware UEFI, el orden de arranque y su menú de arranque | 2 y 9 |
 | Planificar e instalar un sistema operativo; particiones GPT y la partición EFI | 3 |
 | Las fases del arranque, vistas desde dentro del sistema | 4 |
@@ -150,12 +150,32 @@ Con la máquina seleccionada en la lista, la pestaña **Details** (*Detalles*) m
 
 Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu carpeta personal: `ubuntu-arranque.vbox` (la configuración) y `ubuntu-arranque.vdi` (el disco).
 
-**Comprueba que…** la máquina aparece en la lista de VirtualBox, con EFI habilitado, 2048 MB de memoria, 2 procesadores, el disco de 25 GB y el DVD vacío.
+**El hardware de la máquina.** Cada ajuste de la máquina virtual es un componente de un ordenador, como los de los apuntes de la UD1. Para verlos, con la máquina seleccionada, pulsa **Settings** (*Configuración*) y, arriba a la izquierda, **Expert** (*Experto*): salen todos los ajustes. **Solo mira: no cambies nada** y sal con **Cancel**.
+
+| Dónde, en *Settings* | Qué hay | El componente real |
+|---|---|---|
+| *System → Motherboard* | *Base Memory* 2048 MB | La memoria RAM |
+| *System → Motherboard* | *Chipset* PIIX3 | El chipset de la placa base |
+| *System → Motherboard* | *Boot Device Order (BIOS only)* | El orden de arranque, solo para BIOS: con UEFI lo lleva el propio firmware (se ve en el paso 4) |
+| *System → Motherboard* | *TPM Version* None, *UEFI* marcado, *Secure Boot* sin marcar | El firmware y su seguridad. Sin TPM 2.0 ni Secure Boot, esta máquina no cumple los requisitos de Windows 11 |
+| *System → Processor* | *Number of CPUs* 2 | El procesador. La barra está en verde hasta el número de **núcleos** reales de tu ordenador: más que eso perjudica al anfitrión |
+| *System → Acceleration* | *Paravirtualization Interface* Default, *Nested Paging* | Cómo usa la virtualización por hardware. Con *Default*, Ubuntu sabe que está en una máquina virtual (KVM) y colabora |
+| *Display* | *Video Memory* 16 MB, *Graphics Controller* VMSVGA | La tarjeta gráfica |
+| *Storage* | *Controller: IDE*, con el DVD | El controlador del DVD |
+| *Storage* | *Controller: SATA*, tipo AHCI, con el disco en *SATA Port 0* | El controlador de disco y su puerto |
+| *Storage* (clic en el `.vdi`) | *Virtual size* 25 GB, *Actual size* (lo que ocupa de verdad), *Dynamically allocated* | El disco, dinámico: crece según se usa |
+| *Network → Adapter 1* | *Attached to* NAT, *Adapter Type* Intel PRO/1000 MT Desktop, *MAC Address* | La tarjeta de red y su dirección física (MAC). Hay hasta 4 |
+| *USB* | USB 2.0 (OHCI + EHCI) | El controlador USB |
+
+En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
+
+**Comprueba que…** la máquina aparece en la lista de VirtualBox, con EFI habilitado, 2048 MB de memoria, 2 procesadores, el disco de 25 GB y el DVD vacío, y sabes a qué componente de un ordenador corresponde cada ajuste de la tabla.
 
 **Si te falla…**
 
 - *Solo aparecen versiones de 32 bits en «OS Version»*: la virtualización no está activada (paso 0).
-- *No marcaste «Use EFI»*: márcalo en **Settings → System → Motherboard** (*Configuración → Sistema → Placa base*), casilla *Enable EFI*.
+- *No marcaste «Use EFI»*: márcalo en **Settings → System → Motherboard** (*Configuración → Sistema → Placa base*), en *Features*, casilla **UEFI**.
+- *Cambiaste algún ajuste sin querer*: pulsa **Cancel** al salir de *Settings* y no se guarda nada.
 
 ---
 
@@ -210,7 +230,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
    Elige **Power off the machine** y **OK**: sin sistema, desenchufarla no estropea nada.
 
-**El motor de VirtualBox.** En la barra de abajo de la ventana de la máquina hay un icono con un chip verde. Si pasas el ratón por encima, dice cómo funciona: si en **Execution Engine** pone **native API**, VirtualBox está funcionando a través de **Hyper-V**, el hipervisor de Windows, porque está activo (lo usan WSL y algunas funciones de seguridad de Windows). Funciona igual, pero más despacio en los momentos de mucho trabajo, como la instalación del paso 3.
+**El motor de VirtualBox.** En la barra de abajo de la ventana de la máquina hay un icono con un chip verde. Si pasas el ratón por encima, dice cómo funciona: si en **Execution Engine** pone **native API**, VirtualBox está funcionando a través de **Hyper-V**, el hipervisor de Windows, porque está activo (lo usan WSL y algunas funciones de seguridad de Windows). Funciona igual, pero más despacio en los momentos de mucho trabajo, como la instalación del paso 3: entre otras cosas, la traducción de memoria por hardware queda desactivada (*Nested Paging: Inactive*).
 
 ![El motor de VirtualBox](img/05-motor-native-api.png)
 
@@ -413,7 +433,37 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
    El kernel, su ayudante (`initrd`) y los servicios (*userspace*): son las fases del arranque (apartado 8 de los apuntes de la UD2), medidas. El firmware de VirtualBox no informa de su tiempo ni del de GRUB; en un ordenador real salen también `(firmware)` y `(loader)`.
 
-**Comprueba que…** sabes señalar, en la salida de estas órdenes, la partición EFI, la raíz, el programa de GRUB, la entrada de Ubuntu en el firmware, el kernel, sus parámetros y systemd, y a qué fase del arranque corresponde cada uno.
+9. **El hardware que ve Ubuntu.** El mismo de la tabla del paso 1, visto desde dentro:
+
+   ```bash
+   nproc
+   free -h
+   lspci
+   ```
+
+   ```
+   2
+                  total        used        free      shared  buff/cache   available
+   Mem:           1.6Gi       207Mi       1.1Gi       1.0Mi       344Mi       1.4Gi
+   Swap:          2.0Gi          0B       2.0Gi
+   00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
+   00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
+   00:01.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
+   00:02.0 VGA compatible controller: VMware SVGA II Adapter
+   00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
+   00:04.0 System peripheral: InnoTek Systemberatung GmbH VirtualBox Guest Service
+   00:05.0 Multimedia audio controller: Intel Corporation 82801AA AC'97 Audio Controller (rev 01)
+   00:06.0 USB controller: Apple Inc. KeyLargo/Intrepid USB
+   00:07.0 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 08)
+   00:0b.0 USB controller: Intel Corporation 82801FB/FBM/FR/FW/FRW (ICH6 Family) USB2 EHCI Controller
+   00:0d.0 SATA controller: Intel Corporation 82801HM/HEM (ICH8M/ICH8M-E) SATA Controller [AHCI mode] (rev 02)
+   ```
+
+   - `nproc`: los **2 procesadores**;
+   - `free -h`: la memoria. Sale `1.6Gi` y no 2: el kernel aparta una parte para él y para el `crashkernel` (con 2–4 GB, 320 MB). `Swap` es el archivo de intercambio que creó el instalador;
+   - `lspci`: los dispositivos de la placa. Los *bridge* son el **chipset PIIX3**; *IDE interface*, el controlador del DVD; *VGA … SVGA II*, la gráfica **VMSVGA**; *Ethernet … 82540EM*, la tarjeta **Intel PRO/1000**; *SATA controller … AHCI*, el controlador del disco; los *USB controller*, el USB 2.0; y *VirtualBox Guest Service*, un dispositivo propio de VirtualBox. El sistema invitado ve exactamente el hardware que le da el hipervisor.
+
+**Comprueba que…** sabes señalar, en la salida de estas órdenes, la partición EFI, la raíz, el programa de GRUB, la entrada de Ubuntu en el firmware, el kernel, sus parámetros y systemd, y a qué fase del arranque corresponde cada uno; y que reconoces en `lspci` el hardware de la tabla del paso 1.
 
 **Si te falla…**
 
@@ -482,7 +532,7 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
    sudo poweroff
    ```
 
-   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*), junto a *Details*, y pulsa **Take** (*Tomar*). Nombre: `Actualizado`, y **OK**. Con la máquina apagada, la instantánea guarda solo el disco y la configuración: ocupa menos y, al volver a ella, la máquina arranca limpia.
+   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*), junto a *Details*, y pulsa **Take** (*Tomar*). Nombre: `Actualizado`, y **OK**. Con la máquina apagada, la instantánea guarda solo el disco y la configuración: ocupa menos y, al volver a ella, la máquina arranca limpia. Desde ese momento, VirtualBox escribe los cambios del disco en un archivo aparte (en *Settings → Storage*, el disco pasa a ser *differencing*, de diferencias): así se puede volver atrás.
 
    ![La lista de instantáneas](img/15-instantaneas.png)
 
@@ -774,6 +824,7 @@ Qué se entrega y cuándo: [`entrega.md`](entrega.md).
 | Comprobación | Hecho |
 |---|---|
 | Sé qué son el anfitrión, el hipervisor y el invitado, y qué archivos forman una máquina virtual |  |
+| Sé a qué componente de un ordenador corresponde cada ajuste de la máquina, y lo reconozco en `lspci` |  |
 | Sé nombrar las cinco fases del arranque, en orden, y qué hace cada una |  |
 | La máquina usa UEFI, y vi qué hace el firmware sin nada que arrancar |  |
 | Ubuntu Server está instalado, con la partición EFI en `/boot/efi` y la raíz en `/` |  |
