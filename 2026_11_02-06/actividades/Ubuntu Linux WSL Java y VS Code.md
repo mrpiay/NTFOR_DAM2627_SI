@@ -142,6 +142,35 @@ Con la conexión WSL, la mayoría de las extensiones se instalan dentro de Ubunt
 
 > **Nota:** mientras aprendes, conviene no instalar extensiones que escriben código por ti (autocompletado, asistentes) ni que marcan los errores mientras escribes. Así te encuentras los errores al compilar, lees lo que dice `javac` y aprendes de cada fallo.
 
+## 4. Órdenes básicas del terminal
+
+Las órdenes que más se usan en el terminal de Linux. Cada una se escribe y se ejecuta con **Intro**; casi todas aceptan opciones, que empiezan por `-`.
+
+| Orden | Qué hace | Ejemplo |
+|---|---|---|
+| `pwd` | Dice en qué carpeta estás | `pwd` |
+| `ls` | Lista lo que hay en la carpeta; `-R` también lo de dentro de cada subcarpeta | `ls`, `ls -R` |
+| `cd` | Cambia de carpeta; `cd ..` sube una, y `cd` solo vuelve a tu carpeta personal | `cd /tmp/prueba` |
+| `mkdir` | Crea una carpeta; `-p` crea también las intermedias que falten | `mkdir -p a/b` |
+| `touch` | Crea un archivo vacío (o, si ya existe, solo actualiza su fecha) | `touch notas.txt` |
+| `echo` | Escribe un texto en la pantalla | `echo "hola"` |
+| `>` | Manda lo que sale de una orden a un archivo, **sustituyendo** lo que tuviera | `echo "uno" > notas.txt` |
+| `>>` | Lo mismo, pero **añadiendo** al final, sin borrar lo que había | `echo "dos" >> notas.txt` |
+| `cat` | Muestra el contenido de un archivo | `cat notas.txt` |
+| `\|` (tubería) | Pasa lo que sale de una orden como entrada de la siguiente | `cat notas.txt \| sort` |
+| `sort` | Ordena las líneas alfabéticamente | `sort notas.txt` |
+| `mv` | Mueve un archivo a otra carpeta o le cambia el nombre | `mv notas.txt a/`, `mv a.txt b.txt` |
+| `cp` | Copia un archivo | `cp notas.txt copia.txt` |
+| `rm` | Borra un archivo; una carpeta solo con `-r` (todo lo de dentro también, sin preguntar ni papelera) | `rm notas.txt`, `rm -r a` |
+| `less` | Muestra un archivo largo página a página: flechas o **Espacio** para moverse, `/palabra` e **Intro** para buscar (`n`, la siguiente), `q` para salir | `less /etc/services` |
+| `man` | El manual de una orden (se maneja como `less`) | `man ls` |
+
+Algunas carpetas y una orden especiales:
+
+- **`~`** es tu carpeta personal (`/home/tu_usuario`): ahí trabajas con tus archivos.
+- **`/tmp`** es la carpeta de archivos temporales: cualquier usuario puede escribir en ella, y se vacía al reiniciar. Sirve para hacer pruebas.
+- **`sudo`** ejecuta una orden como administrador y pide tu contraseña. Hace falta para cambiar el sistema (instalar programas con `apt`, tocar carpetas como `/etc` o `/usr`), pero no para trabajar en `~` o en `/tmp`.
+
 ## Otras distribuciones de Linux
 
 Una **distribución** es un Linux completo: el núcleo (el kernel Linux), los programas básicos, un gestor de paquetes para instalar más y, normalmente, un escritorio. Todas ejecutan los mismos programas; cambian sobre todo el gestor de paquetes y el ritmo de actualizaciones.
