@@ -1,6 +1,6 @@
 # UD1 · Sistemas informáticos: hardware y software
 
-Lo básico que hay que saber de la UD1. Cada apartado tiene la idea clave, lo que tienes que saber y, cuando hay conceptos que se confunden, una tabla para compararlos. Las preguntas para comprobar que lo entiendes están en el cuestionario de autoevaluación: todas se responden con estos apuntes.
+Lo básico que hay que saber de la UD1. Cada apartado tiene la idea clave, lo que tienes que saber y, cuando hay conceptos que se confunden, una tabla para compararlos. Las preguntas para comprobar que lo entiendes están en el [cuestionario](../cuestionario.md) de la semana, en «Cuestiones sobre los apuntes».
 
 ---
 
