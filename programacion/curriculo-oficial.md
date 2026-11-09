@@ -180,7 +180,9 @@
 - Creación de documentación técnica en los idiomas más empleados por la industria.
 - Herramientas web de búsqueda de información.
 
-## Orientaciones pedagógicas. Este módulo profesional contiene la formación necesaria para desempeñar la función de explotación de sistemas informáticos. Esta función incluye aspectos como:
+## Orientaciones pedagógicas.
+
+Este módulo profesional contiene la formación necesaria para desempeñar la función de explotación de sistemas informáticos. Esta función incluye aspectos como:
 
 - Instalación, configuración básica y explotación de sistemas operativos.
 - Configuración básica y gestión de redes de área local.
