@@ -6,6 +6,7 @@ Qué se trabaja en cada evaluación, cuándo y cómo se califica, según la prog
 - [2ª evaluación](2a-evaluacion.md): UD3, UD4 · cierre el 15 de marzo
 - [3ª evaluación](3a-evaluacion.md): UD5, UD6, UD7 · cierre el 14 de junio
 - [Rúbricas](rubricas.md)
+- [Currículo oficial del módulo](curriculo-oficial.md): resultados de aprendizaje, criterios de evaluación, contenidos básicos y orientaciones, tal como los publica el DOG (Decreto 105/2011)
 
 ## Fechas clave
 
