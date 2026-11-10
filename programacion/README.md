@@ -15,6 +15,8 @@ Qué se trabaja en cada evaluación, cuándo y cómo se califica, según la prog
 | jue 10 sep | Presentación del módulo y preparación del ordenador |
 | mar 6 oct | Sesión de evaluación inicial (diagnóstica) |
 | 3–6 nov | Puesta en común y proyecto de diagnóstico (no se avanza: se repasa y se completa lo que tocaba hasta la fecha y se preparan las próximas entregas y exámenes) |
+| lun 16 nov, 23:59 | Entrega en Teams de las autoevaluaciones de las semanas del 2 al 6 y del 9 al 13, en una sola tarea |
+| vie 20 nov | Prueba escrita de la UD2, en papel, sobre Linux (WSL y órdenes) y el proyecto de máquinas virtuales (en lugar del examen de la UD2) |
 | vie 4 dic y jue 10 dic | Repaso de la 1ª evaluación |
 | vie 11 dic | Examen final de la 1ª evaluación |
 | jue 17 dic | Cierre de la 1ª evaluación (sesión de evaluación) |

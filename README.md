@@ -11,6 +11,7 @@ Todas las semanas: el cuestionario de autoevaluación está disponible desde el 
 | Lunes 16 de noviembre, 23:59 | Entrega en Teams de las autoevaluaciones de las semanas del 2 al 6 y del 9 al 13, en una sola tarea |
 | Martes 17 de noviembre | Se publican las soluciones de esas dos autoevaluaciones |
 | Viernes 20 de noviembre (08:30 y 09:20) | **Prueba escrita**, en papel, sobre Linux (WSL y órdenes) y el proyecto de la máquina virtual y su arranque: firmware, particiones, GRUB, recuperación, instantáneas y el arranque de Windows |
+| Viernes 11 de diciembre | **Examen final de la 1.ª evaluación** (el 4 y el 10 de diciembre, repaso) |
 
 ## Programación
 
