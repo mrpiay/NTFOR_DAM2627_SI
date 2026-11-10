@@ -272,7 +272,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    - **Upgrade to Ubuntu Pro:** **Skip for now** y **Continue**;
    - **SSH configuration:** deja **Install OpenSSH server** sin marcar;
    - **Featured server snaps:** no marques ninguno.
-4. **Empieza la instalación.** Formatear, copiar el sistema e instalar el kernel y GRUB tarda unos **5 minutos**. Después, *downloading and installing security updates* (las actualizaciones) tarda unos **20 minutos**. Pueden salir en rojo avisos como `watchdog: BUG: soft lockup - CPU#0 stuck for 90s!`: el kernel avisa de que un procesador virtual ha estado parado, por el modo *native API* del paso 2. **No pasa nada: espera.** Mientras tanto, abajo sale el botón **Cancel update and reboot**: no lo pulses, espera a que salga **Reboot Now**.
+4. **Empieza la instalación.** Formatear, copiar el sistema e instalar el kernel y GRUB tarda unos **5 minutos**. Después, *downloading and installing security updates* (las actualizaciones) tarda unos **20 minutos**. Pueden salir en rojo avisos como `watchdog: BUG: soft lockup - CPU#0 stuck for 90s!`: el kernel avisa de que un procesador virtual ha estado parado, por el modo *native API* del paso 2. **No pasa nada: espera.** Mientras tanto, abajo sale el botón **Cancel update and reboot**: no lo pulses, espera a que salga **Reboot Now**. Es posible que la instalación se bloquee y no avance nada durante mucho rato: en ese caso, reiniciar el sistema operativo anfitrión (Windows) y volver a abrir la máquina suele desbloquearla.
 
    ![Instalando, con avisos de soft lockup](img/13-instalando-soft-lockup.png)
 
