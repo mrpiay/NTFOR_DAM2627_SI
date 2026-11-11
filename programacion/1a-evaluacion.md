@@ -12,9 +12,9 @@ Qué entra en la 1ª evaluación y con qué se evalúa cada parte. En cada unida
 
 | Contenido | Se evalúa con | Peso en la unidad |
 |---|---|---|
-| Componentes, memorias, sistemas de numeración y seguridad | P1 + P2 | 60 % |
+| Componentes, memorias, sistemas de numeración y seguridad | P1 | 60 % |
 | Puesta en marcha de un equipo | P1 | 15 % |
-| Periféricos: clasificar, instalar y configurar | P1 + P2 | 25 % |
+| Periféricos: clasificar, instalar y configurar | P1 | 25 % |
 
 ### UD2 · Sistemas operativos. Instalación
 
@@ -24,17 +24,17 @@ Qué entra en la 1ª evaluación y con qué se evalúa cada parte. En cada unida
 |---|---|---|
 | Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | P1 | 25 % |
 | Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | P1 | 50 % |
-| Instalar y actualizar sistemas libres y propietarios | P1 + P2 | 20 % |
-| Documentar los procesos | P2 | 5 % |
+| Instalar y actualizar sistemas libres y propietarios | P1 | 20 % |
+| Documentar los procesos | P1 | 5 % |
 
 ## Cómo se evalúa
 
 | Parte | Peso | Qué incluye |
 |---|---|---|
-| **P** · exámenes parciales | 40 % | P1 · vie 20 nov: 29,3 %<br>P2 · vie 4 dic: 10,7 % |
+| **P** · exámenes parciales | 40 % | P1 · vie 4 dic: 40 % |
 | **A** · actividades guiadas | 20 % | 5 actividades, 4 % cada una. Lista de cotejo: cada «Comprueba que…» se cumple o no |
 | **F** · examen final | 30 % | vie 11 dic |
-| **R** · revisión | 10 % | De cada cuestionario (C) y cada examen parcial (P), una vez devuelto corregido: 7 revisiones, 1,4 % cada una |
+| **R** · revisión | 10 % | De cada cuestionario (C) y cada examen parcial (P), una vez devuelto corregido: 6 revisiones, 1,7 % cada una |
 | **C** · cuestionarios | — | 5 cuestionarios. Su entrega es obligatoria; cuentan a través de su revisión (R) |
 
 Porcentajes sobre la nota de la evaluación.
@@ -46,10 +46,10 @@ Porcentajes sobre la nota de la evaluación.
 | Antes del 2 nov<br>[repaso Julia](../repaso-julia/apuntes) | Lo evaluado por Julia | Nada evaluado |
 | [2–6 nov](../2026_11_02-06)<br>[apuntes](../2026_11_02-06/apuntes) · [actividades](../2026_11_02-06/actividades) | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Puesta en marcha de un equipo<br>UD1 · Periféricos: clasificar, instalar y configurar<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (4 %), C1 |
 | [9–13 nov](../2026_11_09-13)<br>[apuntes](../2026_11_09-13/apuntes) · [actividades](../2026_11_09-13/actividades) | UD1 · Puesta en marcha de un equipo<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios | A2 (4 %), C2 |
-| 16–20 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Periféricos: clasificar, instalar y configurar | A3 (4 %), C3, P1 (29,3 %), R de C1 (1,4 %), R de C2 (1,4 %) |
-| 23–27 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad | A4 (4 %), C4, R de C3 (1,4 %), R de P1 (1,4 %) |
-| 30 nov–4 dic | UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD2 · Documentar los procesos | A5 (4 %), C5, P2 (10,7 %), R de C4 (1,4 %) |
-| 7–11 dic | Repaso (jue 10) | F (30 %), R de C5 (1,4 %), R de P2 (1,4 %) |
+| 16–20 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Periféricos: clasificar, instalar y configurar | A3 (4 %), C3, R de C1 (1,7 %), R de C2 (1,7 %) |
+| 23–27 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad | A4 (4 %), C4, R de C3 (1,7 %) |
+| 30 nov–4 dic | UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD2 · Documentar los procesos | A5 (4 %), C5, P1 (40 %), R de C4 (1,7 %) |
+| 7–11 dic | Repaso (jue 10) | F (30 %), R de C5 (1,7 %), R de P1 (1,7 %) |
 | 14–18 dic | UD3 · Linux | Cierre de la 1ª evaluación · jue 17 |
 
 ## Notas

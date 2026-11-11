@@ -11,4 +11,4 @@
 | Cuestionarios C2 y C1 ([semana del 2 al 6](../../2026_11_02-06/cuestionario.md)), en una sola tarea de Teams | Hasta el **lunes 16 de noviembre**, a las 23:59 |
 | Soluciones de los dos cuestionarios, en [`soluciones/`](../soluciones) | **Martes 17 de noviembre** |
 
-El examen parcial **P1**, en papel, sobre el proyecto de esta semana, lo instalado con WSL y los apuntes de las dos semanas (las preguntas de órdenes de Linux cuentan para la UD3, en la 2ª evaluación) es el **viernes 20 de noviembre**, después de que se publiquen las soluciones: está en las [fechas importantes](../../README.md) del repositorio.
+El examen parcial **P1**, en papel, con todo lo de la 1ª evaluación, también el proyecto de esta semana, lo instalado con WSL y los apuntes de las dos semanas (las preguntas de órdenes de Linux cuentan para la UD3, en la 2ª evaluación), es el **viernes 4 de diciembre**: está en las [fechas importantes](../../README.md) del repositorio.

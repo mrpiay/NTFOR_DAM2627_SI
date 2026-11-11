@@ -12,7 +12,7 @@ Es la **UD2 · Sistemas operativos. Instalación**: virtualización, planificar 
 
 **El objetivo es entender cada paso:** es lo que necesitas para responder el cuestionario y preparar los exámenes.
 
-**Evaluación.** Esta actividad guiada (**A2**) se evalúa con su lista de cotejo: cada «Comprueba que…» se cumple o no. El cuestionario de la semana (**C2**) se entrega hasta el lunes 16 de noviembre, junto con el de la otra semana. El **viernes 20 de noviembre** hay un examen parcial, **P1**, en papel, sobre esta actividad: la máquina virtual, las fases del arranque, el firmware, las particiones, GRUB, la recuperación, las instantáneas y el arranque de Windows; los apuntes de la UD1 y la UD2, y lo instalado con WSL en la semana del 2 al 6 (las preguntas de órdenes de Linux cuentan para la UD3, en la 2ª evaluación). Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
+**Evaluación.** Esta actividad guiada (**A2**) se evalúa con su lista de cotejo: cada «Comprueba que…» se cumple o no. El cuestionario de la semana (**C2**) se entrega hasta el lunes 16 de noviembre, junto con el de la otra semana. El **viernes 4 de diciembre** hay un examen parcial, **P1**, en papel, con todo lo de la 1ª evaluación, también esta actividad: la máquina virtual, las fases del arranque, el firmware, las particiones, GRUB, la recuperación, las instantáneas y el arranque de Windows; los apuntes de la UD1 y la UD2, y lo instalado con WSL en la semana del 2 al 6 (las preguntas de órdenes de Linux cuentan para la UD3, en la 2ª evaluación). Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
 
 ---
 
