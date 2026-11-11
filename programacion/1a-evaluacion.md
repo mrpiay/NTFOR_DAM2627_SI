@@ -43,7 +43,7 @@ Porcentajes sobre la nota de la evaluación.
 
 | Semana | Qué se da | Qué se evalúa |
 |---|---|---|
-| Antes del 2 nov | Lo evaluado por Julia | Nada evaluado |
+| Antes del 2 nov<br>[repaso Julia](../repaso-julia/apuntes) | Lo evaluado por Julia | Nada evaluado |
 | [2–6 nov](../2026_11_02-06)<br>[apuntes](../2026_11_02-06/apuntes) · [actividades](../2026_11_02-06/actividades) | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Puesta en marcha de un equipo<br>UD1 · Periféricos: clasificar, instalar y configurar<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (4 %), C1 |
 | [9–13 nov](../2026_11_09-13)<br>[apuntes](../2026_11_09-13/apuntes) · [actividades](../2026_11_09-13/actividades) | UD1 · Puesta en marcha de un equipo<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios | A2 (4 %), C2 |
 | 16–20 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Periféricos: clasificar, instalar y configurar | A3 (4 %), C3, P1 (29,3 %), R de C1 (1,4 %), R de C2 (1,4 %) |
