@@ -2,82 +2,60 @@
 
 [← Programación](README.md)
 
-## Unidades
+Qué entra en la 1ª evaluación y con qué se evalúa cada parte. En cada unidad se muestran sus contenidos, cada uno agrupando los criterios de evaluación que le corresponden; su porcentaje es la suma de los pesos de esos criterios en la programación oficial del módulo. La planificación empieza el 2 de noviembre; lo que ya evaluó Julia (exámenes y tareas de Teams) aparece marcado como «(Julia)».
 
-| UD | Inicio | Fin | Sesiones | Peso | Entrega |
-|---|---|---|---|---|---|
-| UD1 · Sistemas informáticos. Hardware y software. | vie 11 sep | mar 6 oct | 21 | 15 % | Análisis de las características de un equipo informático |
-| UD2 · Sistemas operativos. Instalación. | mar 6 oct | jue 19 nov | 31 | 20 % | — |
+## Qué entra
 
-Peso de estas unidades en el módulo: 35 % (la suma de los pesos de sus unidades, apartado 2.1 de la programación).
+### UD1 · Sistemas informáticos. Hardware y software
 
-## Exámenes y entregas
+42,9 % de la evaluación (15 % del módulo).
 
-| Fecha | Qué | Detalle |
+| Contenido | Se evalúa con | Peso en la unidad |
 |---|---|---|
-| jue 10 sep | **Presentación** | Presentación del módulo y preparación del ordenador |
-| mar 6 oct | Entrega UD1 | Análisis de las características de un equipo informático |
-| mar 13 oct | Examen UD1 | Sistemas informáticos. Hardware y software. |
-| 3–6 nov | **Puesta en común y proyecto de diagnóstico** | No se avanza: se repasa y se completa lo que tocaba hasta la fecha y se preparan las próximas entregas y exámenes |
-| vie 20 nov | Prueba UD2 | Sistemas operativos. Instalación: prueba escrita sobre Linux (WSL y órdenes) y el proyecto de máquinas virtuales, en lugar del examen |
-| vie 4 dic y jue 10 dic | **Repaso** | 1ª evaluación |
-| vie 11 dic | **Examen final** | 1ª evaluación |
+| Componentes, memorias, sistemas de numeración y seguridad | P1 + P2 | 60 % |
+| Puesta en marcha de un equipo | P1 | 15 % |
+| Periféricos: clasificar, instalar y configurar | P1 + P2 | 25 % |
 
-## Qué incluye cada entrega
+### UD2 · Sistemas operativos. Instalación
 
-| UD | Entrega | Qué incluye |
+57,1 % de la evaluación (20 % del módulo).
+
+| Contenido | Se evalúa con | Peso en la unidad |
 |---|---|---|
-| UD1 | Análisis de las características de un equipo informático | Resolución de ejercicios sobre hardware y software. Identificación y comparación de componentes, memorias y periféricos. Análisis de las características de un equipo informático. Instalación y configuración de dispositivos periféricos. Clasificación de software y licencias. Comprobación del proceso de arranque y resolución de supuestos relacionados con la seguridad |
-| UD2 | Documentación del proceso de instalación: máquinas virtuales Linux y Windows con gestor de arranque | Ejercicios de clasificación y comparación de sistemas operativos. Creación y configuración de máquinas virtuales. Planificación de una instalación. Instalación de sistemas Linux y Windows. Configuración de máquinas con varios sistemas operativos y gestores de arranque. Instalación y actualización de aplicaciones. Elaboración de la documentación del proceso de instalación. |
+| Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | P1 | 25 % |
+| Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | P1 | 50 % |
+| Instalar y actualizar sistemas libres y propietarios | P1 + P2 | 20 % |
+| Documentar los procesos | P2 | 5 % |
 
-## Semana a semana
+## Cómo se evalúa
 
-| Semana | Qué se hace |
-|---|---|
-| Del 7 al 11 de septiembre | **Presentación** del módulo y preparación del ordenador<br>UD1 · Realización ejercicios y explicaciones teoricas |
-| Del 14 al 18 de septiembre | UD1 · Realización ejercicios y explicaciones teoricas |
-| Del 21 al 25 de septiembre | UD1 · Realización ejercicios y explicaciones teoricas |
-| Del 28 de septiembre al 2 de octubre | UD1 · Realización ejercicios y explicaciones teoricas |
-| Del 5 al 9 de octubre | UD1 · Realización ejercicios y explicaciones teoricas<br>UD2 · Realización ejercicios y explicaciones teoricas |
-| Del 12 al 16 de octubre | **examen de la UD1**<br>UD2 · Realización ejercicios y explicaciones teoricas |
-| Del 19 al 23 de octubre | UD2 · Realización ejercicios y explicaciones teoricas |
-| Del 26 al 30 de octubre | UD2 · Realización ejercicios y explicaciones teoricas |
-| [Del 2 al 6 de noviembre](../2026_11_02-06) | **puesta en común y proyecto de diagnóstico** (no se avanza: se repasa y se completa lo que tocaba hasta la fecha) |
-| [Del 9 al 13 de noviembre](../2026_11_09-13) | UD2 · Realización ejercicios y explicaciones teoricas |
-| Del 16 al 20 de noviembre | UD2 · Realización ejercicios y explicaciones teoricas<br>**prueba escrita de la UD2** |
-| Del 23 al 27 de noviembre | UD3 · Realización ejercicios y explicaciones teoricas |
-| Del 30 de noviembre al 4 de diciembre | UD3 · Realización ejercicios y explicaciones teoricas<br>**repaso** o terminar lo pendiente · 1ª evaluación |
-| Del 7 al 11 de diciembre | **repaso** o terminar lo pendiente · 1ª evaluación<br>**examen final** · 1ª evaluación |
-| Del 14 al 18 de diciembre | UD3 · Realización ejercicios y explicaciones teoricas |
-
-## Qué se aprende y cómo se evalúa en cada unidad
-
-Resultados de aprendizaje (RA) y criterios de evaluación (CA) de cada unidad, con el instrumento con el que se evalúa cada criterio.
-
-### UD1 · Sistemas informáticos. Hardware y software.
-
-**RA1** · Evalúa sistemas informáticos, identificando sus componentes y sus características
-
-| Criterio | Cómo se evalúa | Peso |
+| Parte | Peso | Qué incluye |
 |---|---|---|
-| **CA1.1** Se han reconocido los componentes físicos de un sistema informático y sus mecanismos de interconexión. | Prueba escrita | 25 % |
-| **CA1.2** Se han clasificado los tipos de memorias, señalando sus características e identificando sus prestaciones y la función que desarrollan en el conjunto del sistema. | Prueba escrita | 20 % |
-| **CA1.3** Se ha verificado el proceso de puesta en marcha de un equipo. | Lista de cotejo | 15 % |
-| **CA1.4** Se han clasificado, instalado y configurado diferentes tipos de dispositivos periféricos. | Lista de cotejo | 25 % |
-| **CA1.8** Se han reconocido las normas de seguridad y de prevención de riesgos laborales en el uso de los sistemas informáticos. | Prueba escrita | 15 % |
+| **P** · exámenes parciales | 40 % | P1 · vie 20 nov: 29,3 %<br>P2 · vie 4 dic: 10,7 % |
+| **A** · actividades guiadas | 20 % | 5 actividades, 4 % cada una. Lista de cotejo: cada «Comprueba que…» se cumple o no |
+| **F** · examen final | 30 % | vie 11 dic |
+| **C** · cuestionarios | 10 % | 5 cuestionarios, 2 % cada uno |
 
-### UD2 · Sistemas operativos. Instalación.
+Porcentajes sobre la nota de la evaluación.
 
-**RA2** · Instala sistemas operativos planificando el proceso e interpretando documentación técnica
+## Planificación semanal
 
-| Criterio | Cómo se evalúa | Peso |
+| Semana | Qué se da | Qué se evalúa |
 |---|---|---|
-| **CA2.1** Se han identificado los elementos funcionales de un sistema informático. | Prueba escrita | 5 % |
-| **CA2.2** Se han analizado las características, las funciones y la arquitectura de un sistema operativo. | Prueba escrita | 10 % |
-| **CA2.3** Se han comparado sistemas operativos en base a sus requisitos, a sus características, a sus campos de aplicación y a sus licencias de uso. | Prueba escrita | 10 % |
-| **CA2.4** Se ha planificado el proceso de la instalación de sistemas operativos. | Lista de cotejo | 10 % |
-| **CA2.5** Se han instalado y actualizado sistemas operativos libres y propietarios. | Lista de cotejo | 20 % |
-| **CA2.6** Se han aplicado técnicas de actualización y recuperación del sistema. | Lista de cotejo | 10 % |
-| **CA2.7** Se han utilizado tecnologías de virtualización para instalar y probar sistemas operativos. | Lista de cotejo | 20 % |
-| **CA2.8** Se han instalado, desinstalado y actualizado aplicaciones. | Lista de cotejo | 10 % |
-| **CA2.9** Se han documentado los procesos realizados. | Lista de cotejo | 5 % |
+| Antes del 2 nov | Lo evaluado por Julia | Nada evaluado |
+| [2–6 nov](../2026_11_02-06) | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Puesta en marcha de un equipo<br>UD1 · Periféricos: clasificar, instalar y configurar<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (4 %), C1 (2 %) |
+| [9–13 nov](../2026_11_09-13) | UD1 · Puesta en marcha de un equipo<br>UD2 · Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux)<br>UD2 · Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code)<br>UD2 · Instalar y actualizar sistemas libres y propietarios | A2 (4 %), C2 (2 %) |
+| 16–20 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad<br>UD1 · Periféricos: clasificar, instalar y configurar | A3 (4 %), C3 (2 %), P1 (29,3 %) |
+| 23–27 nov | UD1 · Componentes, memorias, sistemas de numeración y seguridad | A4 (4 %), C4 (2 %) |
+| 30 nov–4 dic | UD2 · Instalar y actualizar sistemas libres y propietarios<br>UD2 · Documentar los procesos | A5 (4 %), C5 (2 %), P2 (10,7 %) |
+| 7–11 dic | Repaso (jue 10) | F (30 %) |
+| 14–18 dic | UD3 · Linux (2ª evaluación, desde mar 15) | Cierre de la 1ª evaluación · jue 17 |
+
+## Notas
+
+- **Cuestionarios (C).** Hay uno cada semana en la que se facilitan apuntes o actividades guiadas nuevas, con preguntas sobre ellos. Se entrega hasta el lunes siguiente a su semana.
+- **Exámenes escritos** (parciales, **P**, y final, **F**). Son en papel e incluyen preguntas similares a las de los cuestionarios. Cada pregunta indica los puntos que vale: los contenidos con más porcentaje tienen preguntas que valen más.
+- **Actividades guiadas (A).** La marcha y el cumplimiento de cada actividad se evalúan con una lista de cotejo: cada «Comprueba que…» de cada paso se cumple o no. La nota de cada actividad es el porcentaje de puntos cumplidos (de 0 a 10), y el mínimo de 4 se aplica a la media de las actividades de la evaluación.
+- Antes del 2 de noviembre no hay nada evaluado en SI: ni exámenes ni tareas entregadas.
+- WSL, apt, el JDK, VS Code y las distribuciones de Linux son de la UD2. El sistema de archivos, las órdenes básicas y la redirección son una introducción a la UD3: la P1 puede preguntarlos, pero esas preguntas cuentan para la UD3 en la 2ª evaluación.
+- Mínimo de 4 en cada examen parcial, en la media de las actividades guiadas y en el final para aplicar la media (apartado 6.1 de la programación oficial).

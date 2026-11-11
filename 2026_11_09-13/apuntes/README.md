@@ -6,7 +6,7 @@ Los apuntes de las unidades de esta semana.
 |---|---|
 | [`UD2-sistemas-operativos.md`](UD2-sistemas-operativos.md) | Lo básico de la UD2: qué es un sistema operativo, tipos, arquitecturas, licencias, máquinas virtuales, instalación, particiones, arranque y actualizaciones |
 
-Cada archivo tiene lo básico de una unidad. Las preguntas del [cuestionario](../cuestionario.md) se responden con ellos y con el proyecto, y las de la prueba escrita salen de lo mismo.
+Cada archivo tiene lo básico de una unidad. Las preguntas del [cuestionario](../cuestionario.md) se responden con ellos y con el proyecto, y las de los exámenes salen de lo mismo.
 
 ## Dónde consultar
 

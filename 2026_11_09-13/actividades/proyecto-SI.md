@@ -10,9 +10,9 @@ Es la **UD2 · Sistemas operativos. Instalación**: virtualización, planificar 
 
 **Usa la IA como guía, no para que lo haga por ti.** Pídele que te explique lo que no entiendas; **lo que se hace en la máquina lo haces tú**, sabiendo **dónde** y **para qué**. El objetivo es que lo que hagas **funcione y cumpla los requisitos** de cada paso («Comprueba que…») y que sepas **qué está pasando en cada momento del arranque**.
 
-**El objetivo es entender cada paso:** es lo que necesitas para responder el cuestionario de autoevaluación y preparar la prueba escrita.
+**El objetivo es entender cada paso:** es lo que necesitas para responder el cuestionario y preparar los exámenes.
 
-**Evaluación continua.** Algunas semanas hay una **prueba escrita, en papel,** en las dos últimas sesiones del último día de clase, después de que se publiquen las soluciones de lo que entra. La primera es el **viernes 20 de noviembre**, sobre Linux (la guía «Ubuntu Linux, WSL, Java y VS Code» y sus órdenes) y este proyecto: la máquina virtual, las fases del arranque, el firmware, las particiones, GRUB, la recuperación, las instantáneas y el arranque de Windows.
+**Evaluación.** Esta actividad guiada (**A2**) se evalúa con su lista de cotejo: cada «Comprueba que…» se cumple o no. El cuestionario de la semana (**C2**) se entrega hasta el lunes 16 de noviembre, junto con el de la otra semana. El **viernes 20 de noviembre** hay un examen parcial, **P1**, en papel, sobre esta actividad: la máquina virtual, las fases del arranque, el firmware, las particiones, GRUB, la recuperación, las instantáneas y el arranque de Windows; los apuntes de la UD1 y la UD2, y lo instalado con WSL en la semana del 2 al 6 (las preguntas de órdenes de Linux cuentan para la UD3, en la 2ª evaluación). Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
 
 ---
 
