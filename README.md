@@ -6,11 +6,11 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 11 nov | Enlace directo para descargar la ISO de Ubuntu Server en la actividad de la semana del 9 al 13 |
 | 11 nov | **Repaso Julia**: apuntes que completan lo que se dio antes del 2 de noviembre ([repaso-julia/apuntes](repaso-julia/apuntes)) |
 | 11 nov | La **revisión (R)** de los cuestionarios y de los exámenes parciales corregidos es el 10 % de la nota; la entrega de los cuestionarios es obligatoria |
 | 11 nov | La 1ª evaluación en detalle: qué entra, cómo se evalúa y planificación semanal, con enlaces a los apuntes y actividades de cada semana ([programacion/1a-evaluacion.md](programacion/1a-evaluacion.md)) |
 | 10 nov | Fechas de los exámenes parciales y del examen final de la 1ª evaluación |
-| 9 nov | Currículo oficial del módulo ([programacion/curriculo-oficial.md](programacion/curriculo-oficial.md)) |
 
 ## Fechas importantes
 

@@ -92,7 +92,7 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
 
 **Pista.**
 
-1. **Empieza la descarga de la ISO**, que tarda: en [ubuntu.com/download/server](https://ubuntu.com/download/server), la de **Ubuntu Server 26.04 LTS** (el archivo `ubuntu-26.04.1-live-server-amd64.iso`). Windows la muestra con unos **2,7 GB**. Mientras baja, sigue con los puntos siguientes y lee el apartado 5 de los apuntes de la UD2 («Máquinas virtuales»).
+1. **Empieza la descarga de la ISO**, que tarda: la de **Ubuntu Server 26.04 LTS**, directamente desde el servidor de Ubuntu: [ubuntu-26.04.1-live-server-amd64.iso](https://releases.ubuntu.com/26.04/ubuntu-26.04.1-live-server-amd64.iso). Windows la muestra con unos **2,7 GB**. Mientras baja, sigue con los puntos siguientes y lee el apartado 5 de los apuntes de la UD2 («Máquinas virtuales»).
 2. **Comprueba que la virtualización está activada:**
    - en Windows: clic derecho en el botón Inicio (o **Windows + X**) → **Task Manager** (*Administrador de tareas*) → **Performance** (*Rendimiento*) → **CPU**: abajo a la derecha, **Virtualisation: Enabled** o **Virtualization: Enabled** (*Virtualización: Habilitado*);
    - en Linux, en el terminal: `lscpu | grep -i virtualiz` tiene que mostrar `VT-x` (Intel) o `AMD-V` (AMD).
