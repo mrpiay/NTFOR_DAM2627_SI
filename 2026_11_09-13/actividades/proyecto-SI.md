@@ -120,19 +120,7 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
 
 **Objetivo.** Una máquina virtual con UEFI, 2 GB de memoria, 2 procesadores y un disco de 25 GB, todavía sin sistema operativo.
 
-**Qué es UEFI (o EFI).** Al encender un ordenador, lo primero que se ejecuta es el **firmware**: un programa guardado en un chip de la placa base que comprueba el hardware y busca un sistema que arrancar. Hay dos tipos:
-
-| | BIOS (heredada, *legacy*) | UEFI |
-|---|---|---|
-| Qué es | El firmware de los PC desde los años 80 | El que la sustituye: lo llevan los ordenadores actuales desde hace más de diez años |
-| Cómo arranca | Lee el primer sector del disco y ejecuta el pequeño programa que hay allí | Lee una partición del disco, la **partición EFI** (en FAT32), y ejecuta un programa `.efi` que hay en ella: en Ubuntu, el de GRUB |
-| Qué recuerda | Solo el orden de los dispositivos | Una lista de **entradas de arranque** con nombre (`Ubuntu`, `Windows Boot Manager`…) |
-| Tabla de particiones | MBR | GPT |
-| Además | — | Su propio menú de arranque (*Boot Manager*) y **Secure Boot**, que solo arranca programas firmados |
-
-**EFI** (*Extensible Firmware Interface*, «interfaz de firmware extensible») es el nombre de la primera versión, creada por Intel: una interfaz entre el firmware y el sistema operativo, «extensible» porque se le pueden añadir programas, los `.efi`. **UEFI** (*Unified Extensible Firmware Interface*) es la misma, convertida en el estándar común de los fabricantes. Se usan como sinónimos: VirtualBox dice «EFI» y Ubuntu, «UEFI». Mucha gente sigue llamando «BIOS» a la configuración del firmware, aunque sea UEFI. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
-
-Esta máquina usa UEFI, como un ordenador actual: por eso tendrá partición EFI (paso 3), entradas de arranque (paso 4) y *Boot Manager* (pasos 2 y 9).
+**UEFI.** Esta máquina usa UEFI, como un ordenador actual: por eso tendrá partición EFI (paso 3), entradas de arranque (paso 4) y *Boot Manager* (pasos 2 y 9). Qué es UEFI, qué significan sus siglas y en qué se diferencia de la BIOS: [apuntes de la UD2, «El firmware: BIOS y UEFI»](../apuntes/UD2-sistemas-operativos.md#el-firmware-bios-y-uefi).
 
 **Pista.** En VirtualBox, botón **New** (*Nueva*). El asistente tiene tres páginas; se pasa de una a otra con **Next** (*Siguiente*):
 
@@ -162,20 +150,7 @@ Con la máquina seleccionada en la lista, la pestaña **Details** (*Detalles*) m
 - *System → Boot Order*: el **orden de arranque**, *Floppy, Optical, Hard Disk* (disquete, DVD y disco); y **EFI: Enabled**;
 - *Storage*: el DVD virtual (*[Optical Drive] Empty*, vacío) en el controlador IDE, y el disco `ubuntu-arranque.vdi` (25.00 GB) en el SATA.
 
-**Qué son IDE y SATA.** Los discos y las unidades de DVD se conectan a la placa base a través de un **controlador de almacenamiento**, y cada controlador usa una **interfaz**: el tipo de conexión (cable y forma de comunicarse).
-
-| | IDE (o PATA, *Parallel ATA*) | SATA (*Serial ATA*) |
-|---|---|---|
-| Qué es | La interfaz antigua, de los años 80 hasta mediados de los 2000 | La que la sustituyó; la de los discos y DVD actuales (los SSD más rápidos usan NVMe) |
-| Cable | Ancho y plano, con dos dispositivos por cable (*maestro* y *esclavo*) | Fino, con un dispositivo por puerto |
-| Velocidad | Hasta 133 MB/s | Hasta 600 MB/s |
-
-VirtualBox simula los dos controladores, y en esta máquina cada uno tiene una unidad:
-
-- en el **IDE** está la **unidad de DVD**. Ahí se mete la **ISO** (paso 3): un archivo que VirtualBox presenta a la máquina como si fuera un disco metido en el lector;
-- en el **SATA** está el **disco duro**: el archivo `ubuntu-arranque.vdi`, que VirtualBox presenta como si fuera un disco de verdad.
-
-Así, la máquina cree que tiene un lector de DVD y un disco duro, y en tu ordenador solo son dos archivos: la ISO y el `.vdi`. Dentro de Ubuntu, el disco aparecerá como `/dev/sda` y el DVD como `/dev/sr0` (paso 4).
+En el **IDE** está la unidad de DVD, donde se mete la ISO (paso 3); en el **SATA**, el disco duro, que es el archivo `ubuntu-arranque.vdi`. Qué son IDE y SATA: [apuntes de la UD2, «Los controladores de disco: IDE y SATA»](../apuntes/UD2-sistemas-operativos.md#los-controladores-de-disco-ide-y-sata).
 
 Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu carpeta personal: `ubuntu-arranque.vbox` (la configuración) y `ubuntu-arranque.vdi` (el disco).
 
@@ -279,7 +254,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
    ![El GRUB de la ISO](img/10-grub-de-la-iso.png)
 
-   **Qué es GRUB.** Sus siglas son *GRand Unified Bootloader*, «gran cargador de arranque unificado»: unificado porque sirve para arrancar sistemas muy distintos. Es el **gestor de arranque** de Linux: el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás. La ISO trae su propio GRUB, con las opciones de la ISO: instalar, probar el sistema… Al instalar, Ubuntu pondrá otro GRUB en el disco, el que verás a partir del paso 6. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
+   GRUB es el **gestor de arranque**: muestra un menú y carga el kernel del sistema elegido. La ISO trae el suyo; al instalar, Ubuntu pondrá otro en el disco, el del paso 6. Qué es GRUB y qué significan sus siglas: [apuntes de la UD2, «GRUB, el gestor de arranque de Linux»](../apuntes/UD2-sistemas-operativos.md#grub-el-gestor-de-arranque-de-linux).
 
    Salen muchos mensajes del kernel, que carga los drivers de los dispositivos virtuales. Tarda **un par de minutos** hasta la primera pantalla del instalador.
 3. **Sigue el instalador.** Se maneja con las flechas, el **tabulador**, la **barra espaciadora** (marcar y desmarcar) e **Intro**; para avanzar, **Done** (*Hecho*). Puedes elegir el idioma del instalador que quieras; aquí van los nombres en inglés:
@@ -298,18 +273,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
      ![Resumen de las particiones](img/12-resumen-particiones.png)
 
-     **Qué son FAT32 y ext4.** Son **sistemas de archivos**: la forma de organizar los archivos y carpetas dentro de una partición (dónde está guardado cada archivo, su nombre, su tamaño, sus permisos…). Una partición vacía no sirve hasta que se le crea uno: es lo que se llama **formatear**.
-
-     | | FAT32 (*File Allocation Table*, 32 bits) | ext4 (*fourth extended filesystem*) |
-     |---|---|---|
-     | Qué es | Un sistema de archivos antiguo y sencillo, de los años 90 | El sistema de archivos habitual de Linux |
-     | Quién lo entiende | Casi todos: Windows, Linux, macOS… y el firmware UEFI | Linux. Windows no lo lee sin programas añadidos |
-     | Límites | Archivos de hasta 4 GB | Archivos y discos enormes |
-     | Permisos de usuarios | No | Sí: cada archivo tiene propietario y permisos |
-     | Si se va la luz | Se puede dañar | Tiene un **diario** (*journaling*): apunta lo que va a cambiar antes de hacerlo, y así se recupera |
-     | Dónde se usa | La partición EFI y las memorias USB | La raíz de Linux (`/`) |
-
-     Por eso hay dos: la partición EFI tiene que ser **FAT32**, porque el estándar UEFI obliga al firmware a saber leer FAT, y no otros; el sistema va en **ext4**, que es más seguro y tiene permisos. Windows usa **NTFS**.
+     La EFI va en **FAT32** porque es el sistema de archivos que lee el firmware UEFI; la raíz, en **ext4**, el de Linux. Qué son: [apuntes de la UD2, «Sistemas de archivos: FAT32, ext4 y NTFS»](../apuntes/UD2-sistemas-operativos.md#sistemas-de-archivos-fat32-ext4-y-ntfs).
 
    - **Profile configuration:** tu nombre, el nombre del servidor (`ubuntu-arranque`), un nombre de usuario y una contraseña. **Apúntalos:** los necesitas para entrar y para `sudo`;
 
@@ -578,17 +542,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
    En la lista, la máquina pasa a llamarse `ubuntu-arranque (Actualizado)`: muestra su última instantánea. El icono de cada instantánea dice cómo se tomó: con una flecha verde, con la máquina encendida; sin ella, apagada.
 
-**Instantáneas y estado actual.** La lista de la pestaña *Snapshots* es un árbol con dos clases de elementos:
-
-- Cada **instantánea** es una **foto fija** de la máquina en el momento de tomarla. No se enciende ni se cambia: queda tal cual para poder volver a ella.
-- **Current State** (*Estado actual*) es la máquina **tal como está ahora**: la que se enciende y se usa. Cuelga de la última instantánea tomada o restaurada, y **todo lo que se hace con la máquina encendida se guarda aquí**, nunca en una instantánea.
-
-Lo que se puede hacer depende de lo que esté seleccionado en la lista:
-
-| Seleccionado | Qué se puede hacer |
-|---|---|
-| **Current State** | **Start**: encender la máquina; lo que se haga se guarda en el estado actual. **Take**: tomar una instantánea, una foto del estado actual. **Settings**: cambiar la configuración |
-| Una **instantánea** | **Restore**: el estado actual pasa a ser una copia de esa foto, y lo hecho desde entonces se pierde (salvo que se marque *Create a snapshot of the current machine state*, que antes lo guarda en otra instantánea). **Delete**: borra la foto; el estado actual no cambia. **Clone**: crea otra máquina a partir de esa foto. Con una instantánea seleccionada, **Start** sale en gris |
+**Instantáneas y estado actual.** Cada instantánea es una foto fija; **Current State** es la máquina tal como está ahora, y todo lo que se hace con ella encendida se guarda ahí. Qué se puede hacer con cada una: [apuntes de la UD2, «Instantáneas y estado actual»](../apuntes/UD2-sistemas-operativos.md#instantáneas-y-estado-actual).
 
 Reglas prácticas:
 

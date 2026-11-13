@@ -124,6 +124,33 @@ Cada ajuste de la máquina virtual es un componente de un ordenador. En VirtualB
 - En VirtualBox, una «CPU» es un **procesador virtual**, y cada uno usa un núcleo del procesador real. Un ordenador suele tener un solo chip (*Sockets: 1*), con varios **núcleos** (*Cores*), y cada núcleo puede llevar dos **hilos** (*Logical processors*). No conviene dar a la máquina más procesadores que núcleos tiene el anfitrión.
 - **Paravirtualización:** el sistema invitado sabe que está en una máquina virtual y colabora con el hipervisor, para ir más rápido (en Linux, con la interfaz KVM).
 
+### Instantáneas y estado actual
+
+- Cada **instantánea** es una **foto fija** de la máquina en el momento de tomarla. No se enciende ni se cambia: queda tal cual para poder volver a ella.
+- **Current State** (*Estado actual*) es la máquina **tal como está ahora**: la que se enciende y se usa. Cuelga de la última instantánea tomada o restaurada, y **todo lo que se hace con la máquina encendida se guarda aquí**, nunca en una instantánea.
+- **Restaurar** una instantánea hace que el estado actual vuelva a ser una copia de esa foto: lo hecho desde entonces se pierde.
+
+Lo que se puede hacer en VirtualBox depende de lo que esté seleccionado en la lista de *Snapshots*:
+
+| Seleccionado | Qué se puede hacer |
+|---|---|
+| **Current State** | **Start**: encender la máquina; lo que se haga se guarda en el estado actual. **Take**: tomar una instantánea, una foto del estado actual. **Settings**: cambiar la configuración |
+| Una **instantánea** | **Restore**: el estado actual pasa a ser una copia de esa foto, y lo hecho desde entonces se pierde (salvo que se marque *Create a snapshot of the current machine state*, que antes lo guarda en otra instantánea). **Delete**: borra la foto; el estado actual no cambia. **Clone**: crea otra máquina a partir de esa foto. Con una instantánea seleccionada, **Start** sale en gris |
+
+### Los controladores de disco: IDE y SATA
+
+- Los discos y las unidades de DVD se conectan a la placa base a través de un **controlador de almacenamiento**, y cada controlador usa una **interfaz**: el tipo de conexión (cable y forma de comunicarse).
+- VirtualBox simula los dos controladores. En una máquina nueva, en el **IDE** está la **unidad de DVD**, donde se mete la **ISO** (un archivo que VirtualBox presenta como un disco metido en el lector), y en el **SATA**, el **disco duro**, el archivo `.vdi`. La máquina cree que tiene un lector de DVD y un disco; en el anfitrión solo son dos archivos.
+- Dentro de Linux, el disco SATA aparece como `/dev/sda` y el DVD como `/dev/sr0`.
+
+**Compara**
+
+| | IDE (o PATA, *Parallel ATA*) | SATA (*Serial ATA*) |
+|---|---|---|
+| Qué es | La interfaz antigua, de los años 80 hasta mediados de los 2000 | La que la sustituyó; la de los discos y DVD actuales (los SSD más rápidos usan NVMe) |
+| Cable | Ancho y plano, con dos dispositivos por cable (*maestro* y *esclavo*) | Fino, con un dispositivo por puerto |
+| Velocidad | Hasta 133 MB/s | Hasta 600 MB/s |
+
 ### La red de la máquina: NAT
 
 - Con **NAT**, la máquina sale a Internet a través del anfitrión, pero desde fuera no se la ve. VirtualBox le da una dirección por DHCP.
@@ -169,6 +196,23 @@ Cada ajuste de la máquina virtual es un componente de un ordenador. En VirtualB
 | Tamaño máximo | 2 TB | Prácticamente sin límite |
 | Copia de la tabla | No | Sí, al final del disco |
 
+### Sistemas de archivos: FAT32, ext4 y NTFS
+
+- Un **sistema de archivos** es la forma de organizar los archivos y carpetas dentro de una partición: dónde está guardado cada archivo, su nombre, su tamaño, sus permisos… Una partición vacía no sirve hasta que se le crea uno: es lo que se llama **formatear**.
+- La partición EFI tiene que ser **FAT32**, porque el estándar UEFI obliga al firmware a saber leer FAT, y no otros. Linux va en **ext4**, más seguro y con permisos. Windows usa **NTFS**, que también tiene permisos y diario.
+
+**Compara**
+
+| | FAT32 (*File Allocation Table*, 32 bits) | ext4 (*fourth extended filesystem*) |
+|---|---|---|
+| Qué es | Un sistema de archivos antiguo y sencillo, de los años 90 | El sistema de archivos habitual de Linux |
+| Quién lo entiende | Casi todos: Windows, Linux, macOS… y el firmware UEFI | Linux. Windows no lo lee sin programas añadidos |
+| Límites | Archivos de hasta 4 GB | Archivos y discos enormes |
+| Permisos de usuarios | No | Sí: cada archivo tiene propietario y permisos |
+| Si se va la luz | Se puede dañar | Tiene un **diario** (*journaling*): apunta lo que va a cambiar antes de hacerlo, y así se recupera |
+| Dónde se usa | La partición EFI y las memorias USB | La raíz de Linux (`/`) |
+
+
 ---
 
 ## 8. El arranque y los gestores de arranque
@@ -200,6 +244,27 @@ Lo que se ve al arrancar dice en qué fase falla, y eso dice dónde mirar:
 | `grub>` o `grub rescue>` | GRUB arranca, pero no encuentra su configuración | `/boot/grub` y la configuración de GRUB |
 | Mensajes del kernel y una consola de emergencia | El kernel no puede montar la raíz | Los parámetros del kernel, el disco |
 | Un servicio que falla y se queda esperando | systemd | Los servicios |
+
+### El firmware: BIOS y UEFI
+
+- El **firmware** es un programa guardado en un chip de la placa base. Es lo primero que se ejecuta al encender: comprueba el hardware (el **POST**) y busca un sistema que arrancar.
+- **EFI** (*Extensible Firmware Interface*, «interfaz de firmware extensible») es el nombre de la primera versión, creada por Intel: una interfaz entre el firmware y el sistema operativo, «extensible» porque se le pueden añadir programas, los `.efi`. **UEFI** (*Unified Extensible Firmware Interface*) es la misma, convertida en el estándar común de los fabricantes. Se usan como sinónimos: VirtualBox dice «EFI» y Ubuntu, «UEFI». Mucha gente sigue llamando «BIOS» a la configuración del firmware, aunque sea UEFI.
+
+**Compara**
+
+| | BIOS (heredada, *legacy*) | UEFI |
+|---|---|---|
+| Qué es | El firmware de los PC desde los años 80 | El que la sustituye: lo llevan los ordenadores actuales desde hace más de diez años |
+| Cómo arranca | Lee el primer sector del disco y ejecuta el pequeño programa que hay allí | Lee una partición del disco, la **partición EFI** (en FAT32), y ejecuta un programa `.efi` que hay en ella: en Ubuntu, el de GRUB |
+| Qué recuerda | Solo el orden de los dispositivos | Una lista de **entradas de arranque** con nombre (`Ubuntu`, `Windows Boot Manager`…) |
+| Tabla de particiones | MBR | GPT |
+| Además | — | Su propio menú de arranque (*Boot Manager*) y **Secure Boot**, que solo arranca programas firmados |
+
+### GRUB, el gestor de arranque de Linux
+
+- Sus siglas son *GRand Unified Bootloader*, «gran cargador de arranque unificado»: unificado porque sirve para arrancar sistemas muy distintos.
+- Es el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás.
+- Una ISO de instalación trae **su propio GRUB**, con las opciones de la ISO (instalar, probar el sistema…). Al instalar, Ubuntu pone **otro GRUB en el disco**, con las entradas del sistema instalado.
 
 ---
 
