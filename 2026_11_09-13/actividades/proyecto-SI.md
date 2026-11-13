@@ -298,6 +298,19 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
      ![Resumen de las particiones](img/12-resumen-particiones.png)
 
+     **Qué son FAT32 y ext4.** Son **sistemas de archivos**: la forma de organizar los archivos y carpetas dentro de una partición (dónde está guardado cada archivo, su nombre, su tamaño, sus permisos…). Una partición vacía no sirve hasta que se le crea uno: es lo que se llama **formatear**.
+
+     | | FAT32 (*File Allocation Table*, 32 bits) | ext4 (*fourth extended filesystem*) |
+     |---|---|---|
+     | Qué es | Un sistema de archivos antiguo y sencillo, de los años 90 | El sistema de archivos habitual de Linux |
+     | Quién lo entiende | Casi todos: Windows, Linux, macOS… y el firmware UEFI | Linux. Windows no lo lee sin programas añadidos |
+     | Límites | Archivos de hasta 4 GB | Archivos y discos enormes |
+     | Permisos de usuarios | No | Sí: cada archivo tiene propietario y permisos |
+     | Si se va la luz | Se puede dañar | Tiene un **diario** (*journaling*): apunta lo que va a cambiar antes de hacerlo, y así se recupera |
+     | Dónde se usa | La partición EFI y las memorias USB | La raíz de Linux (`/`) |
+
+     Por eso hay dos: la partición EFI tiene que ser **FAT32**, porque el estándar UEFI obliga al firmware a saber leer FAT, y no otros; el sistema va en **ext4**, que es más seguro y tiene permisos. Windows usa **NTFS**.
+
    - **Profile configuration:** tu nombre, el nombre del servidor (`ubuntu-arranque`), un nombre de usuario y una contraseña. **Apúntalos:** los necesitas para entrar y para `sudo`;
 
      ![El perfil](img/25-perfil.png)
