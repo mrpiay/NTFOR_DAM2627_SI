@@ -158,8 +158,6 @@ Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu 
 
 Localiza cada ajuste en la tabla «[El hardware de una máquina virtual](../apuntes/UD2-sistemas-operativos.md#el-hardware-de-una-máquina-virtual)» de los apuntes de la UD2, que dice a qué componente de un ordenador corresponde.
 
-En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
-
 **Comprueba que…** la máquina aparece en la lista de VirtualBox, con EFI habilitado, 2048 MB de memoria, 2 procesadores, el disco de 25 GB y el DVD vacío, y sabes a qué componente de un ordenador corresponde cada ajuste de la tabla.
 
 **Si te falla…**
@@ -309,11 +307,11 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
 ## Paso 4 · El arranque por dentro
 
-**Objetivo.** Ver, desde el sistema ya arrancado, dónde está cada pieza de las fases del arranque.
+**Objetivo.** Ver, desde el sistema ya arrancado, dónde está la pieza de cada fase del arranque: firmware, GRUB, kernel y systemd ([apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque)).
 
-**Pista.** Entra con tu usuario y escribe estas órdenes, una a una. Debajo de cada una, qué mirar. Las que llevan `sudo` piden tu contraseña, con este mensaje: `[sudo: authenticate] Password:`.
+**Pista.** Entra con tu usuario y escribe estas cinco órdenes, una a una. Debajo de cada una, qué mirar. Las que llevan `sudo` piden tu contraseña (`[sudo: authenticate] Password:`).
 
-1. **Los discos y las particiones:**
+1. **El disco y sus particiones:**
 
    ```bash
    lsblk
@@ -322,37 +320,32 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    ```
    NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
    loop0    7:0    0 50.1M  1 loop /snap/snapd/27710
-   loop1    7:1    0 66.8M  1 loop /snap/core24/1643
-   loop2    7:2    0  1.5M  1 loop /snap/hwctl/123
+   …
    sda      8:0    0   25G  0 disk
    ├─sda1   8:1    0    1G  0 part /boot/efi
    └─sda2   8:2    0 23.9G  0 part /
    sr0     11:0    1 1024M  0 rom
    ```
 
-   `sda` es el disco virtual; `sda1`, la partición EFI, montada en `/boot/efi`; `sda2`, la raíz, montada en `/`. `sr0` es la unidad de DVD virtual, ahora vacía. Los `loop` no son discos: son **snaps**, programas que vienen en un archivo comprimido que se monta como si fuera un disco (los números pueden cambiar).
+   `sda` es el disco; `sda1`, la **partición EFI**, montada en `/boot/efi`; `sda2`, la **raíz**, montada en `/`. `sr0` es el DVD, vacío. Los `loop` no son discos, son programas (*snaps*): no hace falta mirarlos.
 
-2. **El tipo de tabla de particiones y el formato de cada partición:**
+2. **La entrada de arranque que guarda el firmware:**
 
    ```bash
-   sudo fdisk -l /dev/sda
+   sudo efibootmgr
    ```
 
    ```
-   Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
-   Disk model: VBOX HARDDISK
-   …
-   Disklabel type: gpt
-   Disk identifier: DD68CE81-EC71-4CF0-AD37-C2FBCE409B38
-
-   Device       Start      End  Sectors  Size Type
-   /dev/sda1     2048  2203647  2201600    1G EFI System
-   /dev/sda2  2203648 52426751 50223104 23.9G Linux filesystem
+   BootCurrent: 0003
+   BootOrder: 0003,0000,0001
+   Boot0000* UiApp        …
+   Boot0001* UEFI VBOX HARDDISK VB…   …
+   Boot0003* Ubuntu       HD(1,GPT,…)/\EFI\ubuntu\shimx64.efi
    ```
 
-   `Disklabel type: gpt`: la tabla de particiones es GPT. `Disk identifier`: el identificador único del disco, propio de GPT. Y el tipo de cada partición: `EFI System` y `Linux filesystem`.
+   `Boot0003* Ubuntu` es la entrada que creó el instalador: le dice al firmware que arranque el archivo `shimx64.efi` de la **partición 1** (la EFI). `BootOrder` es el orden en que el firmware prueba las entradas: primero Ubuntu.
 
-3. **Lo que ejecuta el firmware (fase 1 → 2):**
+3. **El programa de GRUB, en la partición EFI:**
 
    ```bash
    sudo ls /boot/efi/EFI/ubuntu
@@ -362,56 +355,21 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    BOOTX64.CSV  grub.cfg  grubx64.efi  mmx64.efi  shimx64.efi
    ```
 
-   El firmware ejecuta `shimx64.efi`, que está firmado (por **Secure Boot**) y arranca `grubx64.efi`, que es GRUB. `grub.cfg` es muy corto: solo le dice a GRUB dónde está su configuración de verdad, `/boot/grub/grub.cfg`. `mmx64.efi` gestiona las claves de Secure Boot y `BOOTX64.CSV` sirve para volver a crear la entrada de arranque si se pierde. Hace falta `sudo` porque la partición EFI solo la puede leer el administrador.
+   El firmware ejecuta `shimx64.efi`, que está firmado para **Secure Boot** y arranca `grubx64.efi`, que es **GRUB**. El `grub.cfg` de aquí solo le dice a GRUB dónde está su configuración de verdad: `/boot/grub/grub.cfg`.
 
-4. **Las entradas de arranque que guarda el firmware:**
-
-   ```bash
-   sudo efibootmgr
-   ```
-
-   ```
-   BootCurrent: 0003
-   Timeout: 0 seconds
-   BootOrder: 0003,0000,0001
-   Boot0000* UiApp        FvVol(…)/FvFile(…)
-   Boot0001* UEFI VBOX HARDDISK VB…   PciRoot(0x0)/…{auto_created_boot_option}
-   Boot0003* Ubuntu       HD(1,GPT,…)/\EFI\ubuntu\shimx64.efi
-   ```
-
-   - `Boot0003* Ubuntu`: la entrada que creó el instalador. Apunta a la **partición 1** del disco GPT y al archivo **`shimx64.efi`**: es la fase 1 → 2, escrita tal cual;
-   - `Boot0001`: la entrada genérica del disco, la que falló en el paso 2;
-   - `Boot0000* UiApp`: el menú de configuración del firmware del paso 2;
-   - `BootOrder` es el orden en que el firmware prueba las entradas (primero Ubuntu), y `BootCurrent`, la que se ha usado en este arranque.
-
-5. **Lo que carga GRUB (fase 2 → 3):**
+4. **Lo que carga GRUB: el kernel y el initrd:**
 
    ```bash
    ls /boot
    ```
 
    ```
-   System.map-7.0.0-30-generic  config-7.0.0-43-generic      initrd.img                   vmlinuz.old
-   System.map-7.0.0-43-generic  efi                          initrd.img-7.0.0-30-generic  vmlinuz
-   config-7.0.0-30-generic      grub                         initrd.img-7.0.0-43-generic  vmlinuz-7.0.0-30-generic
-   initrd.img.old               vmlinuz-7.0.0-43-generic
+   config-7.0.0-43-generic  grub  initrd.img-7.0.0-43-generic  vmlinuz-7.0.0-43-generic  …
    ```
 
-   `vmlinuz-…` es el kernel; `initrd.img-…`, su ayudante (el *initrd*); `grub`, la carpeta de configuración de GRUB; `efi`, donde está montada la partición EFI. Los nombres terminan en la versión del kernel, y hay **dos versiones**: `7.0.0-30` (la que traía la ISO) y `7.0.0-43` (la que instalaron las actualizaciones del paso 3). Los números dependen del día en que se instala: en tu máquina pueden ser otros. `vmlinuz` e `initrd.img` apuntan al kernel actual, y `vmlinuz.old` e `initrd.img.old`, al anterior. Se ve mejor en el paso 5, con `tree`.
+   `vmlinuz-…` es el **kernel** e `initrd.img-…`, el **initrd**; `grub` es la carpeta de configuración de GRUB. Hay dos versiones de cada uno: la que traía la ISO y la que instalaron las actualizaciones del paso 3 (los números pueden ser otros en tu máquina).
 
-6. **Los parámetros que GRUB le pasó al kernel en este arranque:**
-
-   ```bash
-   cat /proc/cmdline
-   ```
-
-   ```
-   BOOT_IMAGE=/boot/vmlinuz-7.0.0-43-generic root=UUID=56d1ce1a-… ro crashkernel=2G-4G:320M,…
-   ```
-
-   El kernel que se cargó; la partición raíz, por su identificador (el UUID); `ro`, que la monta primero en solo lectura, y systemd la pasa después a lectura y escritura; y `crashkernel`, que reserva memoria para guardar información si el kernel se cuelga.
-
-7. **El primer programa (fase 4):**
+5. **El primer programa que arranca el kernel:**
 
    ```bash
    ps -p 1
@@ -422,52 +380,18 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
          1 ?        00:00:03 systemd
    ```
 
-   El proceso número 1 es `systemd`.
+   El proceso número 1 es **systemd**, que arranca todos los servicios.
 
-8. **Cuánto ha tardado cada fase:**
+**Resumen:**
 
-   ```bash
-   systemd-analyze
-   ```
+| Fase | Pieza | Dónde se ve |
+|---|---|---|
+| Firmware | La entrada `Ubuntu`, que apunta a `shimx64.efi` | `sudo efibootmgr` |
+| Firmware → GRUB | `shimx64.efi` y `grubx64.efi`, en la partición EFI (`sda1`, `/boot/efi`) | `lsblk` y `sudo ls /boot/efi/EFI/ubuntu` |
+| GRUB → kernel | `vmlinuz` (el kernel) e `initrd.img`, en `/boot`, dentro de la raíz (`sda2`) | `ls /boot` |
+| Kernel → servicios | `systemd`, el proceso 1 | `ps -p 1` |
 
-   ```
-   Startup finished in 2.238s (kernel) + 6.114s (initrd) + 13.578s (userspace) = 21.931s
-   graphical.target reached after 13.576s in userspace.
-   ```
-
-   El kernel, su ayudante (`initrd`) y los servicios (*userspace*): son las fases del arranque (apartado 8 de los apuntes de la UD2), medidas. El firmware de VirtualBox no informa de su tiempo ni del de GRUB; en un ordenador real salen también `(firmware)` y `(loader)`.
-
-9. **El hardware que ve Ubuntu.** El mismo de la tabla del paso 1, visto desde dentro:
-
-   ```bash
-   nproc
-   free -h
-   lspci
-   ```
-
-   ```
-   2
-                  total        used        free      shared  buff/cache   available
-   Mem:           1.6Gi       207Mi       1.1Gi       1.0Mi       344Mi       1.4Gi
-   Swap:          2.0Gi          0B       2.0Gi
-   00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
-   00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
-   00:01.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
-   00:02.0 VGA compatible controller: VMware SVGA II Adapter
-   00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
-   00:04.0 System peripheral: InnoTek Systemberatung GmbH VirtualBox Guest Service
-   00:05.0 Multimedia audio controller: Intel Corporation 82801AA AC'97 Audio Controller (rev 01)
-   00:06.0 USB controller: Apple Inc. KeyLargo/Intrepid USB
-   00:07.0 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 08)
-   00:0b.0 USB controller: Intel Corporation 82801FB/FBM/FR/FW/FRW (ICH6 Family) USB2 EHCI Controller
-   00:0d.0 SATA controller: Intel Corporation 82801HM/HEM (ICH8M/ICH8M-E) SATA Controller [AHCI mode] (rev 02)
-   ```
-
-   - `nproc`: los **2 procesadores**;
-   - `free -h`: la memoria. Sale `1.6Gi` y no 2: el kernel aparta una parte para él y para el `crashkernel` (con 2–4 GB, 320 MB). `Swap` es el archivo de intercambio que creó el instalador;
-   - `lspci`: los dispositivos de la placa. Los *bridge* son el **chipset PIIX3**; *IDE interface*, el controlador del DVD; *VGA … SVGA II*, la gráfica **VMSVGA**; *Ethernet … 82540EM*, la tarjeta **Intel PRO/1000**; *SATA controller … AHCI*, el controlador del disco; los *USB controller*, el USB 2.0; y *VirtualBox Guest Service*, un dispositivo propio de VirtualBox. El sistema invitado ve exactamente el hardware que le da el hipervisor.
-
-**Comprueba que…** sabes señalar, en la salida de estas órdenes, la partición EFI, la raíz, el programa de GRUB, la entrada de Ubuntu en el firmware, el kernel, sus parámetros y systemd, y a qué fase del arranque corresponde cada uno; y que reconoces en `lspci` el hardware de la tabla del paso 1.
+**Comprueba que…** sabes señalar, en la salida de estas órdenes, la partición EFI, la raíz, la entrada de Ubuntu en el firmware, el programa de GRUB, el kernel y systemd, y a qué fase del arranque corresponde cada uno.
 
 **Si te falla…**
 
@@ -634,7 +558,7 @@ Adding boot menu entry for UEFI Firmware Settings ...
 done
 ```
 
-`update-grub` lee `/etc/default/grub` (y `kdump-tools.cfg`, de donde sale el parámetro `crashkernel` del paso 4), encuentra los dos kernels y escribe `/boot/grub/grub.cfg`, que es lo que lee GRUB al arrancar ([apuntes de la UD2, apartado 8](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque)). El aviso de `os-prober` dice que GRUB no busca otros sistemas en otras particiones (un Windows en el mismo disco, por ejemplo): aquí no hay otro, así que es normal.
+`update-grub` lee `/etc/default/grub` (y `kdump-tools.cfg`, de donde sale el parámetro `crashkernel`, que reserva memoria para guardar información si el kernel se cuelga), encuentra los dos kernels y escribe `/boot/grub/grub.cfg`, que es lo que lee GRUB al arrancar ([apuntes de la UD2, apartado 8](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque)). El aviso de `os-prober` dice que GRUB no busca otros sistemas en otras particiones (un Windows en el mismo disco, por ejemplo): aquí no hay otro, así que es normal.
 
 Reinicia:
 
@@ -667,7 +591,7 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
    ![Una entrada de GRUB por dentro](img/17-grub-editar-entrada.png)
 
    - `set root='hd0,gpt2'`: GRUB busca los archivos en el disco 0, partición 2 GPT (la raíz, `sda2`);
-   - `linux /boot/vmlinuz-… root=UUID=… ro crashkernel=…`: el kernel y sus parámetros, lo que se vio en el paso 4 con `cat /proc/cmdline`;
+   - `linux /boot/vmlinuz-… root=UUID=… ro crashkernel=…`: el kernel y los parámetros que GRUB le pasa;
    - `initrd /boot/initrd.img-…`: su ayudante;
    - `recordfail`: GRUB anota el arranque, y Ubuntu lo da por bueno cuando termina. Por eso, tras un arranque que no terminó, el menú espera más.
 
@@ -869,11 +793,11 @@ Qué se entrega y cuándo: [`entrega.md`](entrega.md).
 | Comprobación | Hecho |
 |---|---|
 | Sé qué son el anfitrión, el hipervisor y el invitado, y qué archivos forman una máquina virtual |  |
-| Sé a qué componente de un ordenador corresponde cada ajuste de la máquina, y lo reconozco en `lspci` |  |
+| Sé a qué componente de un ordenador corresponde cada ajuste de la máquina |  |
 | Sé nombrar las cinco fases del arranque, en orden, y qué hace cada una |  |
 | La máquina usa UEFI, y vi qué hace el firmware sin nada que arrancar |  |
 | Ubuntu Server está instalado, con la partición EFI en `/boot/efi` y la raíz en `/` |  |
-| Sé señalar el programa de GRUB, la entrada de Ubuntu en el firmware, el kernel, sus parámetros y systemd con las órdenes del paso 4 |  |
+| Sé señalar el programa de GRUB, la entrada de Ubuntu en el firmware, el kernel y systemd con las órdenes del paso 4 |  |
 | Actualicé el sistema e instalé y desinstalé un programa con `apt` |  |
 | GRUB muestra su menú durante 10 segundos |  |
 | Sé para qué sirve tener dos kernels y vi los dos en las opciones avanzadas |  |
