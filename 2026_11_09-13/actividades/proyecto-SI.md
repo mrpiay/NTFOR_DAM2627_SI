@@ -55,7 +55,7 @@ La guía está probada con **VirtualBox 7.2** y **Windows 11**, los dos en ingl�
 
 | Qué | Pasos |
 |---|---|
-| Qué es una máquina virtual; crearla y configurarla (memoria, procesadores, firmware, disco); su hardware, comparado con el de un ordenador real | 1 y 4 |
+| Qué es una máquina virtual; crearla y configurarla (memoria, procesadores, firmware, disco); su hardware, comparado con el de un ordenador real | 1 |
 | El firmware UEFI, el orden de arranque y su menú de arranque | 2 y 9 |
 | Planificar e instalar un sistema operativo; particiones GPT y la partición EFI | 3 |
 | Las fases del arranque, vistas desde dentro del sistema | 4 |
