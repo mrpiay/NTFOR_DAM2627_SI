@@ -279,6 +279,8 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
    ![El GRUB de la ISO](img/10-grub-de-la-iso.png)
 
+   **Qué es GRUB.** Es el **gestor de arranque** de Linux: el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás. La ISO trae su propio GRUB, con las opciones de la ISO: instalar, probar el sistema… Al instalar, Ubuntu pondrá otro GRUB en el disco, el que verás a partir del paso 6. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
+
    Salen muchos mensajes del kernel, que carga los drivers de los dispositivos virtuales. Tarda **un par de minutos** hasta la primera pantalla del instalador.
 3. **Sigue el instalador.** Se maneja con las flechas, el **tabulador**, la **barra espaciadora** (marcar y desmarcar) e **Intro**; para avanzar, **Done** (*Hecho*). Puedes elegir el idioma del instalador que quieras; aquí van los nombres en inglés:
    - **Language:** *English* o *Español*;
