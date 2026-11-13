@@ -6,6 +6,7 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 13 nov | Semana del 16 al 20: apuntes «El equipo por dentro», proyecto «Mi equipo por dentro» y cuestionario C3 ([2026_11_16-20](2026_11_16-20)) |
 | 12 nov | Ejercicio guiado «Entrar en GRUB con el menú oculto» en la semana del 9 al 13 ([ejercicio-grub-oculto.md](2026_11_09-13/actividades/ejercicio-grub-oculto.md)) |
 | 11 nov | Nuevas fechas de exámenes: un solo examen parcial (**P1**, viernes 4 de diciembre) con todo lo de la evaluación, y el examen final (**F**) el viernes 11 de diciembre |
 | 11 nov | Enlace directo para descargar la ISO de Ubuntu Server en la actividad de la semana del 9 al 13 |
@@ -50,6 +51,7 @@ Junto a cada archivo, GitHub muestra cuándo cambió por última vez y qué se c
 | Repaso Julia | — | [apuntes](repaso-julia/apuntes) | — | — |
 | Del 2 al 6 de noviembre | [actividades](2026_11_02-06/actividades) | [apuntes](2026_11_02-06/apuntes) | [cuestionario](2026_11_02-06/cuestionario.md) | [soluciones](2026_11_02-06/soluciones) |
 | Del 9 al 13 de noviembre | [actividades](2026_11_09-13/actividades) | [apuntes](2026_11_09-13/apuntes) | [cuestionario](2026_11_09-13/cuestionario.md) | [soluciones](2026_11_09-13/soluciones) |
+| Del 16 al 20 de noviembre | [actividades](2026_11_16-20/actividades) | [apuntes](2026_11_16-20/apuntes) | [cuestionario](2026_11_16-20/cuestionario.md) | [soluciones](2026_11_16-20/soluciones) |
 
 ## Cómo usar los materiales
 
