@@ -391,6 +391,8 @@ Localiza cada ajuste en la tabla «[El hardware de una máquina virtual](../apun
 | GRUB → kernel | `vmlinuz` (el kernel) e `initrd.img`, en `/boot`, dentro de la raíz (`sda2`) | `ls /boot` |
 | Kernel → servicios | `systemd`, el proceso 1 | `ps -p 1` |
 
+Qué es cada pieza, dónde está y para qué sirve: [apuntes de la UD2, «Las piezas del arranque de Ubuntu con UEFI»](../apuntes/UD2-sistemas-operativos.md#las-piezas-del-arranque-de-ubuntu-con-uefi).
+
 **Comprueba que…** sabes señalar, en la salida de estas órdenes, la partición EFI, la raíz, la entrada de Ubuntu en el firmware, el programa de GRUB, el kernel y systemd, y a qué fase del arranque corresponde cada uno.
 
 **Si te falla…**

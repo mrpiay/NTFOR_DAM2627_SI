@@ -266,6 +266,23 @@ Lo que se ve al arrancar dice en qué fase falla, y eso dice dónde mirar:
 - Es el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás.
 - Una ISO de instalación trae **su propio GRUB**, con las opciones de la ISO (instalar, probar el sistema…). Al instalar, Ubuntu pone **otro GRUB en el disco**, con las entradas del sistema instalado.
 
+### Las piezas del arranque de Ubuntu con UEFI
+
+| Pieza | Qué es | Dónde está | Para qué sirve |
+|---|---|---|---|
+| **Partición EFI** | Una partición pequeña, en FAT32 | La primera del disco (`sda1`); Linux la monta en `/boot/efi` | Guarda los programas de arranque de cada sistema instalado. Es lo que lee el firmware |
+| **Entrada de arranque `Ubuntu`** | Un registro con un nombre y la ruta de un archivo | En la memoria del firmware, en la placa base (no en el disco). Se ve con `sudo efibootmgr` | Le dice al firmware qué archivo arrancar: `\EFI\ubuntu\shimx64.efi`, en la partición EFI |
+| **`shimx64.efi`** | Un programa pequeño, firmado | `/boot/efi/EFI/ubuntu/` | Es lo primero que ejecuta el firmware. Como está firmado, pasa el control de **Secure Boot**, y arranca GRUB |
+| **`grubx64.efi`** | El programa **GRUB** | `/boot/efi/EFI/ubuntu/` | Muestra el menú y carga el kernel y el initrd |
+| **`grub.cfg`** de la partición EFI | Un archivo de texto de pocas líneas | `/boot/efi/EFI/ubuntu/` | Le dice a GRUB dónde está su configuración de verdad |
+| **`/boot/grub/grub.cfg`** | La configuración de GRUB: el menú y sus entradas | En la raíz, en `/boot/grub/` | Lo lee GRUB al arrancar. Lo genera `sudo update-grub`: no se edita a mano |
+| **`/etc/default/grub`** | Los ajustes de GRUB: menú, tiempo de espera, entrada por defecto | En la raíz, en `/etc/default/` | Es donde se cambia GRUB. Los cambios se aplican con `sudo update-grub` |
+| **`vmlinuz-…`** | El **kernel** | En la raíz, en `/boot/` | El núcleo del sistema operativo. Lo carga GRUB |
+| **`initrd.img-…`** | El **initrd**: un pequeño sistema en memoria | En la raíz, en `/boot/` | Prepara lo necesario para montar la raíz; después deja paso al sistema |
+| **`systemd`** | El primer programa, el proceso 1 | `/usr/lib/systemd/systemd` | Lo arranca el kernel, y él arranca todos los servicios |
+
+Por orden: el firmware lee su **entrada de arranque** → ejecuta **`shimx64.efi`** de la **partición EFI** → que arranca **GRUB** (`grubx64.efi`) → que lee **`/boot/grub/grub.cfg`** y carga el **kernel** y el **initrd** → que arrancan **systemd**.
+
 ---
 
 ## 9. Actualizaciones y aplicaciones
