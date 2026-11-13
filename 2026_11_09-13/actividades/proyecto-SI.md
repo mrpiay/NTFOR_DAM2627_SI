@@ -130,7 +130,7 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
 | Tabla de particiones | MBR | GPT |
 | Además | — | Su propio menú de arranque (*Boot Manager*) y **Secure Boot**, que solo arranca programas firmados |
 
-**EFI** es el nombre de la primera versión, creada por Intel; **UEFI** (*Unified EFI*) es el estándar actual. Se usan como sinónimos: VirtualBox dice «EFI» y Ubuntu, «UEFI». Mucha gente sigue llamando «BIOS» a la configuración del firmware, aunque sea UEFI. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
+**EFI** (*Extensible Firmware Interface*, «interfaz de firmware extensible») es el nombre de la primera versión, creada por Intel: una interfaz entre el firmware y el sistema operativo, «extensible» porque se le pueden añadir programas, los `.efi`. **UEFI** (*Unified Extensible Firmware Interface*) es la misma, convertida en el estándar común de los fabricantes. Se usan como sinónimos: VirtualBox dice «EFI» y Ubuntu, «UEFI». Mucha gente sigue llamando «BIOS» a la configuración del firmware, aunque sea UEFI. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
 
 Esta máquina usa UEFI, como un ordenador actual: por eso tendrá partición EFI (paso 3), entradas de arranque (paso 4) y *Boot Manager* (pasos 2 y 9).
 
@@ -279,7 +279,7 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 
    ![El GRUB de la ISO](img/10-grub-de-la-iso.png)
 
-   **Qué es GRUB.** Es el **gestor de arranque** de Linux: el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás. La ISO trae su propio GRUB, con las opciones de la ISO: instalar, probar el sistema… Al instalar, Ubuntu pondrá otro GRUB en el disco, el que verás a partir del paso 6. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
+   **Qué es GRUB.** Sus siglas son *GRand Unified Bootloader*, «gran cargador de arranque unificado»: unificado porque sirve para arrancar sistemas muy distintos. Es el **gestor de arranque** de Linux: el programa que el firmware ejecuta después de comprobar el hardware. Hace dos cosas: si hay varias opciones, muestra un **menú** para elegir una (con cuenta atrás: si no se toca nada, arranca la primera); y **carga en memoria el kernel** del sistema elegido, que pone en marcha todo lo demás. La ISO trae su propio GRUB, con las opciones de la ISO: instalar, probar el sistema… Al instalar, Ubuntu pondrá otro GRUB en el disco, el que verás a partir del paso 6. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
 
    Salen muchos mensajes del kernel, que carga los drivers de los dispositivos virtuales. Tarda **un par de minutos** hasta la primera pantalla del instalador.
 3. **Sigue el instalador.** Se maneja con las flechas, el **tabulador**, la **barra espaciadora** (marcar y desmarcar) e **Intro**; para avanzar, **Done** (*Hecho*). Puedes elegir el idioma del instalador que quieras; aquí van los nombres en inglés:
