@@ -135,7 +135,7 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
    - **Base Memory:** 2048 MB;
    - **Number of CPUs:** 2;
    - **Disk Size:** 25.00 GB. El disco es **dinámico**: ocupa en tu ordenador solo lo que se use;
-   - marca **Use EFI**. Es lo que hace que la máquina arranque con firmware UEFI, como un ordenador actual.
+   - marca **Use EFI**. Es lo que hace que la máquina arranque con firmware UEFI, como un ordenador actual. **Es imprescindible**: sin EFI la máquina arranca con BIOS heredada, y los pasos 2, 3, 4 y 9 no salen como se describen (no hay partición EFI, ni `efibootmgr`, ni *Boot Manager*). Además, **después de instalar Ubuntu ya no se puede cambiar** sin reinstalar.
 
    ![Segunda página del asistente](img/02-nueva-maquina-hardware.png)
 
@@ -238,6 +238,8 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
 **Objetivo.** Ubuntu Server instalado en el disco de la máquina, en dos particiones: la EFI y la raíz.
 
 **Pista.**
+
+**Antes de instalar, comprueba que la máquina tiene UEFI**: con la máquina apagada, en **Settings → System → Motherboard**, la casilla **Enable EFI** tiene que estar marcada. Si no lo está, márcala ahora: el instalador prepara el disco para el firmware que encuentra, y después ya no se puede cambiar sin reinstalar.
 
 1. **Mete la ISO en el DVD virtual.** Con la máquina apagada: **Settings → Storage** (*Configuración → Almacenamiento*). En *Controller: IDE*, selecciona la unidad **Empty** (*Vacío*); a la derecha, junto a *Optical Drive*, pulsa el **icono pequeño del disco** y elige **Choose a Disk File…** (*Seleccionar un archivo de disco…*): la ISO descargada. Pulsa **OK**.
 
@@ -526,11 +528,49 @@ En el paso 4 verás este mismo hardware desde dentro de Ubuntu.
    sudo poweroff
    ```
 
-   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*): es el icono de la cámara, justo a la derecha del de *Details*. Arriba aparecen los botones **Take** (*Tomar*), **Delete**, **Restore**… Con *Current State* seleccionado, pulsa **Take**. Nombre: `Actualizado`, y **OK**. Con la máquina apagada, al volver a ella arranca limpia (cómo funciona una instantánea: [apuntes de la UD2, apartado 5](../apuntes/UD2-sistemas-operativos.md#5-máquinas-virtuales)).
+   Es la forma correcta de apagar Linux (como *Send the shutdown signal*). En la ventana principal de VirtualBox, selecciona la máquina, abre la pestaña **Snapshots** (*Instantáneas*): es el icono de la cámara, justo a la derecha del de *Details*. Arriba aparecen los botones **Take** (*Tomar*), **Delete**, **Restore**… Con *Current State* seleccionado, pulsa **Take**. Nombre: `Actualizado`; en *Description* (*Descripción*): `Paso 5: sistema actualizado, sin tree. GRUB sin tocar`; y **OK**. Con la máquina apagada, al volver a ella arranca limpia (cómo funciona una instantánea: [apuntes de la UD2, apartado 5](../apuntes/UD2-sistemas-operativos.md#5-máquinas-virtuales)).
 
    ![La lista de instantáneas](img/15-instantaneas.png)
 
    En la lista, la máquina pasa a llamarse `ubuntu-arranque (Actualizado)`: muestra su última instantánea. El icono de cada instantánea dice cómo se tomó: con una flecha verde, con la máquina encendida; sin ella, apagada.
+
+**Instantáneas y estado actual.** La lista de la pestaña *Snapshots* es un árbol con dos clases de elementos:
+
+- Cada **instantánea** es una **foto fija** de la máquina en el momento de tomarla. No se enciende ni se cambia: queda tal cual para poder volver a ella.
+- **Current State** (*Estado actual*) es la máquina **tal como está ahora**: la que se enciende y se usa. Cuelga de la última instantánea tomada o restaurada, y **todo lo que se hace con la máquina encendida se guarda aquí**, nunca en una instantánea.
+
+Lo que se puede hacer depende de lo que esté seleccionado en la lista:
+
+| Seleccionado | Qué se puede hacer |
+|---|---|
+| **Current State** | **Start**: encender la máquina; lo que se haga se guarda en el estado actual. **Take**: tomar una instantánea, una foto del estado actual. **Settings**: cambiar la configuración |
+| Una **instantánea** | **Restore**: el estado actual pasa a ser una copia de esa foto, y lo hecho desde entonces se pierde (salvo que se marque *Create a snapshot of the current machine state*, que antes lo guarda en otra instantánea). **Delete**: borra la foto; el estado actual no cambia. **Clone**: crea otra máquina a partir de esa foto. Con una instantánea seleccionada, **Start** sale en gris |
+
+Reglas prácticas:
+
+- **Antes de encender la máquina, haz clic en Current State.**
+- Toma y restaura las instantáneas con la máquina **apagada**: así guardan solo el disco y la configuración, y al volver a ellas la máquina arranca limpia.
+- Ponles un nombre y una descripción que digan qué estado guardan: al restaurar hay que saber cuál elegir.
+
+**Las instantáneas de este proyecto.** Son dos:
+
+| Instantánea | Se toma en | Qué guarda | Para qué sirve |
+|---|---|---|---|
+| `Actualizado` | Paso 5 | El sistema recién actualizado, sin `tree`. GRUB todavía oculta el menú y la contraseña es la de la instalación | Volver a un sistema limpio si algo de los pasos 6 a 8 se estropea sin arreglo (se pierden los cambios de esos pasos) |
+| `Antes de romper` | Paso 8, antes del `mv` | Lo anterior, más el menú de GRUB de 10 segundos (paso 6) y la contraseña nueva (paso 7). El arranque funciona | Recuperar el arranque en el paso 8 sin perder los pasos 6 y 7 |
+
+**Examinar una instantánea y diagnosticar el estado actual.** Sin depender de lo que se apuntó al tomarlas, VirtualBox permite averiguar qué guarda cada instantánea y de dónde parte el estado actual:
+
+1. **Sus datos.** Selecciona una instantánea: debajo del árbol salen su nombre, la fecha y hora en que se tomó y su descripción; en la pestaña de detalles, la configuración que tenía la máquina entonces (memoria, discos…). Clic derecho → **Properties** para cambiar el nombre o la descripción.
+2. **De dónde parte el estado actual.** **Current State** cuelga de la última instantánea que se tomó o se restauró: el estado actual es esa foto más lo hecho después. Si aparece como **Current State (changed)**, ha habido cambios desde esa instantánea. El nombre de la máquina en la lista de la izquierda también la indica: `ubuntu-arranque (Actualizado)`.
+3. **La lista completa, desde la terminal de Windows** (PowerShell):
+
+   ```
+   & "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" snapshot ubuntu-arranque list --details
+   ```
+
+   Sale el árbol de instantáneas con el nombre y la descripción de cada una; la marcada con `*` es la instantánea de la que parte el estado actual.
+4. **Mirar dentro de una instantánea sin restaurarla.** Restaurar cambia el estado actual; para examinar una instantánea sin tocarlo, se crea una máquina a partir de ella: clic derecho en la instantánea → **Clone…**, nombre (por ejemplo `prueba-instantanea`), tipo **Linked Clone** (*Clon enlazado*, que no copia el disco entero y se crea en segundos) y **Finish**. Arranca esa máquina nueva y comprueba lo que haga falta, por ejemplo `ls /boot/grub` (¿está `grub.cfg`?) o `grep GRUB_TIMEOUT /etc/default/grub` (¿menú oculto o de 10 segundos?). Al terminar, apágala y bórrala: clic derecho en ella → **Remove…** → **Delete all files**. La máquina original y sus instantáneas no cambian.
 
 **Comprueba que…**
 
@@ -675,8 +715,8 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
 **Pista.**
 
-1. **Toma otra instantánea**, como en el paso 5: apaga con `sudo poweroff` y, en la pestaña *Snapshots*, **Take**, con el nombre **`Antes de romper`**.
-2. **Rompe el arranque a propósito.** Inicia la máquina, entra y cambia el nombre del archivo de configuración de GRUB, para que no lo encuentre. Después, reinicia:
+1. **Toma otra instantánea**, como en el paso 5: apaga con `sudo poweroff` y, en la pestaña *Snapshots*, **Take**, con el nombre **`Antes de romper`** y, en *Description*, `Paso 8: menú de GRUB de 10 s y contraseña nueva del paso 7. Arranque sin romper`.
+2. **Rompe el arranque a propósito.** Antes de iniciar, haz clic en **Current State** en la lista de instantáneas, para trabajar sobre el estado actual y no sobre `Antes de romper`. Inicia la máquina, entra y cambia el nombre del archivo de configuración de GRUB, para que no lo encuentre. Después, reinicia:
 
    ```bash
    sudo mv /boot/grub/grub.cfg /boot/grub/grub.cfg.roto
@@ -707,6 +747,22 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 
 - *Después de romperlo arranca igual que siempre*: no has escrito bien la ruta en `mv`. Comprueba con `ls /boot/grub` que ya no existe `grub.cfg`.
 - *Después de restaurar sigue saliendo `grub>`*: has restaurado otra instantánea o no la has restaurado. Apaga la máquina y restaura `Antes de romper`.
+- *No tienes la instantánea `Antes de romper`, o al restaurarla también sale `grub>`*: lo segundo pasa si la instantánea guardó el arranque ya roto. Una instantánea es una foto del disco en el momento de tomarla y no cambia después: todo lo que se hace con la máquina encendida, también el `mv`, va al estado actual (*Current State*). Así que la foto se tomó **después** del `mv`, o se está restaurando otra: por ejemplo, la que crea la casilla *Create a snapshot of the current machine state* si se marca al restaurar, que guarda el estado roto. Por eso el orden es: apagar, **Take**, iniciar y, solo entonces, romper; y al restaurar, esa casilla desmarcada. Para salir de ahí, se puede arrancar desde la propia consola, porque la configuración no se ha borrado, solo ha cambiado de nombre. En `grub>`, escribe `ls /boot/grub/` (tiene que salir `grub.cfg.roto`) y después `configfile /boot/grub/grub.cfg.roto`: aparece el menú de siempre. Arranca Ubuntu, entra y devuélvele el nombre con `sudo mv /boot/grub/grub.cfg.roto /boot/grub/grub.cfg` y `sudo reboot`. Si `ls` no encuentra el archivo, usa la ruta completa: `configfile (hd0,gpt2)/boot/grub/grub.cfg.roto`. Después, toma otra instantánea con la máquina apagada.
+- *En `grub>` las teclas no escriben lo que pone en ellas (no salen `/`, `-`, `(`…)*: el teclado no envía letras, sino el **número de la tecla** pulsada; la **distribución de teclado** (española, estadounidense…) es la tabla que traduce cada número al carácter. Esa tabla la configura el sistema operativo, y GRUB se ejecuta **antes** de que Linux arranque: no conoce la distribución española y usa la estadounidense, que es la que trae por defecto (lo mismo pasa en la configuración del firmware). Las letras y los números están en el mismo sitio; cambian los símbolos. Con un teclado español:
+
+  | Para escribir | Pulsa |
+  |---|---|
+  | `/` | la tecla `-` (a la derecha del punto) |
+  | `-` | la tecla `'` (a la derecha del 0) |
+  | `_` | **Mayús** + la tecla `'` |
+  | `=` | la tecla `¡` (a la izquierda de Retroceso) |
+  | `(` y `)` | **Mayús+9** y **Mayús+0** |
+  | `:` | **Mayús** + la tecla `ñ` |
+  | `"` | **Mayús** + la tecla de la tilde `´` (a la derecha de la `ñ`) |
+  | `*` | **Mayús+8** |
+  | `\` | la tecla `ç` |
+
+  Ante la duda, escribe el carácter, mira qué sale en pantalla y bórralo con **Retroceso** si no es el que buscabas.
 - *Al iniciar sale `Failed to load unit 'vga'`*: la instantánea se tomó con la máquina encendida y VirtualBox no puede recuperar lo que había en memoria. En la ventana principal, pulsa **Discard** (*Descartar*), confirma y vuelve a iniciarla: el disco está bien.
 
 ---
@@ -716,6 +772,8 @@ Si no tocas nada, al acabar la cuenta atrás arranca la primera, la marcada con 
 **Objetivo.** Arrancar la máquina desde otro medio, la ISO, eligiéndolo en el menú de arranque del firmware, sin cambiar nada de lo instalado.
 
 **Pista.** Es lo que en un ordenador real se hace para arrancar desde un USB: instalar otro sistema, usar uno de rescate o probar uno sin instalarlo.
+
+**Este paso necesita la máquina con UEFI**, como se pide en el paso 1: la opción **UEFI Firmware Settings** de GRUB y el *Boot Manager* son del firmware UEFI. Compruébalo con la máquina apagada: en **Settings → System → Motherboard**, la casilla **Enable EFI** tiene que estar marcada.
 
 1. Apaga la máquina (`sudo poweroff`) y vuelve a meter la ISO en el DVD virtual, como en el paso 3.
 2. Inicia la máquina y, en el menú de GRUB, elige **UEFI Firmware Settings**: se abre la configuración del firmware del paso 2.
@@ -741,6 +799,7 @@ Lo mismo valdría con la ISO de cualquier otro sistema, por ejemplo la de Window
 
 **Si te falla…**
 
+- *En el menú de GRUB no está «UEFI Firmware Settings»*: la máquina no tiene UEFI. Se creó sin marcar **Use EFI** en el paso 1 y arranca con BIOS heredada, que no tiene *Boot Manager*. Compruébalo en **Settings → System → Motherboard**: **Enable EFI** está desmarcada. **No la marques ahora**: Ubuntu se instaló para BIOS y dejaría de arrancar. Con BIOS, el menú de arranque se abre pulsando **F12** mientras sale el logo de VirtualBox; con la ISO puesta, elige el CD-ROM y sigue en el punto 4. Las particiones, `efibootmgr` y el firmware de los pasos 2 a 4 tampoco te habrán salido como se describen: para tenerlos, hay que crear la máquina de nuevo con **Use EFI** marcado (paso 1) y reinstalar.
 - *En el Boot Manager no aparece el DVD*: no está puesta la ISO. Apaga, ponla y repite.
 - *Del GRUB de la ISO pasa al instalador*: se acabó la cuenta atrás. No pasa nada: quita la ISO y apaga la máquina, como en el punto 5; el instalador no toca el disco hasta que se confirma en *Confirm destructive action*.
 
