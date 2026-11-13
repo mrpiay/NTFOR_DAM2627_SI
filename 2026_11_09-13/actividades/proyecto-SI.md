@@ -120,6 +120,20 @@ Cada paso tiene **Objetivo**, **Pista** (cómo se hace y lo justo para entenderl
 
 **Objetivo.** Una máquina virtual con UEFI, 2 GB de memoria, 2 procesadores y un disco de 25 GB, todavía sin sistema operativo.
 
+**Qué es UEFI (o EFI).** Al encender un ordenador, lo primero que se ejecuta es el **firmware**: un programa guardado en un chip de la placa base que comprueba el hardware y busca un sistema que arrancar. Hay dos tipos:
+
+| | BIOS (heredada, *legacy*) | UEFI |
+|---|---|---|
+| Qué es | El firmware de los PC desde los años 80 | El que la sustituye: lo llevan los ordenadores actuales desde hace más de diez años |
+| Cómo arranca | Lee el primer sector del disco y ejecuta el pequeño programa que hay allí | Lee una partición del disco, la **partición EFI** (en FAT32), y ejecuta un programa `.efi` que hay en ella: en Ubuntu, el de GRUB |
+| Qué recuerda | Solo el orden de los dispositivos | Una lista de **entradas de arranque** con nombre (`Ubuntu`, `Windows Boot Manager`…) |
+| Tabla de particiones | MBR | GPT |
+| Además | — | Su propio menú de arranque (*Boot Manager*) y **Secure Boot**, que solo arranca programas firmados |
+
+**EFI** es el nombre de la primera versión, creada por Intel; **UEFI** (*Unified EFI*) es el estándar actual. Se usan como sinónimos: VirtualBox dice «EFI» y Ubuntu, «UEFI». Mucha gente sigue llamando «BIOS» a la configuración del firmware, aunque sea UEFI. Más, en el [apartado 8 de los apuntes de la UD2](../apuntes/UD2-sistemas-operativos.md#8-el-arranque-y-los-gestores-de-arranque).
+
+Esta máquina usa UEFI, como un ordenador actual: por eso tendrá partición EFI (paso 3), entradas de arranque (paso 4) y *Boot Manager* (pasos 2 y 9).
+
 **Pista.** En VirtualBox, botón **New** (*Nueva*). El asistente tiene tres páginas; se pasa de una a otra con **Next** (*Siguiente*):
 
 1. **Virtual machine name and operating system:**
@@ -147,6 +161,21 @@ Con la máquina seleccionada en la lista, la pestaña **Details** (*Detalles*) m
 
 - *System → Boot Order*: el **orden de arranque**, *Floppy, Optical, Hard Disk* (disquete, DVD y disco); y **EFI: Enabled**;
 - *Storage*: el DVD virtual (*[Optical Drive] Empty*, vacío) en el controlador IDE, y el disco `ubuntu-arranque.vdi` (25.00 GB) en el SATA.
+
+**Qué son IDE y SATA.** Los discos y las unidades de DVD se conectan a la placa base a través de un **controlador de almacenamiento**, y cada controlador usa una **interfaz**: el tipo de conexión (cable y forma de comunicarse).
+
+| | IDE (o PATA, *Parallel ATA*) | SATA (*Serial ATA*) |
+|---|---|---|
+| Qué es | La interfaz antigua, de los años 80 hasta mediados de los 2000 | La que la sustituyó; la de los discos y DVD actuales (los SSD más rápidos usan NVMe) |
+| Cable | Ancho y plano, con dos dispositivos por cable (*maestro* y *esclavo*) | Fino, con un dispositivo por puerto |
+| Velocidad | Hasta 133 MB/s | Hasta 600 MB/s |
+
+VirtualBox simula los dos controladores, y en esta máquina cada uno tiene una unidad:
+
+- en el **IDE** está la **unidad de DVD**. Ahí se mete la **ISO** (paso 3): un archivo que VirtualBox presenta a la máquina como si fuera un disco metido en el lector;
+- en el **SATA** está el **disco duro**: el archivo `ubuntu-arranque.vdi`, que VirtualBox presenta como si fuera un disco de verdad.
+
+Así, la máquina cree que tiene un lector de DVD y un disco duro, y en tu ordenador solo son dos archivos: la ISO y el `.vdi`. Dentro de Ubuntu, el disco aparecerá como `/dev/sda` y el DVD como `/dev/sr0` (paso 4).
 
 Los archivos de la máquina están en la carpeta *VirtualBox VMs*, dentro de tu carpeta personal: `ubuntu-arranque.vbox` (la configuración) y `ubuntu-arranque.vdi` (el disco).
 
