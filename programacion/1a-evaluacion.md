@@ -54,10 +54,11 @@ Porcentajes sobre la nota de la evaluación.
 
 ## Notas
 
-- **Cuestionarios (C).** Hay uno cada semana en la que se facilitan apuntes o actividades guiadas nuevas, con preguntas sobre ellos. Su entrega es obligatoria, hasta el lunes siguiente a su semana. No cuentan por sí mismos para la nota: cuenta su revisión (R).
+- **Cuestionarios (C).** Hay uno cada semana en la que se facilitan apuntes o actividades guiadas nuevas, con preguntas sobre ellos. Su entrega es obligatoria, hasta el lunes siguiente a su semana, salvo que se indique otra fecha (ver las notas). No cuentan por sí mismos para la nota: cuenta su revisión (R).
 - **Revisión (R).** Cada cuestionario y cada examen parcial, una vez devuelto corregido, se revisa: se localizan los errores y se corrigen por escrito. Todas las revisiones pesan lo mismo y forman el 10 % de autoevaluación del apartado 6.1 de la programación oficial. El examen final no tiene revisión, porque se devuelve después del cierre.
 - **Exámenes escritos** (parciales, **P**, y final, **F**). Son en papel e incluyen preguntas similares a las de los cuestionarios. Cada pregunta indica los puntos que vale: los contenidos con más porcentaje tienen preguntas que valen más.
 - **Actividades guiadas (A).** La marcha y el cumplimiento de cada actividad se evalúan con una lista de cotejo: cada «Comprueba que…» de cada paso se cumple o no. La nota de cada actividad es el porcentaje de puntos cumplidos (de 0 a 10), y el mínimo de 4 se aplica a la media de las actividades de la evaluación.
 - Antes del 2 de noviembre no hay nada evaluado en SI: ni exámenes ni tareas entregadas.
+- El C1 se entrega junto con el C2, el lunes 16 de noviembre.
 - WSL, apt, el JDK, VS Code y las distribuciones de Linux son de la UD2. El sistema de archivos, las órdenes básicas y la redirección son una introducción a la UD3: la P1 puede preguntarlos, pero esas preguntas cuentan para la UD3 en la 2ª evaluación.
 - Mínimo de 4 en cada examen parcial, en la media de las actividades guiadas y en el final para aplicar la media (apartado 6.1 de la programación oficial).
