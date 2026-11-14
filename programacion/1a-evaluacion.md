@@ -41,16 +41,16 @@ Porcentajes sobre la nota de la evaluación.
 
 ## Planificación semanal
 
-| Semana | Qué se da | Qué se evalúa |
-|---|---|---|
-| Antes del 2 nov<br>[repaso Julia](../repaso-julia/apuntes) | Lo evaluado por Julia | Nada evaluado |
-| [2–6 nov](../2026_11_02-06)<br>[apuntes](../2026_11_02-06/apuntes) · [actividades](../2026_11_02-06/actividades) | UD1 · Componentes, memorias y seguridad: la teoría<br>UD1 · Puesta en marcha: firmware, POST y orden de arranque<br>UD1 · Periféricos: tipos, conectores y drivers<br>UD2 · Las distribuciones de Linux<br>UD2 · Virtualizar e instalar aplicaciones: WSL, apt, el JDK y VS Code<br>UD2 · Instalar un sistema libre: Ubuntu en WSL<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (4 %), C1 |
-| [9–13 nov](../2026_11_09-13)<br>[apuntes](../2026_11_09-13/apuntes) · [actividades](../2026_11_09-13/actividades) | UD1 · Puesta en marcha: el arranque de una máquina virtual<br>UD2 · Funciones, tipos, arquitectura y licencias de los sistemas operativos<br>UD2 · Planificar, virtualizar, actualizar y recuperar: VirtualBox, instantáneas y GRUB<br>UD2 · Instalar un sistema libre: Ubuntu Server en una máquina virtual | A2 (4 %), C2 |
-| [16–20 nov](../2026_11_16-20)<br>[apuntes](../2026_11_16-20/apuntes) · [actividades](../2026_11_16-20/actividades) | UD1 · Componentes, memorias y seguridad, en el propio equipo<br>UD1 · Periféricos: el móvil, en Windows y en Linux | A3 (4 %), C3, R de C1 (2 %), R de C2 (2 %) |
-| 23–27 nov | UD1 · Sistemas de numeración, operaciones binarias y unidades<br>UD2 · Instalar un sistema propietario: Windows en una máquina virtual<br>UD2 · Documentar la instalación de Windows | A4 (4 %), A5 (4 %), C4, R de C3 (2 %) |
-| 30 nov–4 dic | Repaso de toda la evaluación (mar 1 y jue 3) | P1 (40 %), R de C4 (2 %) |
-| 7–11 dic | Repaso (jue 10) | F (30 %), R de P1 (2 %) |
-| 14–18 dic | UD3 · Linux | Cierre de la 1ª evaluación · jue 17 |
+| Semana | Qué se trabaja | Cómo se evalúa | Exámenes |
+|---|---|---|---|
+| Antes del 2 nov<br>[repaso Julia](../repaso-julia/apuntes) | Lo evaluado por Julia | Nada evaluado | — |
+| [2–6 nov](../2026_11_02-06)<br>[apuntes](../2026_11_02-06/apuntes) · [actividades](../2026_11_02-06/actividades) | UD1 · Componentes, memorias y seguridad: la teoría<br>UD1 · Puesta en marcha: firmware, POST y orden de arranque<br>UD1 · Periféricos: tipos, conectores y drivers<br>UD2 · Las distribuciones de Linux<br>UD2 · Virtualizar e instalar aplicaciones: WSL, apt, el JDK y VS Code<br>UD2 · Instalar un sistema libre: Ubuntu en WSL<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (4 %), C1 | — |
+| [9–13 nov](../2026_11_09-13)<br>[apuntes](../2026_11_09-13/apuntes) · [actividades](../2026_11_09-13/actividades) | UD1 · Puesta en marcha: el arranque de una máquina virtual<br>UD2 · Funciones, tipos, arquitectura y licencias de los sistemas operativos<br>UD2 · Planificar, virtualizar, actualizar y recuperar: VirtualBox, instantáneas y GRUB<br>UD2 · Instalar un sistema libre: Ubuntu Server en una máquina virtual | A2 (4 %), C2 | — |
+| [16–20 nov](../2026_11_16-20)<br>[apuntes](../2026_11_16-20/apuntes) · [actividades](../2026_11_16-20/actividades) | UD1 · Componentes, memorias y seguridad, en el propio equipo<br>UD1 · Periféricos: el móvil, en Windows y en Linux | A3 (4 %), C3, R de C1 (2 %), R de C2 (2 %) | — |
+| 23–27 nov | UD1 · Sistemas de numeración, operaciones binarias y unidades<br>UD2 · Instalar un sistema propietario: Windows en una máquina virtual<br>UD2 · Documentar la instalación de Windows | A4 (4 %), A5 (4 %), C4, R de C3 (2 %) | — |
+| 30 nov–4 dic | Repaso de toda la evaluación (mar 1 y jue 3) | R de C4 (2 %) | **P1** (40 %), vie 4 dic |
+| 7–11 dic | Repaso (jue 10) | R de P1 (2 %) | **F** (30 %), vie 11 dic |
+| 14–18 dic | UD3 · Linux | Cierre de la 1ª evaluación · jue 17 | — |
 
 ## Notas
 
