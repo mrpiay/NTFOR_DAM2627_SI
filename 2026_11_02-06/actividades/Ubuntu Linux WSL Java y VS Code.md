@@ -2,6 +2,8 @@
 
 **Preparando el entorno de desarrollo para el módulo de Programación**
 
+**Evaluación.** Esta actividad guiada (**A1**) comprende los apartados 1 a 4. Se califica por el nivel de cumplimiento de sus apartados: nada (0), poco (2,5), medio (5), alto (7,5) o completo (10); qué supone cada nivel, en las [rúbricas](../../programacion/rubricas.md). El cuestionario de la semana (**C1**) se entrega hasta el lunes 16 de noviembre, junto con el de la otra semana. El **viernes 4 de diciembre** hay un examen parcial, **P1**, en papel, con todo lo de la 1ª evaluación, también esta actividad. Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
+
 Para empezar a programar en Java hace falta un entorno de desarrollo con tres piezas, instaladas en este orden:
 
 1. **WSL con Ubuntu:** un Linux dentro de Windows, donde viven tus proyectos y tu terminal.

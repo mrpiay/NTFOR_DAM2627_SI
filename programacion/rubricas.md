@@ -8,7 +8,7 @@ En papel. Cada pregunta indica los puntos que vale: los contenidos con más porc
 
 ## Actividades guiadas (A)
 
-Cada actividad se califica por el nivel de cumplimiento de sus pasos. Un paso está cumplido cuando se cumple su «Comprueba que…».
+Cada actividad se califica por el nivel de cumplimiento de sus pasos. Un paso está cumplido cuando se cumple su «Comprueba que…». La A1 (Ubuntu, WSL, Java y VS Code) no tiene «Comprueba que…»: en ella cuentan sus apartados.
 
 | Nivel | Nota | Qué supone |
 |---|---|---|
