@@ -6,6 +6,7 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 16 nov | Las **actividades guiadas (A)** se califican por el nivel de cumplimiento de sus pasos: nada (0), poco (2,5), medio (5), alto (7,5) o completo (10). Qué supone cada nivel: [rúbricas](programacion/rubricas.md) |
 | 16 nov | Los **cuestionarios (C)** son requisito de la **autoevaluación (R)**: sin todos los cuestionarios entregados, la autoevaluación (R) es un 0 |
 | 16 nov | La **autoevaluación (R)**, el 10 % de la nota, pasa a ser una sola, la semana del examen final: una [plantilla](programacion/autoevaluacion-1a.xlsx) en Teams con el nivel y el tipo de fallo de cada tema, los hábitos de estudio y una reflexión sobre qué hacer para mejorar. Sustituye a la revisión de cada cuestionario y examen ([cómo se califica](programacion/rubricas.md)) |
 | 13 nov | Semana del 16 al 20: apuntes «El equipo por dentro», proyecto «Mi equipo por dentro» y cuestionario C3 ([2026_11_16-20](2026_11_16-20)) |

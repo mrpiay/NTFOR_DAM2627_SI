@@ -10,7 +10,7 @@ Es la **UD1 · Sistemas informáticos. Hardware y software**: componentes, memor
 
 **El objetivo es entender cada paso:** es lo que necesitas para responder el cuestionario y preparar los exámenes.
 
-**Evaluación.** Esta actividad guiada (**A3**) se evalúa con su lista de cotejo: cada «Comprueba que…» se cumple o no. El cuestionario de la semana (**C3**) se entrega hasta el lunes 23 de noviembre. El **viernes 4 de diciembre** hay un examen parcial, **P1**, en papel, con todo lo de la 1ª evaluación, también esta actividad: los componentes de un equipo y sus características, cómo se averiguan, los periféricos y sus drivers, y la seguridad al manipular un equipo. Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
+**Evaluación.** Esta actividad guiada (**A3**) se califica por el nivel de cumplimiento de sus pasos: nada (0), poco (2,5), medio (5), alto (7,5) o completo (10). Los «Comprueba que…» de cada paso indican si está cumplido; qué supone cada nivel, en las [rúbricas](../../programacion/rubricas.md). El cuestionario de la semana (**C3**) se entrega hasta el lunes 23 de noviembre. El **viernes 4 de diciembre** hay un examen parcial, **P1**, en papel, con todo lo de la 1ª evaluación, también esta actividad: los componentes de un equipo y sus características, cómo se averiguan, los periféricos y sus drivers, y la seguridad al manipular un equipo. Qué entra y cuánto vale cada parte: [1ª evaluación](../../programacion/1a-evaluacion.md).
 
 ---
 
