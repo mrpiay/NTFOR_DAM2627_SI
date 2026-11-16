@@ -2,7 +2,7 @@
 
 [← Programación](README.md)
 
-Cómo se calcula la nota de la 1ª evaluación, qué contenidos entran en los exámenes y planificación semanal. La planificación empieza el 2 de noviembre; lo que ya evaluó Julia (exámenes y tareas de Teams) aparece marcado como «(Julia)».
+Cómo se calcula la nota de la 1ª evaluación, qué contenidos entran en los exámenes y planificación semanal. La planificación empieza el 2 de noviembre; lo que ya evaluó Julia (exámenes y tareas de Teams) está en la fila «Antes del 2 nov».
 
 ## Cómo se evalúa: de dónde sale la nota
 
@@ -24,22 +24,22 @@ Los porcentajes de esta sección no son partes de la nota: dicen cuánto pesa ca
 
 Pesa un 42,9 % en los exámenes (15 % del módulo).
 
-| Contenido | Examen o tarea que lo evalúa (además del F) | Peso en la unidad |
-|---|---|---|
-| Componentes, memorias, sistemas de numeración y seguridad | P1 | 60 % |
-| Puesta en marcha de un equipo | P1 | 15 % |
-| Periféricos: clasificar, instalar y configurar | P1 | 25 % |
+| Contenido | Peso en la unidad |
+|---|---|
+| Componentes, memorias, sistemas de numeración y seguridad | 60 % |
+| Puesta en marcha de un equipo | 15 % |
+| Periféricos: clasificar, instalar y configurar | 25 % |
 
 ### UD2 · Sistemas operativos. Instalación
 
 Pesa un 57,1 % en los exámenes (20 % del módulo).
 
-| Contenido | Examen o tarea que lo evalúa (además del F) | Peso en la unidad |
-|---|---|---|
-| Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | P1 | 25 % |
-| Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | P1 | 50 % |
-| Instalar y actualizar sistemas libres y propietarios | P1 | 20 % |
-| Documentar los procesos | P1 | 5 % |
+| Contenido | Peso en la unidad |
+|---|---|
+| Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | 25 % |
+| Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | 50 % |
+| Instalar y actualizar sistemas libres y propietarios | 20 % |
+| Documentar los procesos | 5 % |
 
 ## Planificación semanal
 
