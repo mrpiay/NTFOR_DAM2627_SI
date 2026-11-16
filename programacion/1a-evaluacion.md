@@ -2,32 +2,11 @@
 
 [← Programación](README.md)
 
-Qué entra en la 1ª evaluación y con qué se evalúa cada parte. En cada unidad se muestran sus contenidos, cada uno agrupando los criterios de evaluación que le corresponden; su porcentaje es la suma de los pesos de esos criterios en la programación oficial del módulo. La planificación empieza el 2 de noviembre; lo que ya evaluó Julia (exámenes y tareas de Teams) aparece marcado como «(Julia)».
+Cómo se calcula la nota de la 1ª evaluación, qué contenidos entran en los exámenes y planificación semanal. La planificación empieza el 2 de noviembre; lo que ya evaluó Julia (exámenes y tareas de Teams) aparece marcado como «(Julia)».
 
-## Qué entra
+## Cómo se evalúa: de dónde sale la nota
 
-### UD1 · Sistemas informáticos. Hardware y software
-
-42,9 % de la evaluación (15 % del módulo).
-
-| Contenido | Se evalúa con | Peso en la unidad |
-|---|---|---|
-| Componentes, memorias, sistemas de numeración y seguridad | P1 | 60 % |
-| Puesta en marcha de un equipo | P1 | 15 % |
-| Periféricos: clasificar, instalar y configurar | P1 | 25 % |
-
-### UD2 · Sistemas operativos. Instalación
-
-57,1 % de la evaluación (20 % del módulo).
-
-| Contenido | Se evalúa con | Peso en la unidad |
-|---|---|---|
-| Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | P1 | 25 % |
-| Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | P1 | 50 % |
-| Instalar y actualizar sistemas libres y propietarios | P1 | 20 % |
-| Documentar los procesos | P1 | 5 % |
-
-## Cómo se evalúa
+Porcentajes sobre la nota de la evaluación: entre todas las partes suman 100 %.
 
 | Parte | Peso | Qué incluye |
 |---|---|---|
@@ -37,7 +16,30 @@ Qué entra en la 1ª evaluación y con qué se evalúa cada parte. En cada unida
 | **R** · autoevaluación | 10 % | Una sola, la semana del examen final: una tarea de Teams con la [plantilla de autoevaluación](autoevaluacion-1a.xlsx) |
 | **C** · cuestionarios | — | 4 cuestionarios. No tienen nota propia, pero su entrega es obligatoria: sin todos ellos entregados, la R es un 0 |
 
-Porcentajes sobre la nota de la evaluación.
+## Qué entra en los exámenes
+
+Los porcentajes de esta sección no son partes de la nota: dicen cuánto pesa cada unidad y cada contenido **dentro de los exámenes**. Con ellos se reparte el 40 % de los exámenes parciales (P) entre lo que evaluó Julia y el examen parcial, y valen igual para el examen final (F), que pregunta todas las unidades: los contenidos con más porcentaje tienen preguntas que valen más. Cada porcentaje es la suma de los pesos de sus criterios de evaluación en la programación oficial. Las actividades guiadas (A) y la autoevaluación (R) cuentan aparte, como se indica en «Cómo se evalúa».
+
+### UD1 · Sistemas informáticos. Hardware y software
+
+Pesa un 42,9 % en los exámenes (15 % del módulo).
+
+| Contenido | Examen o tarea que lo evalúa (además del F) | Peso en la unidad |
+|---|---|---|
+| Componentes, memorias, sistemas de numeración y seguridad | P1 | 60 % |
+| Puesta en marcha de un equipo | P1 | 15 % |
+| Periféricos: clasificar, instalar y configurar | P1 | 25 % |
+
+### UD2 · Sistemas operativos. Instalación
+
+Pesa un 57,1 % en los exámenes (20 % del módulo).
+
+| Contenido | Examen o tarea que lo evalúa (además del F) | Peso en la unidad |
+|---|---|---|
+| Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (también las distribuciones de Linux) | P1 | 25 % |
+| Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (también WSL, apt, el JDK y VS Code) | P1 | 50 % |
+| Instalar y actualizar sistemas libres y propietarios | P1 | 20 % |
+| Documentar los procesos | P1 | 5 % |
 
 ## Planificación semanal
 
