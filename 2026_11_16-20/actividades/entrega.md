@@ -12,6 +12,6 @@
 | Cuestionario C3, en la tarea de Teams de la semana | Hasta el **lunes 23 de noviembre**, a las 23:59 |
 | Soluciones del C3, en [`soluciones/`](../soluciones) | **Martes 24 de noviembre** |
 
-La ficha `mi-equipo.md` del proyecto no se sube: se comprueba en clase el nivel de cumplimiento de los pasos.
+La ficha `mi-equipo.md` del proyecto no se sube: se comprueba en clase su nivel de implementación y comprensión.
 
 El examen parcial **P1**, en papel, con todo lo de la 1ª evaluación, también el proyecto de esta semana y sus apuntes, es el **viernes 4 de diciembre**: está en las [fechas importantes](../../README.md) del repositorio.
