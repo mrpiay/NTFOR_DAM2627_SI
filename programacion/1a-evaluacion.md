@@ -55,76 +55,73 @@ En papel. Cada pregunta indica los puntos que vale: los contenidos con más porc
 
 Se califican una vez terminadas, por su **nivel de implementación y comprensión**, y cómo depende del tipo de actividad:
 
-- **Proyecto de progresión continuada** (un mismo proyecto que avanza de una actividad a la siguiente): se califica **hasta dónde se ha implementado la solución final del proyecto**, no cada actividad por separado. Todas sus actividades tienen el mismo nivel.
+- **Proyecto de progresión continuada** (un mismo proyecto que avanza de una actividad a la siguiente): se califica **hasta dónde se ha implementado la solución final del proyecto**, no cada actividad por separado. Todas sus actividades tienen la misma nota.
 - **Actividad independiente:** se califica su propio resultado.
 
 La nota tiene dos mitades:
 
-- **Implementación (50 %):** con el proyecto propio, en el ordenador, se muestra por orden lo que pide cada nivel (las tablas de abajo). Cada nivel tiene 3 comprobaciones y se alcanza mostrando al menos 2, si los niveles anteriores también se han alcanzado; la nota es la del último nivel alcanzado.
+- **Implementación (50 %):** con el proyecto propio, en el ordenador, se muestran, por orden, las comprobaciones de las tablas de abajo: 12 por proyecto o actividad, 3 en cada nivel (del 1, lo más básico, al 4). Cada comprobación que sale bien suma por sí misma, aunque falle alguna de un nivel anterior: la nota de implementación es las que salen bien entre 12, por 10.
 - **Comprensión (50 %):** cuánto se sabe explicar. Se hacen 4 preguntas sobre el diseño y la arquitectura, una por nivel, sobre lo que se muestra en ese nivel; se hacen las cuatro aunque no se haya alcanzado el nivel. Cada respuesta bien dada vale 2,5. De qué trata cada pregunta, en las tablas de abajo.
 
 #### A1 · Ubuntu Linux, WSL, Java y VS Code
 
-**Implementación**
+**Implementación** (12 comprobaciones; cada una que sale bien suma 10/12)
 
-| Nivel | Nota | Muestra que… (al menos 2 de 3) |
-|---|---|---|
-| **Bajo** | 2,5 | • Ubuntu se abre en WSL<br>• su terminal funciona (por ejemplo, `pwd` y `ls`)<br>• `sudo apt update` termina sin errores |
-| **Medio** | 5 | • el JDK está instalado con `apt`<br>• `javac -version` da la versión 21<br>• `java -version` da la versión 21 |
-| **Alto** | 7,5 | • VS Code se abre desde Ubuntu con `code .`<br>• abajo a la izquierda pone **WSL: Ubuntu**<br>• las extensiones están instaladas en **WSL: Ubuntu** |
-| **Máximo** | 10 | • el terminal de VS Code es el de Ubuntu<br>• se compila un programa con `javac`<br>• se ejecuta con `java` |
-| **Nada** | 0 | No se alcanza el nivel bajo |
+| Nivel | Muestra que… |
+|---|---|
+| **1** | • Ubuntu se abre en WSL<br>• su terminal funciona (por ejemplo, `pwd` y `ls`)<br>• `sudo apt update` termina sin errores |
+| **2** | • el JDK está instalado con `apt`<br>• `javac -version` da la versión 21<br>• `java -version` da la versión 21 |
+| **3** | • VS Code se abre desde Ubuntu con `code .`<br>• abajo a la izquierda pone **WSL: Ubuntu**<br>• las extensiones están instaladas en **WSL: Ubuntu** |
+| **4** | • el terminal de VS Code es el de Ubuntu<br>• se compila un programa con `javac`<br>• se ejecuta con `java` |
 
 **Comprensión** (una pregunta por nivel; se hacen las cuatro)
 
 | Nivel | La pregunta trata sobre… |
 |---|---|
-| Bajo | Qué es WSL |
-| Medio | Qué es el JDK |
-| Alto | Por qué VS Code se conecta a WSL |
-| Máximo | El terminal de Ubuntu y el de Windows |
+| 1 | Qué es WSL |
+| 2 | Qué es el JDK |
+| 3 | Por qué VS Code se conecta a WSL |
+| 4 | El terminal de Ubuntu y el de Windows |
 
 #### A2 · Arranque y GRUB en una máquina virtual
 
-**Implementación**
+**Implementación** (12 comprobaciones; cada una que sale bien suma 10/12)
 
-| Nivel | Nota | Muestra que… (al menos 2 de 3) |
-|---|---|---|
-| **Bajo** | 2,5 | • la máquina virtual está creada, con EFI<br>• tiene la memoria y el disco que pide la actividad<br>• arrancada sin sistema, sale «No bootable option or device was found» |
-| **Medio** | 5 | • Ubuntu Server está instalado<br>• arranca sin la ISO hasta el `login:`<br>• se entra con el usuario creado en la instalación |
-| **Alto** | 7,5 | • hay una instantánea tomada<br>• al arrancar sale el menú de GRUB<br>• se entra en sus opciones avanzadas |
-| **Máximo** | 10 | • se ha visto el arranque roto: sale `grub>`<br>• se ha recuperado<br>• vuelve a arrancar hasta el `login:` |
-| **Nada** | 0 | No se alcanza el nivel bajo |
+| Nivel | Muestra que… |
+|---|---|
+| **1** | • la máquina virtual está creada, con EFI<br>• tiene la memoria y el disco que pide la actividad<br>• arrancada sin sistema, sale «No bootable option or device was found» |
+| **2** | • Ubuntu Server está instalado<br>• arranca sin la ISO hasta el `login:`<br>• se entra con el usuario creado en la instalación |
+| **3** | • hay una instantánea tomada<br>• al arrancar sale el menú de GRUB<br>• se entra en sus opciones avanzadas |
+| **4** | • se ha visto el arranque roto: sale `grub>`<br>• se ha recuperado<br>• vuelve a arrancar hasta el `login:` |
 
 **Comprensión** (una pregunta por nivel; se hacen las cuatro)
 
 | Nivel | La pregunta trata sobre… |
 |---|---|
-| Bajo | Qué es un hipervisor |
-| Medio | Qué hace el firmware al arrancar |
-| Alto | Para qué sirve GRUB |
-| Máximo | Qué indica `grub>` y cómo se recupera el arranque |
+| 1 | Qué es un hipervisor |
+| 2 | Qué hace el firmware al arrancar |
+| 3 | Para qué sirve GRUB |
+| 4 | Qué indica `grub>` y cómo se recupera el arranque |
 
 #### A3 · Mi equipo por dentro
 
-**Implementación**
+**Implementación** (12 comprobaciones; cada una que sale bien suma 10/12)
 
-| Nivel | Nota | Muestra que… (al menos 2 de 3) |
-|---|---|---|
-| **Bajo** | 2,5 | • la ficha `mi-equipo.md` tiene el procesador de tu equipo<br>• tiene su memoria<br>• dice de dónde sale cada dato (qué herramienta u orden) |
-| **Medio** | 5 | • tiene la placa base y el firmware<br>• tiene los discos<br>• tiene la gráfica y la red |
-| **Alto** | 7,5 | • tiene los componentes de la máquina virtual<br>• la tabla compara los seis componentes con los del equipo real<br>• marca cuál es el mismo en los dos |
-| **Máximo** | 10 | • dice en qué modos de conexión se ha probado el móvil en Windows<br>• dice dónde aparece en el Administrador de dispositivos en cada uno<br>• tiene la línea de `lsusb` del móvil en la máquina virtual |
-| **Nada** | 0 | No se alcanza el nivel bajo |
+| Nivel | Muestra que… |
+|---|---|
+| **1** | • la ficha `mi-equipo.md` tiene el procesador de tu equipo<br>• tiene su memoria<br>• dice de dónde sale cada dato (qué herramienta u orden) |
+| **2** | • tiene la placa base y el firmware<br>• tiene los discos<br>• tiene la gráfica y la red |
+| **3** | • tiene los componentes de la máquina virtual<br>• la tabla compara los seis componentes con los del equipo real<br>• marca cuál es el mismo en los dos |
+| **4** | • dice en qué modos de conexión se ha probado el móvil en Windows<br>• dice dónde aparece en el Administrador de dispositivos en cada uno<br>• tiene la línea de `lsusb` del móvil en la máquina virtual |
 
 **Comprensión** (una pregunta por nivel; se hacen las cuatro)
 
 | Nivel | La pregunta trata sobre… |
 |---|---|
-| Bajo | Núcleos y procesadores lógicos |
-| Medio | SATA y NVMe |
-| Alto | Por qué la máquina virtual tiene otros componentes |
-| Máximo | Por qué el móvil aparece como dispositivos distintos |
+| 1 | Núcleos y procesadores lógicos |
+| 2 | SATA y NVMe |
+| 3 | Por qué la máquina virtual tiene otros componentes |
+| 4 | Por qué el móvil aparece como dispositivos distintos |
 
 | Comprensión | Nota |
 |---|---|
@@ -160,7 +157,7 @@ La autoevaluación (R) se hace una sola vez, la semana del examen final, con la 
 - **Cuestionarios (C).** Hay uno cada semana en la que se facilitan apuntes o actividades guiadas nuevas, con preguntas sobre ellos. Su entrega es obligatoria, hasta el lunes siguiente a su semana, salvo que se indique otra fecha (ver las notas). No tienen nota propia, pero sin todos los cuestionarios entregados, la autoevaluación (R) es un 0.
 - **Autoevaluación (R).** La R es de reflexión. Una sola, la semana del examen final, en una tarea de Teams: la [plantilla de autoevaluación](autoevaluacion-1a.xlsx), que cada estudiante rellena en su propia copia. Por cada tema de cada unidad, el nivel de comprensión y el tipo de fallo principal; la frecuencia de 15 hábitos de estudio, y una reflexión general sobre qué hacer para mejorar en la 2ª evaluación. Forma el 10 % de autoevaluación del apartado 6.1 de la programación oficial. La mitad de su nota es la hoja completa; la otra mitad, la reflexión, si es concreta. Requisito: tener entregados todos los cuestionarios (C); si falta alguno, la R es un 0. Lo marcado en cada tema y en cada hábito no cambia la nota.
 - **Exámenes escritos** (parciales, **P**, y final, **F**). Son en papel e incluyen preguntas similares a las de los cuestionarios. Cada pregunta indica los puntos que vale: los contenidos con más porcentaje tienen preguntas que valen más.
-- **Actividades guiadas (A).** Se califican, una vez terminadas, por su nivel de implementación y comprensión, al 50 %. Si son partes de un proyecto de progresión continuada, se califica hasta dónde se ha implementado la solución final del proyecto, con el mismo nivel para todas; si son independientes, cada una por su resultado. Niveles: nada (0), bajo (2,5), medio (5), alto (7,5) o máximo (10); comprensión: 4 preguntas sobre el diseño y la arquitectura (2,5 cada una). Cada nivel tiene 3 comprobaciones y se alcanza con 2, si los anteriores también se han alcanzado; qué pide cada nivel, en las [rúbricas](#rúbricas). Detalle, en las [rúbricas](#rúbricas). El mínimo de 4 se aplica a la media de las actividades de la evaluación.
+- **Actividades guiadas (A).** Se califican, una vez terminadas, por su nivel de implementación y comprensión, al 50 %. Si son partes de un proyecto de progresión continuada, se califica hasta dónde se ha implementado la solución final del proyecto, con la misma nota para todas; si son independientes, cada una por su resultado. Implementación: 12 comprobaciones ordenadas en 4 niveles; cada una que sale bien suma 10/12. Comprensión: 4 preguntas sobre el diseño y la arquitectura, una por nivel (2,5 cada una); qué pide cada nivel, en las [rúbricas](#rúbricas). Detalle, en las [rúbricas](#rúbricas). El mínimo de 4 se aplica a la media de las actividades de la evaluación.
 - Antes del 2 de noviembre no hay nada evaluado en SI: ni exámenes ni tareas entregadas.
 - El C1 se entrega junto con el C2, el lunes 16 de noviembre.
 - WSL, apt, el JDK, VS Code y las distribuciones de Linux son de la UD2. El sistema de archivos, las órdenes básicas y la redirección son una introducción a la UD3: la P1 puede preguntarlos, pero esas preguntas cuentan para la UD3 en la 2ª evaluación.
