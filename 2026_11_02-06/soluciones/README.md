@@ -4,4 +4,4 @@ Las soluciones del [cuestionario](../cuestionario.md) y cómo debe quedar lo de 
 
 | Archivo | Qué es |
 |---|---|
-| [`cuestionario-solucion.md`](cuestionario-solucion.md) | Las respuestas del cuestionario C1, con dónde repasar cada una |
+| [`cuestionario-solucion.md`](cuestionario-solucion.md) | Cada pregunta del cuestionario C1 con su respuesta debajo |
