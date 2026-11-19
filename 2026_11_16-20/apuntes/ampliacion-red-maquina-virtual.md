@@ -1,6 +1,6 @@
 # UD1 · Ampliación: las tarjetas de red con una máquina virtual
 
-Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato, dónde se mira y qué tiene que coincidir, y después los dos modos de red de VirtualBox que interesan, **NAT** y **Host-only**: qué es cada uno, dónde está cada adaptador, qué se puede hacer y para qué se usa. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
+Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato, dónde se mira y qué tiene que coincidir, y después cómo se conecta la máquina, con un dispositivo de red en cada extremo de cada conexión, y los dos modos de red de VirtualBox que interesan, **NAT** y **Host-only**: qué es cada uno, dónde está cada adaptador, qué se puede hacer y para qué se usa. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
 
 ---
 
@@ -66,17 +66,46 @@ enp0s3   UP       10.0.2.15/24                      ← IP de la máquina virtua
 - Los **tres primeros bytes** de una MAC identifican al **fabricante** de la tarjeta: `08:00:27` es VirtualBox; `A4-5E-60`, el fabricante de la tarjeta real.
 - `lo` (*loopback*) no es una tarjeta: es la conexión del equipo consigo mismo, siempre con `127.0.0.1`. Se ignora.
 
-## 4. Dos modos de red: NAT y Host-only
+## 4. Cómo se conecta la máquina: dos extremos en cada conexión
 
-Cada máquina puede tener hasta **cuatro tarjetas de red** (**Adapter 1** a **Adapter 4** en **Settings → Network**, *Configuración → Red*). Para cada una se elige a qué está conectada en **Attached to** (*Conectado a*): es como decidir **a qué enchufe va el cable** de esa tarjeta. La tarjeta de la máquina es siempre la misma, la inventada por VirtualBox (MAC `08:00:27:…`); lo que cambia es **a qué red** va conectada y, con ello, qué IP recibe y con quién puede hablar.
+Para que dos dispositivos se comuniquen hace falta una conexión entre ellos, como un cable, y una conexión tiene **un dispositivo de red en cada extremo**.
 
-Aquí interesan dos modos. La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2). VirtualBox tiene otros (puente, red interna…) que no se usan en este módulo.
+Con una máquina virtual hay dos equipos:
+
+- **El anfitrión** (*host*): el equipo real, con Windows o con Linux. Tiene su tarjeta real, la Wi-Fi o la Ethernet, para salir a Internet. En los ejemplos de este documento, el anfitrión es Windows.
+- **El invitado** (*guest*): la máquina virtual. Tiene **una o más tarjetas virtuales**, hasta cuatro (**Adapter 1** a **Adapter 4** en **Settings → Network**, *Configuración → Red*). La máquina del curso tiene una.
+
+Cada tarjeta del invitado es **el extremo del invitado** de una conexión. Lo que se elige en **Attached to** (*Conectado a*) es **qué dispositivo hay en el otro extremo**, y eso depende de lo que se quiera hacer:
+
+| Se quiere… | Modo | Extremo del invitado | Otro extremo | Por eso… |
+|---|---|---|---|---|
+| Salir a Internet desde el invitado | **NAT** | Su tarjeta, con `10.0.2.15` | El **router virtual de VirtualBox**, con `10.0.2.2`, que sale a Internet por la tarjeta real del anfitrión | Hay Internet, pero desde el anfitrión no se llega al invitado |
+| Entrar en el invitado desde el anfitrión | **Host-only** (*Adaptador solo anfitrión*) | Su tarjeta, con `192.168.56.101` | El adaptador ***VirtualBox Host-Only*** del anfitrión, con `192.168.56.1` | El anfitrión y el invitado se comunican, pero no hay Internet: la conexión acaba en el anfitrión |
+| Las dos cosas | **NAT** y **Host-only** | Dos tarjetas | Una conecta con el router de VirtualBox y la otra, con el adaptador Host-Only | Hay las dos cosas |
+
+```
+            ANFITRIÓN (Windows o Linux)                          INVITADO (Ubuntu)
+
+  Internet ── tarjeta real (Wi-Fi) 192.168.1.35
+                    ▲
+                    │ VirtualBox sale por ella, como cualquier programa
+  router virtual de VirtualBox 10.0.2.2       ◄────►  tarjeta 1 (NAT)        10.0.2.15
+  adaptador VirtualBox Host-Only 192.168.56.1 ◄────►  tarjeta 2 (Host-only)  192.168.56.101
+```
+
+- En **NAT**, el otro extremo también es un dispositivo de red, aunque no sale en `ipconfig`: VirtualBox lo crea dentro del propio programa y hace de router.
+- En **Host-only**, el otro extremo sí sale en `ipconfig`: es el adaptador *VirtualBox Host-Only*, que existe desde que se instala VirtualBox.
+- La tarjeta del invitado es siempre la inventada por VirtualBox (MAC `08:00:27:…`). Al cambiar el modo, cambia lo que hay en el otro extremo y, con ello, la IP que recibe y con quién se puede comunicar.
+
+### NAT y Host-only, comparados
+
+La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2). VirtualBox tiene otros modos (puente, red interna…) que no se usan en este módulo.
 
 | | **NAT** | **Host-only** (*Adaptador solo anfitrión*) |
 |---|---|---|
-| **Qué es** | Una red privada pequeña **solo para esa máquina**, por la que VirtualBox la saca a Internet | Una red privada **entre el equipo real y sus máquinas**, sin Internet: un cable que une el ordenador con las máquinas y con nada más |
-| **Extremo en Windows** | **Ninguno**: VirtualBox usa la conexión de Windows como cualquier programa | **El adaptador *VirtualBox Host-Only*** de `ipconfig`, con `192.168.56.1` |
-| **Extremo en la máquina** | Su tarjeta, con `10.0.2.15` | Su tarjeta, con una IP de `192.168.56.x`, por ejemplo `192.168.56.101` |
+| **Qué es** | Una red privada pequeña **solo para esa máquina**, por la que VirtualBox la saca a Internet | Una red privada **entre el anfitrión y sus máquinas**, sin Internet |
+| **Otro extremo** | El router virtual de VirtualBox (`10.0.2.2`). No sale en `ipconfig` | El adaptador *VirtualBox Host-Only* del anfitrión (`192.168.56.1`). Sale en `ipconfig` |
+| **Extremo del invitado** | Su tarjeta, con `10.0.2.15` | Su tarjeta, con una IP de `192.168.56.x`, por ejemplo `192.168.56.101` |
 | **Puerta de enlace** | `10.0.2.2` (es VirtualBox) | Ninguna |
 | **Internet** | **Sí** | **No** |
 | **Windows → máquina** | **No** (solo con reenvío de puertos, apartado 5) | **Sí** |
@@ -94,7 +123,7 @@ La clave: **para Windows, VirtualBox es un programa más que usa Internet, como 
    De: 10.0.2.15 (la máquina)   →   Para: 142.250.x.x (Google)
    ```
 
-2. **VirtualBox lo recoge.** `10.0.2.2` no es ningún aparato: la tarjeta de la máquina es inventada, así que todo lo que envía llega a VirtualBox, un programa que se ejecuta en Windows.
+2. **VirtualBox lo recoge.** `10.0.2.2` es el otro extremo de la conexión: el router virtual que VirtualBox crea dentro del propio programa. No es ningún aparato físico; todo lo que envía la máquina llega a VirtualBox, un programa que se ejecuta en Windows.
 3. **VirtualBox hace la petición desde Windows, como un programa normal.** Abre él mismo una conexión con Google, igual que la abriría Chrome, y Windows la envía por la Wi-Fi o la Ethernet de verdad, con su IP:
 
    ```
@@ -252,6 +281,7 @@ Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**: es la
 
 ## En resumen
 
+- Cada conexión tiene **un dispositivo de red en cada extremo**. Uno es la tarjeta del invitado; el modo de red decide cuál es el otro.
 - `ipconfig` muestra la red **del equipo real**. La red **de la máquina** se mira en **VirtualBox** y con **`ip -br link` / `ip -br addr` en Ubuntu**, y esos dos sí coinciden.
 - **NAT:** la máquina tiene `10.0.2.15` y sale a Internet porque VirtualBox, un programa de Windows, hace cada petición por ella con la IP del equipo real. Desde fuera no se puede entrar, salvo con reenvío de puertos.
 - **Host-only:** un cable entre Windows (`192.168.56.1`, el adaptador *VirtualBox Host-Only* de `ipconfig`) y la máquina (`192.168.56.101`). Se comunican entre ellos, pero no hay Internet.
