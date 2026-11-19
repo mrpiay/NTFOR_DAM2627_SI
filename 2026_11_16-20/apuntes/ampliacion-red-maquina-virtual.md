@@ -78,15 +78,47 @@ La IP de la máquina depende del modo de red elegido en VirtualBox: **Adapter 1 
 
 ## 5. Cómo sale la máquina a Internet
 
-### Con NAT: VirtualBox hace de router
+### Con NAT: VirtualBox sale por la máquina
 
-En casa pasa lo mismo: el móvil, el portátil y la tele tienen IP privadas (`192.168.1.x`) que solo valen dentro de casa, y es el **router** quien sale a Internet en nombre de todos, con su propia dirección. Eso es **NAT** (*Network Address Translation*, traducción de direcciones de red). Con el modo NAT, VirtualBox monta lo mismo en pequeño:
+La clave: **para Windows, VirtualBox es un programa más que usa Internet, como el navegador.** La máquina no sale directamente: le pide a VirtualBox que salga por ella. Así, paso a paso, cuando la máquina abre `www.google.com`:
 
-1. La máquina quiere abrir una web. Envía el paquete a su **puerta de enlace** (el router de su red), que es `10.0.2.2`. Ese router no existe: es VirtualBox.
-2. VirtualBox recoge el paquete y lo envía de nuevo **como si fuera del equipo real**: sale por la tarjeta de verdad (la Wi-Fi o la Ethernet), con la IP del equipo real (`192.168.1.35` en el ejemplo).
-3. La respuesta llega al equipo real. VirtualBox recuerda que esa conexión la pidió la máquina y se la pasa a `10.0.2.15`.
+1. **La máquina envía su petición a la puerta de enlace.** Ubuntu no sabe llegar a Google, así que hace lo que hace cualquier equipo: envía el paquete a su **puerta de enlace** (el router de su red), `10.0.2.2`:
 
-Para el router del aula y para Internet, **la máquina no existe**: solo ven al equipo real. Por eso, desde fuera (ni siquiera desde el propio Windows) no se puede llegar a la máquina, pero ella sí puede salir.
+   ```
+   De: 10.0.2.15 (la máquina)   →   Para: 142.250.x.x (Google)
+   ```
+
+2. **VirtualBox lo recoge.** `10.0.2.2` no es ningún aparato: la tarjeta de la máquina es inventada, así que todo lo que envía llega a VirtualBox, un programa que se ejecuta en Windows.
+3. **VirtualBox hace la petición desde Windows, como un programa normal.** Abre él mismo una conexión con Google, igual que la abriría Chrome, y Windows la envía por la Wi-Fi o la Ethernet de verdad, con su IP:
+
+   ```
+   De: 192.168.1.35 (el equipo real)   →   Para: 142.250.x.x (Google)
+   ```
+
+   Antes, VirtualBox **apunta** de quién es esa conexión:
+
+   | Conexión que abrió VirtualBox en Windows | Es de… |
+   |---|---|
+   | hacia Google, desde el puerto 51234 | la máquina `10.0.2.15` |
+
+4. **Google responde al equipo real.** Solo ve a `192.168.1.35`; no sabe que hay una máquina virtual.
+5. **VirtualBox mira su nota y se lo pasa a la máquina**, como si viniera de Google:
+
+   ```
+   De: 142.250.x.x (Google)   →   Para: 10.0.2.15 (la máquina)
+   ```
+
+   La máquina recibe su web sin enterarse de que hubo un intermediario.
+
+Esto es **NAT** (*Network Address Translation*, traducción de direcciones de red): cambiar la dirección de quien envía y recordar el cambio para devolver la respuesta.
+
+**Después, el router del aula hace lo mismo.** El paquete de Windows tampoco sale tal cual: el router cambia `192.168.1.35` por la IP pública del centro, lo apunta y devuelve la respuesta al equipo. Hay **dos NAT seguidos**:
+
+```
+Máquina 10.0.2.15 → VirtualBox (NAT 1) → Windows 192.168.1.35 → router del aula (NAT 2) → Internet
+```
+
+**Por qué desde fuera no se llega a la máquina.** VirtualBox solo tiene en su nota las conexiones que **empezó la máquina**. Si alguien (incluso el propio Windows) intenta conectarse a la máquina, no hay ninguna nota que diga «esto es para `10.0.2.15`», y se descarta. Con NAT, **la máquina puede salir, pero nadie puede entrar**.
 
 Se ve en Ubuntu (salidas resumidas):
 
@@ -135,4 +167,4 @@ Se usa cuando el equipo real tiene que **llegar a la máquina**: entrar en ella 
 
 - `ipconfig` muestra la red **del equipo real**.
 - La red **de la máquina virtual** se mira en **VirtualBox** y con **`ip -br link` / `ip -br addr` en Ubuntu**, y esos dos sí coinciden.
-- En modo NAT, la máquina tiene siempre `10.0.2.15`, en una red propia, y sale a Internet a través de VirtualBox, que hace de router (`10.0.2.2`) con la IP del equipo real; en modo puente, tiene una IP de la misma red que el equipo y sale por su cuenta.
+- En modo NAT, la máquina tiene siempre `10.0.2.15`, en una red propia, y sale a Internet porque VirtualBox, un programa de Windows, hace cada petición por ella con la IP del equipo real y le devuelve la respuesta; en modo puente, tiene una IP de la misma red que el equipo y sale por su cuenta.
