@@ -240,6 +240,8 @@ Equipo: (fabricante y modelo)
    | Red | | |
    ```
 
+   En la fila **Red**, la MAC y la IP de la máquina no coinciden con las de `ipconfig`: son dos tarjetas distintas. Qué es cada dato y dónde se mira, en la ampliación [Las tarjetas de red con una máquina virtual](../apuntes/ampliacion-red-maquina-virtual.md).
+
 **Comprueba que…**
 
 - la tabla de la ficha compara los seis componentes del equipo real y de la máquina virtual;

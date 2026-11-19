@@ -6,6 +6,7 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 19 nov | Ampliación de la UD1: las tarjetas de red con una máquina virtual, qué MAC e IP muestran `ipconfig`, VirtualBox y Ubuntu ([apuntes](2026_11_16-20/apuntes/ampliacion-red-maquina-virtual.md)) |
 | 17 nov | Las **actividades guiadas (A)** se califican, una vez terminadas, por su **nivel de implementación y comprensión**: la mitad de la nota es cuánto funciona o se ha completado y la otra mitad, cuánto se sabe explicar, con 4 preguntas sobre el diseño y la arquitectura del proyecto ([rúbricas](programacion/1a-evaluacion.md#rúbricas)) |
 | 17 nov | Soluciones de los cuestionarios C1 y C2 ([2026_11_02-06/soluciones](2026_11_02-06/soluciones) y [2026_11_09-13/soluciones](2026_11_09-13/soluciones)) |
 | 16 nov | Los **cuestionarios (C)** son requisito de la **autoevaluación (R)**: sin todos los cuestionarios entregados, la autoevaluación (R) es un 0 |
@@ -15,7 +16,6 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 | 11 nov | Nuevas fechas de exámenes: un solo examen parcial (**P1**, viernes 4 de diciembre) con todo lo de la evaluación, y el examen final (**F**) el viernes 11 de diciembre |
 | 11 nov | **Repaso Julia**: apuntes que completan lo que se dio antes del 2 de noviembre ([repaso-julia/apuntes](repaso-julia/apuntes)) |
 | 11 nov | La **revisión (R)** de los cuestionarios y de los exámenes parciales corregidos es el 10 % de la nota; la entrega de los cuestionarios es obligatoria |
-| 11 nov | La 1ª evaluación en detalle: qué entra, cómo se evalúa y planificación semanal, con enlaces a los apuntes y actividades de cada semana ([programacion/1a-evaluacion.md](programacion/1a-evaluacion.md)) |
 
 ## Fechas importantes
 
