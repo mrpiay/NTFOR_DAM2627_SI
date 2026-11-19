@@ -74,9 +74,41 @@ La IP de la máquina depende del modo de red elegido en VirtualBox: **Adapter 1 
 |---|---|---|---|
 | **NAT** (el que viene por defecto) | VirtualBox monta una **red privada pequeña** solo para la máquina, que sale a Internet **a través del equipo real**, como un móvil que usa la conexión compartida de otro | Siempre `10.0.2.15` | No: está en otra red |
 | **Bridged Adapter** (*Adaptador puente*) | La máquina se conecta **directamente a la misma red** que el equipo real, como otro ordenador enchufado al mismo router | Una de la misma red, por ejemplo `192.168.1.40` | Sí, la misma red, pero otra IP y otra MAC: es otro equipo |
-| **Host-only Adapter** (*Adaptador solo anfitrión*) | Una red privada **solo entre el equipo real y sus máquinas**, sin Internet (apartado 5) | Una de la red `192.168.56.x`, por ejemplo `192.168.56.101` | Se parece a la del adaptador «VirtualBox Host-Only» de `ipconfig` (`192.168.56.1`): es la misma red |
+| **Host-only Adapter** (*Adaptador solo anfitrión*) | Una red privada **solo entre el equipo real y sus máquinas**, sin Internet (apartado 6) | Una de la red `192.168.56.x`, por ejemplo `192.168.56.101` | Se parece a la del adaptador «VirtualBox Host-Only» de `ipconfig` (`192.168.56.1`): es la misma red |
 
-## 5. Lo que despista: el adaptador «VirtualBox Host-Only»
+## 5. Cómo sale la máquina a Internet
+
+### Con NAT: VirtualBox hace de router
+
+En casa pasa lo mismo: el móvil, el portátil y la tele tienen IP privadas (`192.168.1.x`) que solo valen dentro de casa, y es el **router** quien sale a Internet en nombre de todos, con su propia dirección. Eso es **NAT** (*Network Address Translation*, traducción de direcciones de red). Con el modo NAT, VirtualBox monta lo mismo en pequeño:
+
+1. La máquina quiere abrir una web. Envía el paquete a su **puerta de enlace** (el router de su red), que es `10.0.2.2`. Ese router no existe: es VirtualBox.
+2. VirtualBox recoge el paquete y lo envía de nuevo **como si fuera del equipo real**: sale por la tarjeta de verdad (la Wi-Fi o la Ethernet), con la IP del equipo real (`192.168.1.35` en el ejemplo).
+3. La respuesta llega al equipo real. VirtualBox recuerda que esa conexión la pidió la máquina y se la pasa a `10.0.2.15`.
+
+Para el router del aula y para Internet, **la máquina no existe**: solo ven al equipo real. Por eso, desde fuera (ni siquiera desde el propio Windows) no se puede llegar a la máquina, pero ella sí puede salir.
+
+Se ve en Ubuntu (salidas resumidas):
+
+```
+$ ip route
+default via 10.0.2.2 dev enp0s3      ← la puerta de enlace: el «router» de VirtualBox
+10.0.2.0/24 dev enp0s3               ← la red privada de la máquina
+
+$ resolvectl status
+...
+Current DNS Server: 10.0.2.3         ← también es VirtualBox, que pregunta al DNS del equipo real
+```
+
+### Con adaptador puente: sale por su cuenta
+
+En modo **puente**, VirtualBox no traduce nada: los paquetes de la máquina salen por la tarjeta real **con la MAC y la IP de la máquina**. El router del aula la ve como un equipo más, le da IP (`192.168.1.40`) y la máquina sale a Internet a través de él, igual que el equipo real.
+
+### Con solo anfitrión: no sale
+
+En modo **Host-only** no hay router ni traducción: la máquina solo llega al equipo real y a las otras máquinas de esa red. Para que además tenga Internet, se le pone un **segundo adaptador** en NAT (**Adapter 2**), y entonces tiene dos tarjetas, una en cada red.
+
+## 6. Lo que despista: el adaptador «VirtualBox Host-Only»
 
 En `ipconfig /all` puede aparecer un adaptador que no es ni la Wi-Fi ni la Ethernet:
 
@@ -103,4 +135,4 @@ Se usa cuando el equipo real tiene que **llegar a la máquina**: entrar en ella 
 
 - `ipconfig` muestra la red **del equipo real**.
 - La red **de la máquina virtual** se mira en **VirtualBox** y con **`ip -br link` / `ip -br addr` en Ubuntu**, y esos dos sí coinciden.
-- En modo NAT, la máquina tiene siempre `10.0.2.15`, en una red propia; en modo puente, una IP de la misma red que el equipo.
+- En modo NAT, la máquina tiene siempre `10.0.2.15`, en una red propia, y sale a Internet a través de VirtualBox, que hace de router (`10.0.2.2`) con la IP del equipo real; en modo puente, tiene una IP de la misma red que el equipo y sale por su cuenta.
