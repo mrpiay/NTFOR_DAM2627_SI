@@ -318,6 +318,8 @@ Equipo: (fabricante y modelo)
 
 - *En **Devices → USB** no sale el móvil, o sale en gris*: en **Settings → USB** (*Configuración → USB*) de la máquina tiene que estar marcado **Enable USB Controller** (*Habilitar controlador USB*). Apaga la máquina para cambiarlo.
 - *Sale `Failed to attach the USB device`*: otro programa de Windows está usando el móvil (el Explorador de archivos, un programa del fabricante). Ciérralos y repite.
+- *Sigue saliendo `Failed to attach the USB device`, aunque el Explorador esté cerrado*: Windows ya tiene el móvil con su driver y no lo suelta. Apaga la máquina; con el móvil conectado en **Transferencia de archivos**, en **Settings → USB** marca **Enable USB Controller**, elige **USB 3.0 (xHCI)** (si no va, **USB 2.0**), pulsa el icono del enchufe con **+** (*Add new USB filter…*) y elige el móvil. Desconecta el móvil, arranca la máquina y vuelve a conectarlo: entra directamente en ella.
+- *En **Compartir conexión** el móvil ya no entra en la máquina*: al cambiar de modo cambia el número de producto. Edita el filtro (doble clic) y vacía **Product ID**, dejando solo **Vendor ID**.
 - *`lsusb: command not found`*: instálalo con `sudo apt install usbutils`.
 
 ---
