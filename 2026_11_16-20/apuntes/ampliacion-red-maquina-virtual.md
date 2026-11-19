@@ -68,12 +68,13 @@ enp0s3   UP       10.0.2.15/24                      ← IP de la máquina virtua
 
 ## 4. Por qué la IP de la máquina es `10.0.2.15`: los modos de red
 
-La IP de la máquina depende del modo de red elegido en VirtualBox: **Adapter 1 → Attached to** (*Adaptador 1 → Conectado a*).
+La IP de la máquina depende del modo de red elegido en VirtualBox: **Adapter 1 → Attached to** (*Adaptador 1 → Conectado a*). La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2).
 
 | Modo | Cómo funciona | IP de la máquina | ¿Se parece a la de `ipconfig`? |
 |---|---|---|---|
 | **NAT** (el que viene por defecto) | VirtualBox monta una **red privada pequeña** solo para la máquina, que sale a Internet **a través del equipo real**, como un móvil que usa la conexión compartida de otro | Siempre `10.0.2.15` | No: está en otra red |
 | **Bridged Adapter** (*Adaptador puente*) | La máquina se conecta **directamente a la misma red** que el equipo real, como otro ordenador enchufado al mismo router | Una de la misma red, por ejemplo `192.168.1.40` | Sí, la misma red, pero otra IP y otra MAC: es otro equipo |
+| **Host-only Adapter** (*Adaptador solo anfitrión*) | Una red privada **solo entre el equipo real y sus máquinas**, sin Internet (apartado 5) | Una de la red `192.168.56.x`, por ejemplo `192.168.56.101` | Se parece a la del adaptador «VirtualBox Host-Only» de `ipconfig` (`192.168.56.1`): es la misma red |
 
 ## 5. Lo que despista: el adaptador «VirtualBox Host-Only»
 
@@ -85,7 +86,16 @@ Adaptador de Ethernet VirtualBox Host-Only Network:
    Dirección IPv4. . . . . : 192.168.56.1
 ```
 
-Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**. Es una tarjeta virtual que VirtualBox crea **en Windows** para una red interna entre el equipo y sus máquinas, y solo se usa con el modo **Host-only Adapter** (*Adaptador solo anfitrión*). En modo NAT no interviene, y no tiene que coincidir con nada de lo que se ve dentro de la máquina.
+Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**. Es una tarjeta virtual que VirtualBox **añade a Windows** al instalarse, esté encendida o no alguna máquina, y la usen o no. Por eso sale en `ipconfig` aunque la máquina esté en modo NAT.
+
+**Para qué sirve.** VirtualBox tiene un tercer modo de red, **Host-only Adapter** (*Adaptador solo anfitrión*): una **red privada solo entre el equipo real y sus máquinas virtuales**, sin salida a Internet. Es como un cable que une el ordenador con las máquinas y con nada más. En esa red:
+
+- el equipo real es `192.168.56.1`, a través de este adaptador de Windows;
+- cada máquina conectada en ese modo recibe una IP de la misma red, como `192.168.56.101`, en su propia tarjeta (que en Ubuntu se ve con `ip -br addr`, como siempre).
+
+Se usa cuando el equipo real tiene que **llegar a la máquina**: entrar en ella desde el terminal de Windows o abrir en el navegador una web que se sirve dentro de la máquina. En modo NAT eso no se puede, porque la red de NAT es solo de la máquina y el equipo real no la ve.
+
+**Con el modo NAT**, que es el de la máquina de este curso, este adaptador **no interviene**: la máquina no está conectada a esa red. Su IP y su MAC no tienen que coincidir con nada de lo que se ve dentro de la máquina.
 
 ---
 
