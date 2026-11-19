@@ -5,7 +5,7 @@ Los apuntes de las unidades de esta semana.
 | Archivo | Qué es |
 |---|---|
 | [`UD1-el-equipo-por-dentro.md`](UD1-el-equipo-por-dentro.md) | La UD1 en detalle: caja, fuente y placa; procesador; memoria RAM; almacenamiento y RAID; tarjetas de expansión; periféricos y conectores; cómo se ve el hardware de un equipo, y mantenimiento y seguridad al manipularlo |
-| [`ampliacion-red-maquina-virtual.md`](ampliacion-red-maquina-virtual.md) | Ampliación: las tarjetas de red con una máquina virtual. Qué MAC e IP muestran `ipconfig`, VirtualBox y Ubuntu, qué tiene que coincidir, los modos NAT y puente, y el adaptador *Host-Only* |
+| [`ampliacion-red-maquina-virtual.md`](ampliacion-red-maquina-virtual.md) | Ampliación: las tarjetas de red con una máquina virtual. Qué MAC e IP muestran `ipconfig`, VirtualBox y Ubuntu y qué tiene que coincidir; los modos de red de VirtualBox (qué es cada uno, dónde está cada adaptador, qué se puede hacer y para qué se usa); cómo sale la máquina a Internet con NAT, y el adaptador *Host-Only* de `ipconfig` |
 
 Continúan los [apuntes de la UD1 de la semana del 2 al 6](../../2026_11_02-06/apuntes/UD1-hardware-y-software.md). Las preguntas del [cuestionario](../cuestionario.md) se responden con los dos y con el proyecto, y las de los exámenes salen de lo mismo.
 
