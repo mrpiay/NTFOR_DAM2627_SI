@@ -123,6 +123,26 @@ La nota tiene dos mitades:
 | 3 | Por qué la máquina virtual tiene otros componentes |
 | 4 | Por qué el móvil aparece como dispositivos distintos |
 
+#### A4 · Windows en una máquina virtual
+
+**Implementación** (12 comprobaciones; cada una que sale bien suma 10/12)
+
+| Nivel | Muestra que… |
+|---|---|
+| **1** | • la máquina `windows11` tiene 4096 MB, 2 procesadores y EFI<br>• tiene TPM 2.0 y arranque seguro<br>• tiene un disco VDI dinámico de 80 GB |
+| **2** | • Windows 11 arranca sin la ISO hasta el escritorio<br>• se entra con el usuario local `dam`<br>• la ISO se ha quitado de la unidad óptica |
+| **3** | • las Guest Additions están instaladas: la pantalla se adapta a la ventana<br>• el Administrador de dispositivos no tiene avisos amarillos<br>• `tpm.msc` muestra el TPM listo, versión 2.0 |
+| **4** | • `instalacion-windows.md` tiene la máquina, con el porqué de cada ajuste<br>• tiene las pantallas de la instalación con lo elegido, y las incidencias<br>• tiene las particiones que creó Windows y para qué sirve cada una |
+
+**Comprensión** (una pregunta por nivel; se hacen las cuatro)
+
+| Nivel | La pregunta trata sobre… |
+|---|---|
+| 1 | Por qué Windows 11 pide TPM 2.0 y arranque seguro |
+| 2 | La instalación personalizada en el espacio sin asignar |
+| 3 | Para qué sirven las Guest Additions |
+| 4 | Las particiones que crea Windows |
+
 | Comprensión | Nota |
 |---|---|
 | Las 4 preguntas, bien respondidas | 10 |
@@ -147,7 +167,7 @@ La autoevaluación (R) se hace una sola vez, la semana del examen final, con la 
 | [2–6 nov](../2026_11_02-06)<br>[apuntes](../2026_11_02-06/apuntes) · [actividades](../2026_11_02-06/actividades) | UD1 · Componentes, memorias y seguridad: la teoría<br>UD1 · Puesta en marcha: firmware, POST y orden de arranque<br>UD1 · Periféricos: tipos, conectores y drivers<br>UD2 · Las distribuciones de Linux<br>UD2 · Virtualizar e instalar aplicaciones: WSL, apt, el JDK y VS Code<br>UD2 · Instalar un sistema libre: Ubuntu en WSL<br>UD3 · Introducción: sistema de archivos, órdenes básicas y redirección (cuentan en la 2ª evaluación) | A1 (5 %), C1 | — |
 | [9–13 nov](../2026_11_09-13)<br>[apuntes](../2026_11_09-13/apuntes) · [actividades](../2026_11_09-13/actividades) | UD1 · Puesta en marcha: el arranque de una máquina virtual<br>UD2 · Funciones, tipos, arquitectura y licencias de los sistemas operativos<br>UD2 · Planificar, virtualizar, actualizar y recuperar: VirtualBox, instantáneas y GRUB<br>UD2 · Instalar un sistema libre: Ubuntu Server en una máquina virtual | A2 (5 %), C2 | — |
 | [16–20 nov](../2026_11_16-20)<br>[apuntes](../2026_11_16-20/apuntes) · [actividades](../2026_11_16-20/actividades) | UD1 · Componentes, memorias y seguridad, en el propio equipo<br>UD1 · Periféricos: el móvil, en Windows y en Linux | A3 (5 %), C3 | — |
-| 23–27 nov | UD2 · Instalar un sistema propietario: Windows en una máquina virtual (mar 24)<br>UD2 · Documentar la instalación de Windows<br>Repaso de toda la evaluación (jue 26 y vie 27) | A4 (5 %), C4 | — |
+| [23–27 nov](../2026_11_23-27)<br>[apuntes](../2026_11_23-27/apuntes) · [actividades](../2026_11_23-27/actividades) | UD2 · Instalar un sistema propietario: Windows en una máquina virtual (mar 24)<br>UD2 · Documentar la instalación de Windows<br>Repaso de toda la evaluación (jue 26 y vie 27) | A4 (5 %), C4 | — |
 | 30 nov–4 dic | Repaso (mar 1 y jue 3) | — | **P1** (40 %), vie 4 dic |
 | 7–11 dic | Repaso (jue 10) | R (10 %) | **F** (30 %), vie 11 dic |
 | 14–18 dic | UD3 · Linux | Cierre de la 1ª evaluación · jue 17 | — |

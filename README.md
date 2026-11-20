@@ -53,6 +53,7 @@ Junto a cada archivo, GitHub muestra cuándo cambió por última vez y qué se c
 | Del 2 al 6 de noviembre | [actividades](2026_11_02-06/actividades) | [apuntes](2026_11_02-06/apuntes) | [cuestionario](2026_11_02-06/cuestionario.md) | [soluciones](2026_11_02-06/soluciones) |
 | Del 9 al 13 de noviembre | [actividades](2026_11_09-13/actividades) | [apuntes](2026_11_09-13/apuntes) | [cuestionario](2026_11_09-13/cuestionario.md) | [soluciones](2026_11_09-13/soluciones) |
 | Del 16 al 20 de noviembre | [actividades](2026_11_16-20/actividades) | [apuntes](2026_11_16-20/apuntes) | [cuestionario](2026_11_16-20/cuestionario.md) | [soluciones](2026_11_16-20/soluciones) |
+| Del 23 al 27 de noviembre | [actividades](2026_11_23-27/actividades) | [apuntes](2026_11_23-27/apuntes) | [cuestionario](2026_11_23-27/cuestionario.md) | [soluciones](2026_11_23-27/soluciones) |
 
 ## Cómo usar los materiales
 
