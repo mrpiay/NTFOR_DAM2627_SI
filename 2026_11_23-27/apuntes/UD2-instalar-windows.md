@@ -1,6 +1,6 @@
 # UD2 · Instalar Windows en una máquina virtual
 
-Continuación de los [apuntes de la UD2 de la semana del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md), que tienen lo general: qué es una máquina virtual, cómo se planifica una instalación, las particiones y los sistemas de archivos. Aquí, lo propio de Windows: sus ediciones, sus requisitos y cómo se comprueban, la máquina virtual que necesita, el proceso de instalación y lo que se hace después. Todo sale del libro de Paraninfo, *Sistemas informáticos*, capítulo 2; cada apartado indica las páginas (en el lector, hay que sumar 12).
+Continuación de los [apuntes de la UD2 de la semana del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md), que tienen lo general: qué es una máquina virtual, cómo se planifica una instalación, las particiones y los sistemas de archivos. Aquí, lo propio de Windows: sus ediciones, sus requisitos y cómo se comprueban, la máquina virtual que necesita, el proceso de instalación, lo que se hace después y cómo se documenta. Todo sale del libro de Paraninfo, *Sistemas informáticos*, capítulo 2; cada apartado indica las páginas (en el lector, hay que sumar 12).
 
 Hay dos tipos de contenido:
 
@@ -168,3 +168,26 @@ En Windows 11, el menú Inicio y los iconos de la barra de tareas están por def
 - Si se añade un disco nuevo, Windows pide **inicializarlo** con un estilo de partición: **MBR** o **GPT**.
 
 > **Para saber más.** En Windows, una **partición** es una división del disco, y un **volumen** puede ser una partición, varios discos o partes de varios discos, si los discos son **dinámicos** (p. 137).
+
+---
+
+## 6. Documentar la instalación
+
+*Paraninfo 2.5.2, p. 122, y lo mismo para Windows al final de 2.5.3.*
+
+**En una frase:** al terminar una instalación, se deja por escrito cómo se hizo, para poder mantener el equipo y actualizarlo después.
+
+**Lo que tienes que saber**
+
+- El libro lo dice así: «una vez realizado el proceso de instalación es importante documentarlo y guardarlo para un mejor mantenimiento y futuras actualizaciones». Quien tenga que reparar, actualizar o repetir la instalación (otra persona, o quien la hizo, meses después) sabe cómo está el equipo sin tener que adivinarlo.
+- Lo básico que recoge el documento de una instalación:
+
+| Qué | Por qué |
+|---|---|
+| El **equipo** (o la máquina virtual) y su **configuración** | Para saber en qué hardware funciona y con qué ajustes |
+| Lo que se **eligió** en cada paso, con su **porqué** | Para repetir la instalación igual o entender una decisión |
+| Las **incidencias** y cómo se resolvieron | Si vuelven a pasar, ya se sabe la solución |
+| Las **comprobaciones** hechas después y su resultado | Para saber que el sistema quedó funcionando |
+| Las **particiones** que se crearon | Para tocar el disco sin perder datos |
+
+- Se escribe **mientras se instala**, no al final de memoria: los detalles (un mensaje de error, un valor) se olvidan enseguida.

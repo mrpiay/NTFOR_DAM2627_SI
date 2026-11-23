@@ -24,6 +24,7 @@ La teoría está en los [apuntes de esta semana](../apuntes/UD2-instalar-windows
 | 1 | 3 · La máquina virtual para Windows 11 en VirtualBox |
 | 2 y 3 | 4 · El proceso de instalación |
 | 4 y 5 | 5 · Después de instalar |
+| 6, y el documento en todos | 6 · Documentar la instalación; la instantánea, en el apartado 5 de los [apuntes del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#5-máquinas-virtuales) |
 
 ---
 

@@ -33,3 +33,5 @@ Estas preguntas se responden con los apuntes de esta semana y de la semana del 9
 **9.** ¿Qué indica una marca amarilla en el Administrador de dispositivos? ¿Qué se puede hacer desde el botón secundario sobre ese dispositivo?
 
 **10.** ¿Qué hacen las órdenes `list disk`, `select disk 0`, `list partition` y `list volume` de `diskpart`? ¿Cómo se sabe con `list disk` si un disco es GPT?
+
+**11.** ¿Para qué se documenta la instalación de un sistema operativo? ¿Qué debe recoger el documento como mínimo? ¿Por qué conviene escribirlo mientras se instala y no al terminar?

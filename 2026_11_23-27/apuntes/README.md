@@ -4,7 +4,7 @@ Los apuntes de las unidades de esta semana.
 
 | Archivo | Qué es |
 |---|---|
-| [`UD2-instalar-windows.md`](UD2-instalar-windows.md) | Instalar Windows en una máquina virtual: versiones y ediciones de Windows; requisitos de Windows 11 (TPM 2.0, arranque seguro) y cómo se comprueban; la máquina virtual en VirtualBox; las pantallas de la instalación, en orden, y lo que se hace después: Windows Update, controladores y las particiones que crea Windows |
+| [`UD2-instalar-windows.md`](UD2-instalar-windows.md) | Instalar Windows en una máquina virtual: versiones y ediciones de Windows; requisitos de Windows 11 (TPM 2.0, arranque seguro) y cómo se comprueban; la máquina virtual en VirtualBox; las pantallas de la instalación, en orden, y lo que se hace después: Windows Update, controladores y las particiones que crea Windows; y qué se apunta al documentar una instalación |
 
 Continúan los [apuntes de la UD2 de la semana del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md). Las preguntas del [cuestionario](../cuestionario.md) se responden con los dos y con la actividad, y las de los exámenes salen de lo mismo.
 
