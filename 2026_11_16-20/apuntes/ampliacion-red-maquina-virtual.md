@@ -1,6 +1,6 @@
 # UD1 · Ampliación: las tarjetas de red con una máquina virtual
 
-Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato, dónde se mira y qué tiene que coincidir, y después cómo se conecta la máquina, con un dispositivo de red en cada extremo de cada conexión, en los dos modos de red de VirtualBox que interesan, **NAT** y **Host-only**. Al final, una práctica para probar los dos modos en la propia máquina. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
+Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato y dónde se mira, y después los **modos de red** de VirtualBox, cada uno con una explicación breve y una **comprobación** para hacer en la propia máquina. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
 
 ---
 
@@ -8,8 +8,8 @@ Al comparar la red del equipo real con la de la máquina virtual (paso 4 del pro
 
 Con la máquina virtual encendida hay **dos ordenadores**, y cada uno tiene su tarjeta de red:
 
-- **El equipo real** (Windows), con su tarjeta de verdad: la Wi-Fi o la Ethernet de la placa.
-- **La máquina virtual** (Ubuntu), con una tarjeta **inventada por VirtualBox**, que se presenta como una Intel `82540EM`.
+- **El anfitrión** (*host*): el equipo real, con Windows, y su tarjeta de verdad, la Wi-Fi o la Ethernet de la placa.
+- **El invitado** (*guest*): la máquina virtual, con Ubuntu, y una tarjeta **inventada por VirtualBox**, que se presenta como una Intel `82540EM`.
 
 De cada tarjeta interesan dos datos:
 
@@ -20,20 +20,13 @@ De cada tarjeta interesan dos datos:
 
 Como son dos tarjetas distintas, hay **dos MAC distintas** y **dos IP distintas**.
 
-## 2. Dónde se mira cada cosa
+## 2. Dónde se mira cada cosa, con un ejemplo
 
 | Dónde | Qué se ve | De qué tarjeta |
 |---|---|---|
 | `ipconfig /all`, en el terminal de Windows | La MAC (*Dirección física*) y la IP de cada adaptador | De las tarjetas **del equipo real** |
 | VirtualBox: **Settings → Network → Adapter 1 → Advanced → MAC Address** (*Configuración → Red → Adaptador 1 → Avanzadas → Dirección MAC*) | La MAC que VirtualBox **ha dado** a la tarjeta de la máquina | De la tarjeta **de la máquina virtual** |
 | `ip -br link` (MAC) e `ip -br addr` (IP), en el terminal de Ubuntu | La MAC y la IP que Ubuntu **ve** en su tarjeta | De la tarjeta **de la máquina virtual** |
-
-De ahí sale qué se compara:
-
-- **VirtualBox y `ip -br link` tienen que coincidir**: miran la misma tarjeta. VirtualBox dice qué MAC le ha puesto y Ubuntu confirma que es esa.
-- **`ipconfig` y la máquina virtual no tienen que coincidir**: son tarjetas distintas.
-
-## 3. Un ejemplo
 
 **En Windows, `ipconfig /all`:**
 
@@ -62,124 +55,39 @@ lo       UNKNOWN  127.0.0.1/8
 enp0s3   UP       10.0.2.15/24                      ← IP de la máquina virtual
 ```
 
-- `080027A1B2C3` y `08:00:27:a1:b2:c3` son **el mismo número**, escrito de otra forma: VirtualBox, sin separadores; Linux, con dos puntos; Windows, con guiones (`08-00-27-A1-B2-C3`).
-- Los **tres primeros bytes** de una MAC identifican al **fabricante** de la tarjeta: `08:00:27` es VirtualBox; `A4-5E-60`, el fabricante de la tarjeta real.
+- **VirtualBox y `ip -br link` coinciden**: miran la misma tarjeta. `080027A1B2C3` y `08:00:27:a1:b2:c3` son el mismo número, escrito de otra forma (Windows lo escribiría con guiones: `08-00-27-A1-B2-C3`).
+- **`ipconfig` y la máquina virtual no coinciden**: son tarjetas distintas.
+- Los **tres primeros bytes** de una MAC identifican al **fabricante**: `08:00:27` es VirtualBox; `A4-5E-60`, el de la tarjeta real.
 - `lo` (*loopback*) no es una tarjeta: es la conexión del equipo consigo mismo, siempre con `127.0.0.1`. Se ignora.
 
-## 4. Cómo se conecta la máquina: dos extremos en cada conexión
+## 3. Los modos de red: qué hay en el otro extremo
 
-Para que dos dispositivos se comuniquen hace falta una conexión entre ellos, como un cable, y una conexión tiene **un dispositivo de red en cada extremo**.
+Para que dos dispositivos se comuniquen hace falta una conexión entre ellos, como un cable, y una conexión tiene **un dispositivo de red en cada extremo**. La tarjeta del invitado es siempre uno de los dos. Lo que se elige en VirtualBox, en **Settings → Network → Adapter 1 → Attached to** (*Configuración → Red → Adaptador 1 → Conectado a*), es el **modo de red**: **qué dispositivo hay en el otro extremo**. De eso depende la IP que recibe la máquina y con quién se puede comunicar. Una máquina puede tener hasta cuatro tarjetas (Adapter 1 a 4); la del curso tiene una.
 
-Con una máquina virtual hay dos equipos:
+El modo solo se puede cambiar con la máquina **apagada** (`sudo poweroff`). Para comprobar cada modo se usan estos comandos:
 
-- **El anfitrión** (*host*): el equipo real, con Windows o con Linux. Tiene su tarjeta real, la Wi-Fi o la Ethernet, para salir a Internet. En los ejemplos de este documento, el anfitrión es Windows.
-- **El invitado** (*guest*): la máquina virtual. Tiene **una o más tarjetas virtuales**, hasta cuatro (**Adapter 1** a **Adapter 4** en **Settings → Network**, *Configuración → Red*). La máquina del curso tiene una.
-
-Cada tarjeta del invitado es **el extremo del invitado** de una conexión. Lo que se elige en **Attached to** (*Conectado a*) es **qué dispositivo hay en el otro extremo**, y eso depende de lo que se quiera hacer:
-
-| Se quiere… | Modo | Extremo del invitado | Otro extremo | Por eso… |
-|---|---|---|---|---|
-| Salir a Internet desde el invitado | **NAT** | Su tarjeta, con `10.0.2.15` | El **router virtual de VirtualBox**, con `10.0.2.2`, que sale a Internet por la tarjeta real del anfitrión | Hay Internet, pero desde el anfitrión no se llega al invitado |
-| Entrar en el invitado desde el anfitrión | **Host-only** (*Adaptador solo anfitrión*) | Su tarjeta, con `192.168.56.101` | El adaptador ***VirtualBox Host-Only*** del anfitrión, con `192.168.56.1` | El anfitrión y el invitado se comunican, pero no hay Internet: la conexión acaba en el anfitrión |
-| Las dos cosas | **NAT** y **Host-only** | Dos tarjetas | Una conecta con el router de VirtualBox y la otra, con el adaptador Host-Only | Hay las dos cosas |
-
-En el anfitrión hay dos partes: **Windows**, el sistema, y **VirtualBox**, un programa que se ejecuta en él. Cada uno de los dos «otros extremos» está en una de ellas:
-
-```
-   WINDOWS (el sistema)               VIRTUALBOX (el programa)          INVITADO (Ubuntu)
-
- tarjeta real (Wi-Fi) 192.168.1.35 ◄── sale por ella, como
-   └── Internet                        cualquier programa
-                                      router NAT 10.0.2.2  ◄─────────►  tarjeta 1 (NAT)        10.0.2.15
-
- adaptador Host-Only 192.168.56.1 ◄──────────────────────────────────►  tarjeta 2 (Host-only)  192.168.56.101
-   (sale en ipconfig)                 (VirtualBox solo instaló
-                                       este adaptador)
-```
-
-| | Router de VirtualBox (NAT) | Adaptador *VirtualBox Host-Only* |
+| Comando | Dónde | Qué muestra o hace |
 |---|---|---|
-| **De quién es** | **Del programa VirtualBox.** Lo crea dentro de sí mismo, uno por cada máquina en NAT | **De Windows.** Es una tarjeta de red virtual que el instalador de VirtualBox añade a Windows con su controlador |
-| **¿Lo ve Windows?** | **No.** Para Windows no existe: solo ve un programa, VirtualBox, que usa Internet | **Sí.** Para Windows es una tarjeta más, con su IP `192.168.56.1` |
-| **Dónde se ve** | En ninguna parte de Windows: solo lo conoce el invitado, como su puerta de enlace | En `ipconfig` y en el Administrador de dispositivos de Windows |
-| **¿Existe con la máquina apagada?** | No: existe mientras la máquina está encendida en NAT | Sí: desde que se instala VirtualBox |
+| `ip -br addr` | Ubuntu | La IP de cada tarjeta |
+| `ip route` | Ubuntu | La **tabla de rutas**: a qué red pertenece la tarjeta (`10.0.2.0/24 …`) y por dónde salen los paquetes que van a otras redes. La línea `default via …` es la **puerta de enlace** |
+| `ping -c 4 <IP>` | Ubuntu | Envía 4 paquetes a esa IP y espera respuesta. Si llegan (`64 bytes from …`), hay comunicación; si no, `100% packet loss` |
+| `ipconfig` y `ping <IP>` | Windows (CMD o PowerShell) | Las IP de las tarjetas de Windows, y lo mismo que `ping` en Ubuntu |
 
-Por eso, en Host-only, Windows llega a la máquina por su propia tarjeta, el adaptador Host-Only. En NAT no puede: Windows no tiene ninguna tarjeta en esa red, porque el router NAT está dentro de un programa.
+Las IP de los ejemplos son las de este documento: la de Windows cambia de un equipo a otro, pero las de VirtualBox (`10.0.2.x` y `192.168.56.x`) salen casi siempre iguales.
 
-- La tarjeta del invitado es siempre la inventada por VirtualBox (MAC `08:00:27:…`). Al cambiar el modo, cambia lo que hay en el otro extremo y, con ello, la IP que recibe y con quién se puede comunicar.
+## 4. NAT
 
-### NAT y Host-only, comparados
+Es el modo de la máquina del curso, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2).
 
-La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2). VirtualBox tiene otros modos, como el **adaptador puente** y la **red interna**, que se explican después de esta tabla.
+- **El otro extremo** es un **router virtual que crea VirtualBox**, con la IP `10.0.2.2`. Le da a la máquina la IP `10.0.2.15` y la saca a Internet por la tarjeta real de Windows, como a cualquier otro programa.
+- Ese router **está dentro del programa VirtualBox**: Windows no lo ve ni tiene ninguna tarjeta en esa red. Por eso **la máquina tiene Internet, pero desde Windows no se llega a ella**.
+- Cada máquina en NAT tiene su propio router, aislado: dos máquinas en NAT no se ven entre sí.
+- **Para qué se usa:** lo habitual, una máquina que solo necesita Internet (instalar paquetes, navegar).
 
-| | **NAT** | **Host-only** (*Adaptador solo anfitrión*) |
-|---|---|---|
-| **Qué es** | Una red privada pequeña **solo para esa máquina**, por la que VirtualBox la saca a Internet | Una red privada **entre el anfitrión y sus máquinas**, sin Internet |
-| **Otro extremo** | El router virtual de VirtualBox (`10.0.2.2`). No sale en `ipconfig` | El adaptador *VirtualBox Host-Only* del anfitrión (`192.168.56.1`). Sale en `ipconfig` |
-| **Extremo del invitado** | Su tarjeta, con `10.0.2.15` | Su tarjeta, con una IP de `192.168.56.x`, por ejemplo `192.168.56.101` |
-| **Puerta de enlace** | `10.0.2.2` (es VirtualBox) | Ninguna |
-| **Internet** | **Sí** | **No** |
-| **Windows → máquina** | **No** | **Sí** |
-| **Máquina → Windows** | Solo como salida a Internet | **Sí** |
-| **Entre varias máquinas** | No: cada una tiene su NAT, aislado | Sí, las que estén en esa misma red |
-| **Para qué se usa** | Lo habitual: una máquina que solo necesita Internet (instalar paquetes, navegar) | Entrar en la máquina desde Windows (un terminal remoto, una web que se sirve dentro) sin exponerla a la red |
+### Comprobación
 
-### Otros dos modos: adaptador puente y red interna
-
-**Adaptador puente** (*Bridged Adapter*). La tarjeta del invitado se conecta **directamente a la red real** del anfitrión, a través de su tarjeta Wi-Fi o Ethernet. Es como enchufar la máquina con un cable al mismo router que el equipo real:
-
-- **El otro extremo** es el **router de la red real**, el del aula o el de casa. Es él quien le da la IP, de la misma red que el anfitrión: si Windows tiene `192.168.1.35`, la máquina recibe, por ejemplo, `192.168.1.50`.
-- Para la red, la máquina es **un equipo más**, con su propia MAC (`08:00:27:…`) y su propia IP. Tiene Internet, el anfitrión llega a ella y **también cualquier otro equipo de esa red**.
-- En `ipconfig` no aparece ningún adaptador nuevo: VirtualBox usa la tarjeta real del anfitrión.
-- **Para qué se usa:** una máquina que hace de servidor (una web, una base de datos) y a la que tienen que llegar otros equipos de la red.
-- **Cuidado:** la máquina queda **expuesta a toda la red**, igual que un equipo real. Además, en algunas redes no funciona: con Wi-Fi a veces falla, y en redes con control de acceso, como las de muchos centros, el router puede no darle IP a un equipo que no conoce.
-
-**Red interna** (*Internal Network*). Una red **solo entre máquinas virtuales**: se conectan entre sí las que tienen en **Name** (*Nombre*) el mismo nombre de red, por ejemplo `intnet`. No hay Internet, y el anfitrión no está en ella. Tampoco hay quien reparta IP: se ponen a mano en cada máquina. Sirve para practicar redes con varias máquinas sin tocar la red real.
-
-**Los cuatro modos, de un vistazo:**
-
-| | Internet | Anfitrión → máquina | Entre máquinas | Otros equipos de la red → máquina |
-|---|---|---|---|---|
-| **NAT** | Sí | No | No | No |
-| **Host-only** | No | Sí | Sí | No |
-| **Adaptador puente** | Sí | Sí | Sí | **Sí** |
-| **Red interna** | No | No | Sí, las del mismo nombre de red | No |
-
-## 5. Qué se ve en `ipconfig`
-
-`ipconfig /all` solo muestra **las tarjetas de Windows**. La de la máquina virtual no aparece nunca. Lo que puede aparecer:
-
-| Adaptador | Qué es | IP | MAC |
-|---|---|---|---|
-| **Wi-Fi** o **Ethernet** | La tarjeta real del equipo | La que da el router del aula, por ejemplo `192.168.1.35` | La de la tarjeta, con el código de su fabricante |
-| **VirtualBox Host-Only Ethernet Adapter** | El extremo de Windows de la red solo anfitrión | `192.168.56.1` | Empieza por `0A-00-27` |
-
-```
-Adaptador de Ethernet VirtualBox Host-Only Network:
-   Dirección física. . . . : 0A-00-27-00-00-0B
-   Dirección IPv4. . . . . : 192.168.56.1
-```
-
-Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**: es la punta de Windows del cable de la red solo anfitrión. Sale siempre en `ipconfig`, esté la máquina en el modo que esté. Con la máquina en **Host-only**, al otro extremo está la máquina (`192.168.56.101`); con la máquina en **NAT**, como la del curso, **no hay nadie al otro extremo** y ese adaptador no interviene.
-
----
-
-## 6. Práctica: probar NAT y Host-only en la propia máquina
-
-Se hace con la máquina de Ubuntu Server del curso, primero en **NAT**, como está, y después en **Host-only**. En cada paso se mira la red en Windows y en Ubuntu y se prueba con `ping` con quién se puede comunicar la máquina. Las IP de ejemplo son las de este documento: la de Windows cambia de un equipo a otro, pero las de VirtualBox (`10.0.2.x` y `192.168.56.x`) salen casi siempre iguales.
-
-Tres comandos nuevos, todos de Ubuntu salvo el último:
-
-| Comando | Qué muestra o hace |
-|---|---|
-| `ip route` | La **tabla de rutas**: a qué red pertenece la tarjeta y por dónde salen los paquetes que van a otras redes. La línea `default via …` es la **puerta de enlace** |
-| `ping -c 4 <IP>` | Envía 4 paquetes a esa IP y espera respuesta. Si llegan las respuestas (`64 bytes from …`), hay comunicación; si no, `100% packet loss` |
-| `ping <IP>`, en Windows | Lo mismo desde el CMD o PowerShell de Windows. Envía 4 paquetes sin pedirlo |
-
-### Parte 1 · En NAT
-
-1. En VirtualBox, con la máquina **apagada**: **Settings → Network → Adapter 1** (*Configuración → Red → Adaptador 1*). Comprueba que está **Enable Network Adapter** (*Habilitar adaptador de red*) y **Attached to: NAT** (*Conectado a: NAT*). Arranca la máquina.
-2. **En Windows**, en el CMD: `ipconfig`. Apunta la IP y la puerta de enlace de la tarjeta real (Wi-Fi o Ethernet), por ejemplo:
+1. Con la máquina apagada, en **Adapter 1**: **Enable Network Adapter** (*Habilitar adaptador de red*) marcado y **Attached to: NAT**. Arranca la máquina.
+2. **En Windows**, `ipconfig`: la IP y la puerta de enlace de la tarjeta real, por ejemplo:
 
    ```
    Adaptador de LAN inalámbrica Wi-Fi:
@@ -188,7 +96,7 @@ Tres comandos nuevos, todos de Ubuntu salvo el último:
       Puerta de enlace predeterminada . . . . . : 192.168.1.1
    ```
 
-3. **En Ubuntu**, en el terminal:
+3. **En Ubuntu:**
 
    ```
    $ ip -br addr
@@ -199,10 +107,8 @@ Tres comandos nuevos, todos de Ubuntu salvo el último:
    10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 …
    ```
 
-4. **Prueba la conexión desde Ubuntu:**
-   - `ping -c 4 10.0.2.2`: responde. Es el router de VirtualBox.
-   - `ping -c 4 8.8.8.8`: responde. Es un servidor de Internet (el DNS de Google), y se llega a él a través del router de VirtualBox y de la tarjeta real de Windows.
-5. **Prueba desde Windows:** `ping 10.0.2.15`. **No responde**: Windows no tiene ninguna tarjeta en la red `10.0.2.0/24`, porque el router NAT está dentro del programa VirtualBox.
+4. **Desde Ubuntu:** `ping -c 4 10.0.2.2` responde (es el router de VirtualBox), y `ping -c 4 8.8.8.8` también (es un servidor de Internet, el DNS de Google).
+5. **Desde Windows:** `ping 10.0.2.15` **no responde**.
 
 **Comprueba que lo entiendes.** Contesta antes de abrir las respuestas:
 
@@ -214,25 +120,34 @@ Tres comandos nuevos, todos de Ubuntu salvo el último:
 <details>
 <summary>Respuestas</summary>
 
-1. Windows, la de su tarjeta real: `192.168.1.35` en el ejemplo. Ubuntu, `10.0.2.15`. Son de redes distintas: cada una está en su propia red.
+1. Windows, la de su tarjeta real: `192.168.1.35` en el ejemplo. Ubuntu, `10.0.2.15`. Son de redes distintas.
 2. `10.0.2.2`, la de la línea `default via`. Es el router virtual de VirtualBox, que está dentro del programa: por él sale todo lo que Ubuntu envía fuera de su red.
 3. Es **la red** a la que pertenece la tarjeta de Ubuntu: todas las IP que empiezan por `10.0.2.` (`/24` quiere decir que los tres primeros números son los de la red). No es la IP de ningún equipo.
-4. Ubuntu envía todo lo que no es de su red a su puerta de enlace, el router de VirtualBox, que lo saca a Internet por la tarjeta real de Windows. Windows, en cambio, no tiene ninguna tarjeta en la red `10.0.2.0/24` ni ninguna ruta hacia ella: el router NAT no es una tarjeta de Windows.
+4. Ubuntu envía todo lo que no es de su red a su puerta de enlace, el router de VirtualBox, que lo saca a Internet por la tarjeta real de Windows. Windows, en cambio, no tiene ninguna tarjeta en la red `10.0.2.0/24`: el router NAT no es una tarjeta de Windows, sino una parte del programa VirtualBox.
 
 </details>
 
-### Parte 2 · En Host-only
+## 5. Host-only (adaptador solo anfitrión)
 
-1. **Apaga** la máquina (`sudo poweroff`). En **Settings → Network → Adapter 1**, cambia **Attached to** a **Host-only Adapter** (*Adaptador solo anfitrión*). En **Name** (*Nombre*) tiene que salir **VirtualBox Host-Only Ethernet Adapter**. Arranca la máquina.
-2. **En Windows:** `ipconfig`. Además de la tarjeta real, aparece el adaptador Host-Only:
+- **El otro extremo** es el **adaptador *VirtualBox Host-Only*** de Windows, con la IP `192.168.56.1`: una tarjeta de red virtual que el instalador de VirtualBox añade a Windows. La máquina recibe una IP de esa red, por ejemplo `192.168.56.101`.
+- **Windows y la máquina se comunican**, porque cada uno tiene su tarjeta en la misma red. Pero **no hay Internet**: la conexión acaba en Windows, y la máquina no tiene puerta de enlace.
+- Las máquinas que estén en Host-only se ven entre sí.
+- **Para qué se usa:** entrar en la máquina desde Windows (un terminal remoto, una web que se sirve dentro) sin exponerla al resto de la red.
 
-   ```
-   Adaptador de Ethernet VirtualBox Host-Only Network:
-      Dirección IPv4. . . . . . . . . . . . . . : 192.168.56.1
-      Máscara de subred . . . . . . . . . . . . : 255.255.255.0
-      Puerta de enlace predeterminada . . . . . :
-   ```
+**El adaptador Host-Only en `ipconfig`.** Sale **siempre** en `ipconfig`, desde que se instala VirtualBox, esté la máquina en el modo que esté:
 
+```
+Adaptador de Ethernet VirtualBox Host-Only Network:
+   Dirección física. . . . : 0A-00-27-00-00-0B
+   Dirección IPv4. . . . . : 192.168.56.1
+```
+
+Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**: es la punta de Windows del cable de la red solo anfitrión. Con la máquina en Host-only, al otro extremo está la máquina; con la máquina en NAT, **no hay nadie al otro extremo** y ese adaptador no interviene.
+
+### Comprobación
+
+1. Apaga la máquina. En **Adapter 1**, **Attached to: Host-only Adapter** (*Adaptador solo anfitrión*), con **Name** (*Nombre*) **VirtualBox Host-Only Ethernet Adapter**. Arranca la máquina.
+2. **En Windows**, `ipconfig`: la tarjeta real sigue con su IP, y el adaptador Host-Only tiene `192.168.56.1`, sin puerta de enlace.
 3. **En Ubuntu:**
 
    ```
@@ -242,11 +157,10 @@ Tres comandos nuevos, todos de Ubuntu salvo el último:
    192.168.56.0/24 dev enp0s3 proto kernel scope link src 192.168.56.101 …
    ```
 
-   La IP ha cambiado, y en `ip route` **ya no hay línea `default via`**: la máquina no tiene puerta de enlace.
-4. **Prueba la conexión:**
-   - **Desde Windows**, `ping 192.168.56.101`: **responde**. Windows llega a la máquina por su adaptador Host-Only.
-   - **Desde Ubuntu**, `ping -c 4 8.8.8.8`: no hay Internet. Sale `Network is unreachable` (la red no se puede alcanzar): sin puerta de enlace, Ubuntu no sabe por dónde enviar lo que no es de su red.
-   - **Desde Ubuntu**, `ping -c 4 192.168.56.1`: lo normal es que **no responda**, aunque la conexión exista. El **cortafuegos de Windows** no contesta a los `ping` que le llegan, y Windows suele tratar el adaptador Host-Only como una red pública. No es un fallo de la red: la prueba fiable es la de Windows a Ubuntu.
+   La IP ha cambiado, y **ya no hay línea `default via`**.
+4. **Desde Windows:** `ping 192.168.56.101` **responde**.
+5. **Desde Ubuntu:** `ping -c 4 8.8.8.8` da `Network is unreachable` (la red no se puede alcanzar): sin puerta de enlace, Ubuntu no sabe por dónde enviar lo que no es de su red.
+6. **Desde Ubuntu:** `ping -c 4 192.168.56.1` lo normal es que **no responda**, aunque la conexión exista. El **cortafuegos de Windows** no contesta a los `ping` que le llegan, y suele tratar el adaptador Host-Only como una red pública. No es un fallo: la prueba fiable es la del paso 4.
 
 **Comprueba que lo entiendes.** Contesta antes de abrir las respuestas:
 
@@ -265,9 +179,62 @@ Tres comandos nuevos, todos de Ubuntu salvo el último:
 
 </details>
 
-### Parte 3 · La tabla, para completar
+## 6. NAT y Host-only a la vez
 
-Completa la tabla con lo que ha salido en tu equipo, sin mirar el resto del documento. Después, compárala con la solución:
+Con **dos tarjetas** en la máquina, una en NAT y otra en Host-only, se tienen las dos cosas: Internet por la primera y comunicación con Windows por la segunda. Cada tarjeta tiene su otro extremo, y cada uno está en una parte distinta del anfitrión:
+
+```
+   WINDOWS (el sistema)               VIRTUALBOX (el programa)          INVITADO (Ubuntu)
+
+ tarjeta real (Wi-Fi) 192.168.1.35 ◄── sale por ella, como
+   └── Internet                        cualquier programa
+                                      router NAT 10.0.2.2  ◄─────────►  tarjeta 1 (NAT)        10.0.2.15
+
+ adaptador Host-Only 192.168.56.1 ◄──────────────────────────────────►  tarjeta 2 (Host-only)  192.168.56.101
+   (sale en ipconfig)                 (VirtualBox solo instaló
+                                       este adaptador)
+```
+
+### Comprobación
+
+1. Apaga la máquina. **Adapter 1**: **NAT**. **Adapter 2**: marca **Enable Network Adapter** y **Attached to: Host-only Adapter**. Arranca la máquina.
+2. **En Ubuntu**, `ip -br addr`: ahora hay **dos tarjetas**, `enp0s3` con `10.0.2.15` y `enp0s8` con `192.168.56.101`. Si `enp0s8` sale sin IP, es que Ubuntu Server solo configura al instalarlo las tarjetas que tenía entonces; para esta comprobación basta con pedírsela una vez: `sudo dhcpcd enp0s8`.
+3. **Desde Ubuntu**, `ping -c 4 8.8.8.8` responde: sale por la tarjeta NAT, la única con `default via` en `ip route`.
+4. **Desde Windows**, `ping 192.168.56.101` responde: llega por la tarjeta Host-only.
+
+## 7. Adaptador puente (*Bridged Adapter*)
+
+- La tarjeta del invitado se conecta **directamente a la red real** del anfitrión, a través de su tarjeta Wi-Fi o Ethernet. Es como enchufar la máquina con un cable al mismo router que el equipo real.
+- **El otro extremo** es el **router de la red real**, el del aula o el de casa. Es él quien le da la IP, de la misma red que Windows: si Windows tiene `192.168.1.35`, la máquina recibe, por ejemplo, `192.168.1.50`.
+- Para la red, la máquina es **un equipo más**, con su propia MAC y su propia IP: tiene Internet, Windows llega a ella y **también cualquier otro equipo de esa red**.
+- En `ipconfig` no aparece ningún adaptador nuevo: VirtualBox usa la tarjeta real.
+- **Para qué se usa:** una máquina que hace de servidor (una web, una base de datos) y a la que tienen que llegar otros equipos.
+- **Cuidado:** la máquina queda **expuesta a toda la red**, igual que un equipo real. Además, en algunas redes no funciona: con Wi-Fi a veces falla, y en redes con control de acceso, como las de muchos centros, el router puede no darle IP a un equipo que no conoce.
+
+### Comprobación
+
+1. Apaga la máquina (si tiene dos tarjetas, desmarca **Enable Network Adapter** en **Adapter 2**). En **Adapter 1**, **Attached to: Bridged Adapter** (*Adaptador puente*) y, en **Name**, la tarjeta real con la que Windows sale a Internet (la Wi-Fi o la Ethernet). Arranca la máquina.
+2. **En Ubuntu**, `ip -br addr` e `ip route`: la IP es de **la misma red que Windows** (`192.168.1.x` en el ejemplo), y la puerta de enlace, `default via 192.168.1.1`, es **la misma que la de Windows** en `ipconfig`: el router real.
+3. **Desde Ubuntu**, `ping -c 4 8.8.8.8` responde. **Desde Windows**, `ping` a la IP de Ubuntu responde.
+
+Si `ip -br addr` no muestra ninguna IP en `enp0s3`, el router de esa red no se la ha dado: es una red con control de acceso, de las que no admiten el modo puente.
+
+## 8. Red interna (*Internal Network*)
+
+Una red **solo entre máquinas virtuales**: se conectan entre sí las que tienen en **Name** el mismo nombre de red, por ejemplo `intnet`. No hay Internet, y Windows no está en ella. Tampoco hay quien reparta IP: se ponen a mano en cada máquina. Sirve para practicar redes con varias máquinas sin tocar la red real, así que comprobarla necesita al menos dos máquinas virtuales.
+
+---
+
+## 9. Los modos, de un vistazo
+
+| | Otro extremo | IP de la máquina | Internet | Windows → máquina | Entre máquinas | Otros equipos de la red → máquina |
+|---|---|---|---|---|---|---|
+| **NAT** | Router de VirtualBox, `10.0.2.2` | `10.0.2.15` | Sí | No | No | No |
+| **Host-only** | Adaptador Host-Only de Windows, `192.168.56.1` | `192.168.56.101` | No | Sí | Sí | No |
+| **Adaptador puente** | Router de la red real | De la red real, como la de Windows | Sí | Sí | Sí | **Sí** |
+| **Red interna** | Las otras máquinas con el mismo nombre de red | La que se ponga a mano | No | No | Sí | No |
+
+**Completa la tabla** con lo que ha salido en tu equipo en las comprobaciones de NAT y Host-only, sin mirar atrás. Después, compárala con la solución:
 
 | Dato | NAT | Host-only |
 |---|---|---|
@@ -294,18 +261,19 @@ Completa la tabla con lo que ha salido en tu equipo, sin mirar el resto del docu
 
 </details>
 
-**Para terminar, explica con tus palabras** por qué Ubuntu tiene una IP en NAT y otra distinta en Host-only, si su tarjeta es la misma. (Pista: el apartado 4. ¿Quién está en el otro extremo en cada modo, y quién le da la IP?)
+**Para terminar, explica con tus palabras** por qué Ubuntu tiene una IP en NAT y otra distinta en Host-only, si su tarjeta es la misma. (Pista: ¿quién está en el otro extremo en cada modo, y quién le da la IP?)
 
-**Al acabar, vuelve a dejar la máquina en NAT:** apágala, **Attached to: NAT** y arráncala. Comprueba con `ping -c 4 8.8.8.8` que vuelve a tener Internet: la necesita para instalar paquetes durante el curso.
+**Al acabar, vuelve a dejar la máquina como estaba:** apágala, **Adapter 1** en **NAT** y, si se activó, **Adapter 2** desmarcado. Arráncala y comprueba con `ping -c 4 8.8.8.8` que tiene Internet: la necesita para instalar paquetes durante el curso.
 
 ---
 
 ## En resumen
 
-- Cada conexión tiene **un dispositivo de red en cada extremo**. Uno es la tarjeta del invitado; el modo de red decide cuál es el otro.
 - `ipconfig` muestra la red **del equipo real**. La red **de la máquina** se mira en **VirtualBox** y con **`ip -br link` / `ip -br addr` en Ubuntu**, y esos dos sí coinciden.
+- Cada conexión tiene **un dispositivo de red en cada extremo**. Uno es la tarjeta del invitado; el **modo de red** decide cuál es el otro, y con él la IP de la máquina y con quién se comunica.
 - **NAT:** el otro extremo es el router de VirtualBox, que está dentro del programa y Windows no ve. La máquina sale a Internet, pero desde Windows no se llega a ella.
 - **Host-only:** el otro extremo es el adaptador *VirtualBox Host-Only*, que es de Windows y sale en `ipconfig`. Se comunican entre ellos, pero no hay Internet.
 - **Las dos cosas a la vez:** dos tarjetas, una en NAT y otra en Host-only.
-- **Adaptador puente:** el otro extremo es el router de la red real. La máquina es un equipo más de esa red, con Internet, y le llega todo el mundo: también los demás equipos de la red.
+- **Adaptador puente:** el otro extremo es el router de la red real. La máquina es un equipo más de esa red, con Internet, y le llega todo el mundo.
 - **Red interna:** una red solo entre máquinas virtuales, sin Internet ni anfitrión.
+- Para comprobar un modo: `ip -br addr` e `ip route` en Ubuntu, `ipconfig` en Windows, y `ping` en los dos sentidos.
