@@ -110,7 +110,7 @@ Por eso, en Host-only, Windows llega a la máquina por su propia tarjeta, el ada
 
 ### NAT y Host-only, comparados
 
-La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2). VirtualBox tiene otros modos (puente, red interna…) que no se usan en este módulo.
+La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la máquina: NAT](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#la-red-de-la-máquina-nat)», en los apuntes de la UD2). VirtualBox tiene otros modos, como el **adaptador puente** y la **red interna**, que se explican después de esta tabla.
 
 | | **NAT** | **Host-only** (*Adaptador solo anfitrión*) |
 |---|---|---|
@@ -123,6 +123,27 @@ La máquina del curso usa **NAT**, como se vio al instalarla («[La red de la m�
 | **Máquina → Windows** | Solo como salida a Internet | **Sí** |
 | **Entre varias máquinas** | No: cada una tiene su NAT, aislado | Sí, las que estén en esa misma red |
 | **Para qué se usa** | Lo habitual: una máquina que solo necesita Internet (instalar paquetes, navegar) | Entrar en la máquina desde Windows (un terminal remoto, una web que se sirve dentro) sin exponerla a la red |
+
+### Otros dos modos: adaptador puente y red interna
+
+**Adaptador puente** (*Bridged Adapter*). La tarjeta del invitado se conecta **directamente a la red real** del anfitrión, a través de su tarjeta Wi-Fi o Ethernet. Es como enchufar la máquina con un cable al mismo router que el equipo real:
+
+- **El otro extremo** es el **router de la red real**, el del aula o el de casa. Es él quien le da la IP, de la misma red que el anfitrión: si Windows tiene `192.168.1.35`, la máquina recibe, por ejemplo, `192.168.1.50`.
+- Para la red, la máquina es **un equipo más**, con su propia MAC (`08:00:27:…`) y su propia IP. Tiene Internet, el anfitrión llega a ella y **también cualquier otro equipo de esa red**.
+- En `ipconfig` no aparece ningún adaptador nuevo: VirtualBox usa la tarjeta real del anfitrión.
+- **Para qué se usa:** una máquina que hace de servidor (una web, una base de datos) y a la que tienen que llegar otros equipos de la red.
+- **Cuidado:** la máquina queda **expuesta a toda la red**, igual que un equipo real. Además, en algunas redes no funciona: con Wi-Fi a veces falla, y en redes con control de acceso, como las de muchos centros, el router puede no darle IP a un equipo que no conoce.
+
+**Red interna** (*Internal Network*). Una red **solo entre máquinas virtuales**: se conectan entre sí las que tienen en **Name** (*Nombre*) el mismo nombre de red, por ejemplo `intnet`. No hay Internet, y el anfitrión no está en ella. Tampoco hay quien reparta IP: se ponen a mano en cada máquina. Sirve para practicar redes con varias máquinas sin tocar la red real.
+
+**Los cuatro modos, de un vistazo:**
+
+| | Internet | Anfitrión → máquina | Entre máquinas | Otros equipos de la red → máquina |
+|---|---|---|---|---|
+| **NAT** | Sí | No | No | No |
+| **Host-only** | No | Sí | Sí | No |
+| **Adaptador puente** | Sí | Sí | Sí | **Sí** |
+| **Red interna** | No | No | Sí, las del mismo nombre de red | No |
 
 ## 5. Qué se ve en `ipconfig`
 
@@ -150,3 +171,5 @@ Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**: es la
 - **NAT:** el otro extremo es el router de VirtualBox, que está dentro del programa y Windows no ve. La máquina sale a Internet, pero desde Windows no se llega a ella.
 - **Host-only:** el otro extremo es el adaptador *VirtualBox Host-Only*, que es de Windows y sale en `ipconfig`. Se comunican entre ellos, pero no hay Internet.
 - **Las dos cosas a la vez:** dos tarjetas, una en NAT y otra en Host-only.
+- **Adaptador puente:** el otro extremo es el router de la red real. La máquina es un equipo más de esa red, con Internet, y le llega todo el mundo: también los demás equipos de la red.
+- **Red interna:** una red solo entre máquinas virtuales, sin Internet ni anfitrión.
