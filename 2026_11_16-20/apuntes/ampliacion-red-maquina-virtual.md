@@ -1,6 +1,6 @@
 # UD1 · Ampliación: las tarjetas de red con una máquina virtual
 
-Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato, dónde se mira y qué tiene que coincidir, y después cómo se conecta la máquina, con un dispositivo de red en cada extremo de cada conexión, en los dos modos de red de VirtualBox que interesan, **NAT** y **Host-only**. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
+Al comparar la red del equipo real con la de la máquina virtual (paso 4 del proyecto), `ipconfig` y Ubuntu muestran MAC e IP distintas. Es lo esperado: este documento explica qué es cada dato, dónde se mira y qué tiene que coincidir, y después cómo se conecta la máquina, con un dispositivo de red en cada extremo de cada conexión, en los dos modos de red de VirtualBox que interesan, **NAT** y **Host-only**. Al final, una práctica para probar los dos modos en la propia máquina. Continúa el [apartado 5 de los apuntes de la UD1](UD1-el-equipo-por-dentro.md#5-tarjetas-de-expansión) (la tarjeta de red y la MAC).
 
 ---
 
@@ -161,6 +161,142 @@ Adaptador de Ethernet VirtualBox Host-Only Network:
 ```
 
 Por el nombre parece la tarjeta de la máquina virtual, pero **no lo es**: es la punta de Windows del cable de la red solo anfitrión. Sale siempre en `ipconfig`, esté la máquina en el modo que esté. Con la máquina en **Host-only**, al otro extremo está la máquina (`192.168.56.101`); con la máquina en **NAT**, como la del curso, **no hay nadie al otro extremo** y ese adaptador no interviene.
+
+---
+
+## 6. Práctica: probar NAT y Host-only en la propia máquina
+
+Se hace con la máquina de Ubuntu Server del curso, primero en **NAT**, como está, y después en **Host-only**. En cada paso se mira la red en Windows y en Ubuntu y se prueba con `ping` con quién se puede comunicar la máquina. Las IP de ejemplo son las de este documento: la de Windows cambia de un equipo a otro, pero las de VirtualBox (`10.0.2.x` y `192.168.56.x`) salen casi siempre iguales.
+
+Tres comandos nuevos, todos de Ubuntu salvo el último:
+
+| Comando | Qué muestra o hace |
+|---|---|
+| `ip route` | La **tabla de rutas**: a qué red pertenece la tarjeta y por dónde salen los paquetes que van a otras redes. La línea `default via …` es la **puerta de enlace** |
+| `ping -c 4 <IP>` | Envía 4 paquetes a esa IP y espera respuesta. Si llegan las respuestas (`64 bytes from …`), hay comunicación; si no, `100% packet loss` |
+| `ping <IP>`, en Windows | Lo mismo desde el CMD o PowerShell de Windows. Envía 4 paquetes sin pedirlo |
+
+### Parte 1 · En NAT
+
+1. En VirtualBox, con la máquina **apagada**: **Settings → Network → Adapter 1** (*Configuración → Red → Adaptador 1*). Comprueba que está **Enable Network Adapter** (*Habilitar adaptador de red*) y **Attached to: NAT** (*Conectado a: NAT*). Arranca la máquina.
+2. **En Windows**, en el CMD: `ipconfig`. Apunta la IP y la puerta de enlace de la tarjeta real (Wi-Fi o Ethernet), por ejemplo:
+
+   ```
+   Adaptador de LAN inalámbrica Wi-Fi:
+      Dirección IPv4. . . . . . . . . . . . . . : 192.168.1.35
+      Máscara de subred . . . . . . . . . . . . : 255.255.255.0
+      Puerta de enlace predeterminada . . . . . : 192.168.1.1
+   ```
+
+3. **En Ubuntu**, en el terminal:
+
+   ```
+   $ ip -br addr
+   lo       UNKNOWN  127.0.0.1/8 ::1/128
+   enp0s3   UP       10.0.2.15/24 …
+   $ ip route
+   default via 10.0.2.2 dev enp0s3 proto dhcp …
+   10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 …
+   ```
+
+4. **Prueba la conexión desde Ubuntu:**
+   - `ping -c 4 10.0.2.2`: responde. Es el router de VirtualBox.
+   - `ping -c 4 8.8.8.8`: responde. Es un servidor de Internet (el DNS de Google), y se llega a él a través del router de VirtualBox y de la tarjeta real de Windows.
+5. **Prueba desde Windows:** `ping 10.0.2.15`. **No responde**: Windows no tiene ninguna tarjeta en la red `10.0.2.0/24`, porque el router NAT está dentro del programa VirtualBox.
+
+**Comprueba que lo entiendes.** Contesta antes de abrir las respuestas:
+
+1. ¿Cuál es la IP de Windows, y cuál la de Ubuntu?
+2. ¿Cuál es la puerta de enlace de Ubuntu, y qué es en realidad?
+3. ¿Qué quiere decir `10.0.2.0/24` en la salida de `ip route`?
+4. ¿Por qué Ubuntu llega a `8.8.8.8`, y Windows no llega a Ubuntu?
+
+<details>
+<summary>Respuestas</summary>
+
+1. Windows, la de su tarjeta real: `192.168.1.35` en el ejemplo. Ubuntu, `10.0.2.15`. Son de redes distintas: cada una está en su propia red.
+2. `10.0.2.2`, la de la línea `default via`. Es el router virtual de VirtualBox, que está dentro del programa: por él sale todo lo que Ubuntu envía fuera de su red.
+3. Es **la red** a la que pertenece la tarjeta de Ubuntu: todas las IP que empiezan por `10.0.2.` (`/24` quiere decir que los tres primeros números son los de la red). No es la IP de ningún equipo.
+4. Ubuntu envía todo lo que no es de su red a su puerta de enlace, el router de VirtualBox, que lo saca a Internet por la tarjeta real de Windows. Windows, en cambio, no tiene ninguna tarjeta en la red `10.0.2.0/24` ni ninguna ruta hacia ella: el router NAT no es una tarjeta de Windows.
+
+</details>
+
+### Parte 2 · En Host-only
+
+1. **Apaga** la máquina (`sudo poweroff`). En **Settings → Network → Adapter 1**, cambia **Attached to** a **Host-only Adapter** (*Adaptador solo anfitrión*). En **Name** (*Nombre*) tiene que salir **VirtualBox Host-Only Ethernet Adapter**. Arranca la máquina.
+2. **En Windows:** `ipconfig`. Además de la tarjeta real, aparece el adaptador Host-Only:
+
+   ```
+   Adaptador de Ethernet VirtualBox Host-Only Network:
+      Dirección IPv4. . . . . . . . . . . . . . : 192.168.56.1
+      Máscara de subred . . . . . . . . . . . . : 255.255.255.0
+      Puerta de enlace predeterminada . . . . . :
+   ```
+
+3. **En Ubuntu:**
+
+   ```
+   $ ip -br addr
+   enp0s3   UP       192.168.56.101/24 …
+   $ ip route
+   192.168.56.0/24 dev enp0s3 proto kernel scope link src 192.168.56.101 …
+   ```
+
+   La IP ha cambiado, y en `ip route` **ya no hay línea `default via`**: la máquina no tiene puerta de enlace.
+4. **Prueba la conexión:**
+   - **Desde Windows**, `ping 192.168.56.101`: **responde**. Windows llega a la máquina por su adaptador Host-Only.
+   - **Desde Ubuntu**, `ping -c 4 8.8.8.8`: no hay Internet. Sale `Network is unreachable` (la red no se puede alcanzar): sin puerta de enlace, Ubuntu no sabe por dónde enviar lo que no es de su red.
+   - **Desde Ubuntu**, `ping -c 4 192.168.56.1`: lo normal es que **no responda**, aunque la conexión exista. El **cortafuegos de Windows** no contesta a los `ping` que le llegan, y Windows suele tratar el adaptador Host-Only como una red pública. No es un fallo de la red: la prueba fiable es la de Windows a Ubuntu.
+
+**Comprueba que lo entiendes.** Contesta antes de abrir las respuestas:
+
+1. ¿Cuál es la IP del adaptador Host-Only de Windows, y cuál la de Ubuntu?
+2. ¿Cuál es la red, y por qué las dos IP están en ella?
+3. ¿Por qué Ubuntu no tiene Internet en Host-only?
+4. Si `ping 192.168.56.1` desde Ubuntu no responde, ¿quiere decir que Ubuntu y Windows no están conectados?
+
+<details>
+<summary>Respuestas</summary>
+
+1. Windows, `192.168.56.1`, en su adaptador *VirtualBox Host-Only*. Ubuntu, `192.168.56.101`. La tarjeta real de Windows sigue con su IP de siempre.
+2. `192.168.56.0/24`: todas las IP que empiezan por `192.168.56.`. Las dos tarjetas son los dos extremos de la misma conexión, la red solo anfitrión, y por eso están en la misma red y se comunican directamente.
+3. Porque la conexión acaba en el adaptador Host-Only de Windows, y no hay puerta de enlace: `ip route` no tiene línea `default via`. Para Ubuntu, fuera de `192.168.56.0/24` no hay nada.
+4. No. El `ping` de Windows a Ubuntu responde, así que la conexión funciona. Lo que pasa es que el cortafuegos de Windows no contesta a los `ping`.
+
+</details>
+
+### Parte 3 · La tabla, para completar
+
+Completa la tabla con lo que ha salido en tu equipo, sin mirar el resto del documento. Después, compárala con la solución:
+
+| Dato | NAT | Host-only |
+|---|---|---|
+| IP de Windows (tarjeta real) | | |
+| IP del adaptador Host-Only de Windows | | |
+| IP de Ubuntu | | |
+| Puerta de enlace de Ubuntu | | |
+| Red de Ubuntu | | |
+| ¿Windows llega a Ubuntu? | | |
+| ¿Ubuntu tiene Internet? | | |
+
+<details>
+<summary>Solución, con las IP del ejemplo</summary>
+
+| Dato | NAT | Host-only |
+|---|---|---|
+| IP de Windows (tarjeta real) | `192.168.1.35` | `192.168.1.35`: no cambia |
+| IP del adaptador Host-Only de Windows | `192.168.56.1`, pero no interviene: no hay nadie al otro extremo | `192.168.56.1` |
+| IP de Ubuntu | `10.0.2.15` | `192.168.56.101` |
+| Puerta de enlace de Ubuntu | `10.0.2.2`, el router de VirtualBox | Ninguna |
+| Red de Ubuntu | `10.0.2.0/24` | `192.168.56.0/24` |
+| ¿Windows llega a Ubuntu? | No | Sí |
+| ¿Ubuntu tiene Internet? | Sí | No |
+
+</details>
+
+**Para terminar, explica con tus palabras** por qué Ubuntu tiene una IP en NAT y otra distinta en Host-only, si su tarjeta es la misma. (Pista: el apartado 4. ¿Quién está en el otro extremo en cada modo, y quién le da la IP?)
+
+**Al acabar, vuelve a dejar la máquina en NAT:** apágala, **Attached to: NAT** y arráncala. Comprueba con `ping -c 4 8.8.8.8` que vuelve a tener Internet: la necesita para instalar paquetes durante el curso.
 
 ---
 
