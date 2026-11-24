@@ -49,7 +49,7 @@ Cómo se califica cada parte de la evaluación.
 
 ### Exámenes parciales (P) y examen final (F)
 
-En papel. Cada pregunta indica los puntos que vale: los contenidos con más porcentaje tienen preguntas que valen más. La rúbrica de cada examen se publica aquí antes del examen.
+En papel. Cada pregunta indica los puntos que vale: los contenidos con más porcentaje tienen preguntas que valen más. La rúbrica de cada examen se publica aquí antes del examen. Para practicar, hay un [simulacro del examen parcial (P1)](simulacro-P1.md), con las respuestas debajo de cada pregunta.
 
 ### Actividades guiadas (A)
 

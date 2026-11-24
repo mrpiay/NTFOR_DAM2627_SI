@@ -6,6 +6,7 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 24 nov | Simulacro del examen parcial (P1), con las respuestas debajo de cada pregunta ([programacion/simulacro-P1.md](programacion/simulacro-P1.md)) |
 | 23 nov | Soluciones del cuestionario C3 ([2026_11_16-20/soluciones](2026_11_16-20/soluciones)) |
 | 19 nov | Ampliación de la UD1: las tarjetas de red con una máquina virtual, qué MAC e IP muestran `ipconfig`, VirtualBox y Ubuntu ([apuntes](2026_11_16-20/apuntes/ampliacion-red-maquina-virtual.md)) |
 | 17 nov | Las **actividades guiadas (A)** se califican, una vez terminadas, por su **nivel de implementación y comprensión**: la mitad de la nota es cuánto funciona o se ha completado y la otra mitad, cuánto se sabe explicar, con 4 preguntas sobre el diseño y la arquitectura del proyecto ([rúbricas](programacion/1a-evaluacion.md#rúbricas)) |
@@ -15,7 +16,6 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 | 13 nov | Semana del 16 al 20: apuntes «El equipo por dentro», proyecto «Mi equipo por dentro» y cuestionario C3 ([2026_11_16-20](2026_11_16-20)) |
 | 12 nov | Ejercicio guiado «Entrar en GRUB con el menú oculto» en la semana del 9 al 13 ([ejercicio-grub-oculto.md](2026_11_09-13/actividades/ejercicio-grub-oculto.md)) |
 | 11 nov | Nuevas fechas de exámenes: un solo examen parcial (**P1**, viernes 4 de diciembre) con todo lo de la evaluación, y el examen final (**F**) el viernes 11 de diciembre |
-| 11 nov | **Repaso Julia**: apuntes que completan lo que se dio antes del 2 de noviembre ([repaso-julia/apuntes](repaso-julia/apuntes)) |
 
 ## Fechas importantes
 
