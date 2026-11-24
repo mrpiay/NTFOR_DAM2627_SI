@@ -63,6 +63,7 @@ Hay tres tipos de contenido:
 | **32 o 64 bits** | El tamaño de los datos y direcciones con los que trabaja. Con 32 bits solo se pueden usar 4 GB de RAM. Hoy casi todo es de 64 bits, y un sistema de 64 bits necesita un procesador de 64 bits |
 | **Núcleos** (*cores*) | CPU completas dentro del mismo chip: cada una ejecuta su propio programa a la vez que las demás. De 2 a más de 64 |
 | **Hilos** (*threads*) | Lo que un núcleo puede llevar a la vez. Con 2 hilos por núcleo, el sistema ve el doble de **procesadores lógicos** |
+| **Procesadores lógicos** | Cada unidad de procesamiento que el sistema operativo reconoce y puede utilizar para ejecutar hilos de software. Con 8 núcleos y 2 hilos por núcleo, el sistema reconoce 16 procesadores lógicos |
 | **Frecuencia** | Ciclos de reloj por segundo, en GHz. Hay una **base** y una **turbo** (la máxima, durante poco tiempo). Más GHz no siempre es más rápido: cuentan también los núcleos, la caché y la generación |
 | **Caché** | **L1** y **L2**, propias de cada núcleo; **L3**, compartida por todos |
 | **TDP** | El calor que hay que sacar, en vatios. Decide qué refrigeración necesita: disipador con ventilador o refrigeración líquida |

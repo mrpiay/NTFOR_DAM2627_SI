@@ -6,7 +6,7 @@ Entre paréntesis, dónde está la respuesta para repasarla.
 
 **1.** En el Administrador de tareas, un procesador muestra 8 núcleos y 16 procesadores lógicos. ¿Qué es un núcleo y qué es un procesador lógico? ¿Cuántos hilos lleva cada núcleo? ¿Qué muestra tu equipo?
 
-**Respuesta.** *(UD1 esta semana, apartado 2; proyecto, paso 1)* Un **núcleo** es una CPU completa dentro del chip, que ejecuta su propio programa a la vez que las demás. Un **procesador lógico** es cada hilo que el sistema puede usar: con 2 hilos por núcleo, el sistema ve el doble de procesadores lógicos que núcleos. Con 8 núcleos y 16 procesadores lógicos, cada núcleo lleva **2 hilos**. La última parte depende de cada equipo: los datos son los de *Rendimiento → CPU* del propio ordenador.
+**Respuesta.** *(UD1 esta semana, apartado 2; proyecto, paso 1)* Un **núcleo** es una CPU completa dentro del chip, que ejecuta su propio programa a la vez que las demás. Un **procesador lógico** es cada unidad de procesamiento que el sistema operativo reconoce y puede utilizar para ejecutar hilos de software: con 2 hilos por núcleo, el sistema reconoce el doble de procesadores lógicos que núcleos. Con 8 núcleos y 16 procesadores lógicos, cada núcleo lleva **2 hilos**. La última parte depende de cada equipo: los datos son los de *Rendimiento → CPU* del propio ordenador.
 
 **2.** La memoria de un portátil aparece así: DDR4, 3200 MT/s, ranuras usadas 1 de 2, factor de forma SODIMM. ¿A cuántos MHz va su reloj, y por qué? ¿Se puede ampliar? ¿Qué módulo habría que comprar? ¿Qué querría decir que el factor de forma fuera *Row of chips*?
 
