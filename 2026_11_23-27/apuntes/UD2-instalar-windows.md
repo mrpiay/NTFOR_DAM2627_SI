@@ -184,6 +184,31 @@ En Windows 11, el menú Inicio y los iconos de la barra de tareas están por def
 
 **Ejemplo: un portátil real con Windows 11.** Administración de discos muestra el *Disco 0*, de 476,92 GB (un SSD de 512 GB: el fabricante cuenta 1 GB como 1000 MB y Windows, como 1024), con tres particiones: la **EFI** (260 MB), **C:** (475,78 GB, NTFS) y la de **recuperación** (905 MB). Es un disco GPT: tiene partición EFI. La numeración salta de la 1 a la 3 porque la 2 es la **MSR**, que no se muestra. Los tamaños de la EFI y de la recuperación no coinciden con los de la tabla de particiones de más arriba (100 MB y unos 600 MB): dependen de quién instaló Windows, el fabricante o el instalador de Microsoft; las particiones son las mismas.
 
+### FAT32 y NTFS
+
+*Más detalle en el [apartado 7 de los apuntes del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#sistemas-de-archivos-fat32-ext4-y-ntfs). Para ampliar: Síntesis, cap. 3, 3.2 «Sistemas de archivos» (FAT, exFAT y NTFS), pp. 93–95.*
+
+- El **sistema de archivos** organiza el interior de una partición en archivos y carpetas. Windows usa dos: **NTFS** para el disco del sistema y **FAT32** (o exFAT) para lo que tiene que entender cualquier equipo.
+- Windows 11 **solo se instala en NTFS**: `C:` y la partición de recuperación son NTFS. La partición **EFI** es **FAT32**, porque el firmware UEFI solo sabe leer FAT.
+- Se ve en el **Explorador de archivos**: botón secundario sobre la unidad → **Propiedades** → pestaña **General** → **Sistema de archivos**. También en Administración de discos y con `list volume` en `diskpart`.
+
+**Compara**
+
+| | FAT32 (*File Allocation Table*, tabla de asignación de archivos, 32 bits) | NTFS (*New Technology File System*, sistema de archivos de nueva tecnología) |
+|---|---|---|
+| Origen | De los años 90 (Windows 95). Sencillo | De Windows NT (1993). El de Windows desde XP |
+| Tamaño máximo de un archivo | **4 GB** | Prácticamente sin límite |
+| Tamaño de la partición | Windows solo formatea en FAT32 hasta 32 GB | Prácticamente sin límite |
+| Permisos | No: cualquiera que use el equipo puede leer y borrar todo | Sí: cada archivo y carpeta tiene una lista de usuarios y grupos con sus permisos (pestaña **Seguridad** de Propiedades, que en FAT32 no aparece) |
+| Diario (*journaling*) | No: si se va la luz mientras escribe, se puede dañar | Sí: apunta lo que va a cambiar antes de hacerlo, y al arrancar se recupera |
+| Otras funciones | Ninguna | Compresión, cifrado de archivos, cuotas de disco (cuánto puede ocupar cada usuario) |
+| Quién lo entiende | Casi todos: Windows, Linux, macOS, televisores, cámaras… y el firmware UEFI | Windows. Linux lo lee y lo escribe; macOS solo lo lee |
+| Dónde se usa | La partición EFI y las memorias USB pequeñas | `C:` y los discos internos de Windows |
+
+- **exFAT** (*Extended FAT*) es un FAT moderno: sin el límite de 4 GB por archivo, pero tampoco tiene permisos ni diario. Es el de las memorias USB y tarjetas grandes, porque lo entienden Windows, macOS y Linux.
+
+**Ejemplo.** La ISO de Windows 11 ocupa más de 5 GB. Si se copia a una memoria USB en FAT32, Windows responde *El archivo es demasiado grande para el sistema de archivos de destino*, aunque quede espacio libre: es el límite de 4 GB por archivo. En exFAT o NTFS se copia sin problema.
+
 > **Para saber más.** En Windows, una **partición** es una división del disco, y un **volumen** puede ser una partición, varios discos o partes de varios discos, si los discos son **dinámicos** (p. 137).
 
 ---
