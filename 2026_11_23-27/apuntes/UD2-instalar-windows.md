@@ -167,6 +167,23 @@ En Windows 11, el menú Inicio y los iconos de la barra de tareas están por def
 
 - Si se añade un disco nuevo, Windows pide **inicializarlo** con un estilo de partición: **MBR** o **GPT**.
 
+### MBR y GPT
+
+*Paraninfo 2.6, p. 139. Más detalle en el [apartado 7 de los apuntes del 9 al 13](../../2026_11_09-13/apuntes/UD2-sistemas-operativos.md#7-discos-y-particiones).*
+
+- La **tabla de particiones** es la lista de las particiones del disco: dónde empieza y acaba cada una y de qué tipo es. Va al principio del disco, y hay dos tipos (el **estilo de partición** de Windows):
+  - **MBR** (*Master Boot Record*, registro de arranque principal): la tabla antigua. Va en el primer sector del disco, con el pequeño programa de arranque que ejecuta la BIOS. Admite como mucho **4 particiones principales** (más, con una **extendida** que contiene particiones **lógicas**) y discos de hasta **2 TB**.
+  - **GPT** (*GUID Partition Table*, tabla de particiones con identificadores únicos): la actual, parte del estándar UEFI. Admite discos de más de 2 TB y muchas particiones (Windows, hasta 128) sin necesidad de extendidas, y guarda **una copia de la tabla al final del disco**: si se daña la del principio, se recupera. El libro resume sus ventajas: más tamaño de disco, más particiones, más seguridad en los datos y un arranque más rápido.
+- **Cada tabla va con un firmware:** **BIOS con MBR** y **UEFI con GPT**. Windows 11 exige UEFI, así que se instala siempre en un disco GPT, con la partición **EFI** para el arranque. Si el modo de arranque y la tabla no coinciden, el firmware no encuentra el sistema.
+- **Cómo se ve en Windows:**
+
+| Qué | Dónde |
+|---|---|
+| El modo de arranque, UEFI o BIOS | **Información del sistema** (`msinfo32`) → **Resumen del sistema** → **Modo de BIOS**: *UEFI* o *Heredado* (BIOS) |
+| La tabla del disco, MBR o GPT | En `diskpart`, `list disk`: un `*` en la columna **Gpt**. En PowerShell, `Get-Disk`: la columna **Partition Style**. En Administración de discos, botón secundario sobre el disco → **Propiedades** → **Volúmenes** → **Estilo de partición** |
+
+**Ejemplo: un portátil real con Windows 11.** Administración de discos muestra el *Disco 0*, de 476,92 GB (un SSD de 512 GB: el fabricante cuenta 1 GB como 1000 MB y Windows, como 1024), con tres particiones: la **EFI** (260 MB), **C:** (475,78 GB, NTFS) y la de **recuperación** (905 MB). Es un disco GPT: tiene partición EFI. La numeración salta de la 1 a la 3 porque la 2 es la **MSR**, que no se muestra. Los tamaños de la EFI y de la recuperación no coinciden con los de la tabla de particiones de más arriba (100 MB y unos 600 MB): dependen de quién instaló Windows, el fabricante o el instalador de Microsoft; las particiones son las mismas.
+
 > **Para saber más.** En Windows, una **partición** es una división del disco, y un **volumen** puede ser una partición, varios discos o partes de varios discos, si los discos son **dinámicos** (p. 137).
 
 ---
