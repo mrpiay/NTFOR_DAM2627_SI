@@ -105,7 +105,7 @@ Lo básico del terminal de Linux que se usa desde esta semana. Cada apartado tie
 
 ## 6. Distribuciones de Linux
 
-**En una frase:** una distribución es un Linux completo: el kernel Linux, los programas básicos, un gestor de paquetes y, normalmente, un escritorio.
+**En una frase:** una distribución Linux es un sistema operativo basado en el kernel Linux que incluye programas, herramientas, un sistema de gestión de paquetes y, normalmente, un entorno de escritorio.
 
 **Lo que tienes que saber**
 
