@@ -6,6 +6,7 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
+| 27 nov | Mini servidor web en la máquina virtual con Ubuntu, abierto desde el navegador de Windows, con los adaptadores NAT y solo-anfitrión ([2026_11_23-27/actividades/servidor-web-ubuntu.md](2026_11_23-27/actividades/servidor-web-ubuntu.md)) |
 | 27 nov | Los exámenes escritos (P y F) son de **verdadero o falso** (cada acierto suma 1, cada error resta 0,5 y en blanco vale 0; esa parte nunca baja de 0) y de **unir pares** (0,25 por pareja bien unida, sin restar), de 1 punto cada pregunta ([programacion/1a-evaluacion.md](programacion/1a-evaluacion.md#rúbricas)). El simulacro del P1, ya en ese formato ([programacion/simulacro-P1-SI.md](programacion/simulacro-P1-SI.md)) |
 | 24 nov | Simulacro del examen parcial (P1), con las respuestas debajo de cada pregunta ([programacion/simulacro-P1-SI.md](programacion/simulacro-P1-SI.md)) |
 | 23 nov | Soluciones del cuestionario C3 ([2026_11_16-20/soluciones](2026_11_16-20/soluciones)) |
@@ -15,7 +16,6 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 | 16 nov | Los **cuestionarios (C)** son requisito de la **autoevaluación (R)**: sin todos los cuestionarios entregados, la autoevaluación (R) es un 0 |
 | 16 nov | La **autoevaluación (R)**, el 10 % de la nota, pasa a ser una sola, la semana del examen final: una [plantilla](programacion/autoevaluacion-1a.xlsx) en Teams con el nivel y el tipo de fallo de cada tema, los hábitos de estudio y una reflexión sobre qué hacer para mejorar. Sustituye a la revisión de cada cuestionario y examen ([cómo se califica](programacion/1a-evaluacion.md#rúbricas)) |
 | 13 nov | Semana del 16 al 20: apuntes «El equipo por dentro», proyecto «Mi equipo por dentro» y cuestionario C3 ([2026_11_16-20](2026_11_16-20)) |
-| 12 nov | Ejercicio guiado «Entrar en GRUB con el menú oculto» en la semana del 9 al 13 ([ejercicio-grub-oculto.md](2026_11_09-13/actividades/ejercicio-grub-oculto.md)) |
 
 ## Fechas importantes
 
