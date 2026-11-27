@@ -49,7 +49,7 @@ Cómo se califica cada parte de la evaluación.
 
 ### Exámenes parciales (P) y examen final (F)
 
-En papel, con preguntas de dos tipos, de 1 punto cada una: verdadero o falso (cada acierto suma 1, cada error resta 0,5 y una pregunta en blanco vale 0; esta parte nunca baja de 0) y unir pares (0,25 por cada pareja bien unida; las mal unidas no restan). Los contenidos con más porcentaje tienen más preguntas, y la nota es proporcional a los puntos obtenidos. La rúbrica de cada examen se publica aquí antes del examen. Para practicar, hay un [simulacro del examen parcial (P1)](simulacro-P1.md), con las respuestas debajo de cada pregunta.
+En papel, con preguntas de dos tipos, de 1 punto cada una: verdadero o falso (cada acierto suma 1, cada error resta 0,5 y una pregunta en blanco vale 0; esta parte nunca baja de 0) y unir pares (0,25 por cada pareja bien unida; las mal unidas no restan). Los contenidos con más porcentaje tienen más preguntas, y la nota es proporcional a los puntos obtenidos. La rúbrica de cada examen se publica aquí antes del examen. Para practicar, hay un [simulacro del examen parcial (P1)](simulacro-P1-SI.md), con las respuestas debajo de cada pregunta.
 
 ### Actividades guiadas (A)
 

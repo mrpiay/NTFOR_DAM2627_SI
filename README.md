@@ -6,8 +6,8 @@ Materiales del módulo de **Sistemas informáticos (SI)**, con una carpeta por s
 
 | Fecha | Qué cambia |
 |---|---|
-| 27 nov | Los exámenes escritos (P y F) son de **verdadero o falso** (cada acierto suma 1, cada error resta 0,5 y en blanco vale 0; esa parte nunca baja de 0) y de **unir pares** (0,25 por pareja bien unida, sin restar), de 1 punto cada pregunta ([programacion/1a-evaluacion.md](programacion/1a-evaluacion.md#rúbricas)). El simulacro del P1, ya en ese formato ([programacion/simulacro-P1.md](programacion/simulacro-P1.md)) |
-| 24 nov | Simulacro del examen parcial (P1), con las respuestas debajo de cada pregunta ([programacion/simulacro-P1.md](programacion/simulacro-P1.md)) |
+| 27 nov | Los exámenes escritos (P y F) son de **verdadero o falso** (cada acierto suma 1, cada error resta 0,5 y en blanco vale 0; esa parte nunca baja de 0) y de **unir pares** (0,25 por pareja bien unida, sin restar), de 1 punto cada pregunta ([programacion/1a-evaluacion.md](programacion/1a-evaluacion.md#rúbricas)). El simulacro del P1, ya en ese formato ([programacion/simulacro-P1-SI.md](programacion/simulacro-P1-SI.md)) |
+| 24 nov | Simulacro del examen parcial (P1), con las respuestas debajo de cada pregunta ([programacion/simulacro-P1-SI.md](programacion/simulacro-P1-SI.md)) |
 | 23 nov | Soluciones del cuestionario C3 ([2026_11_16-20/soluciones](2026_11_16-20/soluciones)) |
 | 19 nov | Ampliación de la UD1: las tarjetas de red con una máquina virtual, qué MAC e IP muestran `ipconfig`, VirtualBox y Ubuntu ([apuntes](2026_11_16-20/apuntes/ampliacion-red-maquina-virtual.md)) |
 | 17 nov | Las **actividades guiadas (A)** se califican, una vez terminadas, por su **nivel de implementación y comprensión**: la mitad de la nota es cuánto funciona o se ha completado y la otra mitad, cuánto se sabe explicar, con 4 preguntas sobre el diseño y la arquitectura del proyecto ([rúbricas](programacion/1a-evaluacion.md#rúbricas)) |
