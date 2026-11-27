@@ -1,159 +1,227 @@
 # Sistemas Informáticos · 1º DAM · Examen parcial (P1) · Simulacro
 
 - **Duración:** 1 hora y 30 minutos.
-- **Tiempo medio de respuesta a cada apartado:** minuto y medio.
-- Cada pregunta indica los puntos que vale: cada dato que se pide vale 0,5, y 0,25 cuando es un elemento de una lista. En total, 26 puntos; la nota, de 0 a 10, es proporcional: puntos obtenidos × 10 / 26.
-- **Preguntas adicionales:** al final hay 8 preguntas optativas, de 1 punto cada una, para sustituir preguntas del examen que no se sepan. Sus puntos se suman a los demás, pero la nota no pasa de 26 puntos, es decir, de un 10.
-- Debajo de cada pregunta, su respuesta: cada dato en una línea que empieza por lo que vale, entre corchetes.
+- **Verdadero o falso** (1 punto): se marca V o F. Cada acierto suma 1 punto, cada error resta 0,5 y una pregunta en blanco vale 0. Los errores solo restan dentro de esta parte, que nunca baja de 0: no quitan puntos de unir pares. Conviene contestar aunque haya dudas: compensa en cuanto se acierta más de una de cada tres veces.
+- **Unir pares** (1 punto): cada elemento de la izquierda va con uno de la derecha. La derecha tiene una opción de más, que no va con ninguno. Cada pareja bien unida vale 0,25, y las mal unidas no restan.
+- En total, 27 preguntas y 27 puntos; la nota, de 0 a 10, es proporcional: puntos obtenidos × 10 / 27.
+- **Preguntas adicionales:** al final hay 11 preguntas optativas, con las mismas reglas, para sustituir preguntas del examen que no se sepan. Sus puntos se suman a los demás, pero la nota no pasa de 27 puntos, es decir, de un 10.
+- Debajo de cada pregunta, la respuesta correcta marcada y su porqué.
 
 ---
 
-## UD1 · Sistemas informáticos. Hardware y software (10,5 puntos)
+## UD1 · Sistemas informáticos. Hardware y software
 
-### Componentes, memorias, sistemas de numeración y seguridad (7 puntos)
+### Componentes, memorias, sistemas de numeración y seguridad
 
-**1.** *(1,5 puntos)* ¿Cuáles son las tres partes de la CPU y qué hace cada una?
+**1.** Une cada parte del equipo con lo que hace.
 
-- **[0,25]** La **unidad de control**.
-- **[0,25]** Lee e interpreta cada instrucción y da las órdenes para ejecutarla.
-- **[0,25]** La **ALU**.
-- **[0,25]** Hace las operaciones aritméticas y lógicas.
-- **[0,25]** Los **registros**.
-- **[0,25]** Son memorias diminutas y muy rápidas dentro de la CPU, con los datos con los que trabaja en cada momento.
+| | Parte | | Qué hace |
+|---|---|---|---|
+| 1 | Unidad de control | a | Hace las operaciones aritméticas y lógicas |
+| 2 | ALU | b | Lee e interpreta cada instrucción y da las órdenes para ejecutarla |
+| 3 | Registros | c | Guarda el firmware de la placa y no se borra al apagar |
+| 4 | RAM | d | Memorias diminutas y muy rápidas dentro de la CPU, con los datos con los que trabaja en cada momento |
+| | | e | Guarda los programas que se están ejecutando, que pasan a ella desde el almacenamiento |
 
-**2.** *(1 punto)* Ordena de más rápida a más lenta: RAM, SSD, caché L1, registros y caché L3. ¿Cuáles se borran al apagar el equipo?
+1 → **b** &nbsp;&nbsp;&nbsp; 2 → **a** &nbsp;&nbsp;&nbsp; 3 → **d** &nbsp;&nbsp;&nbsp; 4 → **e**
 
-- **[0,5]** Registros → caché L1 → caché L3 → RAM → SSD.
-- **[0,5]** Se borran los registros, las cachés y la RAM, porque son volátiles.
+*Por qué:* La unidad de control, la ALU y los registros son las tres partes de la CPU. Para ejecutarse, un programa pasa del almacenamiento a la **RAM**, y de ahí la CPU lee sus instrucciones. La c es la **ROM** o la **flash**, que no son volátiles.
 
-**3.** *(1,5 puntos)* Una memoria es DDR4-3600 CL18. ¿A cuántos MHz va su reloj, y por qué? Calcula su latencia en nanosegundos.
+**2.** De más rápida a más lenta, el orden es: registros, caché L1, caché L3, RAM y SSD.
 
-- **[0,5]** A **1800 MHz**.
-- **[0,5]** Porque la DDR hace dos transferencias por ciclo: los MT/s son el doble de los MHz (3600 / 2).
-- **[0,5]** Un ciclo dura 1 / 1800 MHz ≈ 0,556 ns, y 18 ciclos son **10 ns**.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-**4.** *(1,5 puntos)* La memoria de un equipo aparece así en el Administrador de tareas: DDR4, 3200 MT/s, ranuras usadas 1 de 2, factor de forma SODIMM. ¿Para qué tipo de equipo es esa memoria, y por qué? ¿Se puede ampliar?
+*Por qué:* Registros → caché (L1 la más rápida, L3 la más lenta de las tres) → RAM → almacenamiento.
 
-- **[0,5]** Para un **portátil**.
-- **[0,5]** Porque el factor de forma es **SODIMM**, el módulo pequeño de los portátiles; los de sobremesa usan **DIMM**.
-- **[0,5]** **Sí**, porque hay una ranura libre.
+**3.** Al apagar el equipo se borran la RAM y el SSD, porque los dos son memorias.
 
-**5.** *(1 punto)* Una pequeña empresa quiere que, si se estropea uno de los 2 discos de su servidor, no se pierda nada. ¿Qué RAID usaría? ¿Por qué un RAID no sustituye a las copias de seguridad?
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-- **[0,5]** **RAID 1** (espejo): los dos discos tienen los mismos datos.
-- **[0,5]** Un RAID protege del fallo de un disco, no de los errores: si se borra o se estropea un archivo, pasa en los dos discos a la vez.
+*Por qué:* Se borran los registros, las cachés y la RAM, porque son **volátiles**. El SSD es almacenamiento, y lo que guarda sigue ahí al apagar.
 
-**6.** *(0,5 puntos)* ¿Por qué no se debe abrir nunca la fuente de alimentación de un ordenador, aunque esté desconectada?
+**4.** Una memoria DDR4-3600 tiene un reloj de 3600 MHz.
 
-- **[0,5]** Porque sus **condensadores** guardan una carga eléctrica peligrosa aunque esté desconectada.
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-### Puesta en marcha de un equipo (1,5 puntos)
+*Por qué:* Va a **1800 MHz**. La DDR hace dos transferencias por ciclo, así que los MT/s son el doble de los MHz: 3600 / 2.
 
-**7.** *(1,5 puntos)* ¿Qué es el POST? Si un ordenador pita al encenderlo y no da imagen, ¿en qué fase falla y dónde se mira qué significan los pitidos?
+**5.** Una memoria DDR4-3600 CL18 tiene una latencia de unos 10 ns.
 
-- **[0,5]** La comprobación del hardware (procesador, memoria, gráfica) que hace el firmware al encender, antes de buscar el sistema.
-- **[0,5]** Falla en el **POST**.
-- **[0,5]** Los pitidos se miran en el **manual del fabricante** de la placa base.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-### Periféricos: clasificar, instalar y configurar (2 puntos)
+*Por qué:* El reloj va a 1800 MHz, así que un ciclo dura 1 / 1800 MHz ≈ 0,556 ns, y 18 ciclos son **10 ns**.
 
-**8.** *(1 punto)* ¿Qué es un driver? En Windows, ¿dónde se ve si a un dispositivo le falta el driver?
+**6.** La memoria de un equipo aparece así en el Administrador de tareas: DDR4, 3200 MT/s, ranuras usadas 1 de 2, factor de forma SODIMM. Es la memoria de un portátil, y se puede ampliar.
 
-- **[0,5]** El programa que explica al sistema operativo cómo manejar un dispositivo.
-- **[0,5]** En el **Administrador de dispositivos**, con una marca amarilla.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-**9.** *(1 punto)* Clasifica como de entrada, de salida o de entrada/salida: un micrófono, una impresora con escáner, un proyector y una pantalla táctil.
+*Por qué:* **SODIMM** es el módulo pequeño de los portátiles; los de sobremesa usan **DIMM**. Se puede ampliar porque hay una ranura libre.
 
-- **[0,25]** Micrófono: **entrada**.
-- **[0,25]** Impresora con escáner: **entrada/salida**, porque imprime y escanea.
-- **[0,25]** Proyector: **salida**.
-- **[0,25]** Pantalla táctil: **entrada/salida**, porque muestra y recibe.
+**7.** Los dos discos de un servidor están en RAID 1. Si alguien borra un archivo por error, se puede recuperar del otro disco.
 
-## UD2 · Sistemas operativos. Instalación (15,5 puntos)
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-### Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos (4,5 puntos)
+*Por qué:* En **RAID 1** (espejo), los dos discos tienen los mismos datos: el archivo se borra en los dos a la vez. Un RAID protege del fallo de un disco, no de los errores, y por eso no sustituye a las copias de seguridad.
 
-**10.** *(1,5 puntos)* ¿Cuáles son las dos funciones de un sistema operativo? ¿Qué es el kernel?
+**8.** Una fuente de alimentación se puede abrir sin peligro si está desconectada.
 
-- **[0,5]** Ofrecer una **interfaz** para usar el equipo.
-- **[0,5]** **Gestionar los recursos** (procesador, memoria, dispositivos, archivos) entre los programas.
-- **[0,5]** El kernel es la parte central: siempre está en memoria y es quien habla con el hardware.
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-**11.** *(1,5 puntos)* ¿En qué se diferencian un kernel monolítico y un microkernel? ¿De qué tipo es el de Linux?
+*Por qué:* Sus **condensadores** guardan una carga eléctrica peligrosa aunque esté desconectada. No se abre nunca.
 
-- **[0,5]** En el **monolítico**, todo el sistema, también los drivers, funciona dentro del kernel: rápido, pero un fallo puede tirarlo todo.
-- **[0,5]** En el **microkernel**, el kernel hace lo mínimo y el resto son programas aparte: más estable, pero más lento.
-- **[0,5]** Linux es **monolítico, pero modular**: muchos drivers son módulos que el kernel carga solo cuando hacen falta.
+### Puesta en marcha de un equipo
 
-**12.** *(1,5 puntos)* ¿Qué diferencia hay entre software libre y software propietario? La versión base de VirtualBox tiene licencia GPL: ¿con qué condición se puede publicar una versión modificada?
+**9.** Un ordenador pita al encenderlo y no da imagen. Falla en el POST, y lo que significan los pitidos se mira en el manual del fabricante de la placa base.
 
-- **[0,5]** El **libre** se puede usar, estudiar (el código está disponible), modificar y redistribuir.
-- **[0,5]** El **propietario** no da el código y limita el uso.
-- **[0,5]** Que la versión modificada también sea **GPL** y se distribuya con su código fuente (*copyleft*).
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-### Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones (7,5 puntos)
+*Por qué:* El **POST** es la comprobación del hardware (procesador, memoria, gráfica) que hace el firmware al encender, antes de buscar el sistema. Los códigos de pitidos dependen del fabricante de la placa.
 
-**13.** *(1,5 puntos)* ¿Qué tipos de hipervisores hay y en qué se diferencian? ¿De qué tipo es VirtualBox?
+### Periféricos: clasificar, instalar y configurar
 
-- **[0,5]** **Tipo 1**: funciona directamente sobre el hardware, sin sistema operativo debajo; se usa en servidores.
-- **[0,5]** **Tipo 2**: funciona como un programa dentro de un sistema operativo.
-- **[0,5]** VirtualBox es de **tipo 2**.
+**10.** En Windows, un dispositivo al que le falta el driver aparece con una marca amarilla en el Administrador de dispositivos.
 
-**14.** *(1,5 puntos)* ¿Cuántas particiones principales admiten las tablas MBR y GPT? ¿Por qué en un disco GPT no hay particiones lógicas?
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-- **[0,5]** MBR, **4**.
-- **[0,5]** GPT, hasta **128** en Windows.
-- **[0,5]** Porque no las necesita: las lógicas eran el truco de MBR para pasar de 4 particiones.
+*Por qué:* El **driver** es el programa que explica al sistema operativo cómo manejar un dispositivo; sin él, el **Administrador de dispositivos** lo marca en amarillo.
 
-**15.** *(1,5 puntos)* Escribe en orden las fases del arranque de Ubuntu. Si al encender sale `grub>`, ¿en qué fase falla?
+**11.** Una impresora con escáner es un periférico de salida.
 
-- **[0,25]** **Firmware** (POST y búsqueda en el orden de arranque).
-- **[0,25]** **Gestor de arranque** (GRUB).
-- **[0,25]** **Kernel**.
-- **[0,25]** **systemd**.
-- **[0,25]** **Inicio de sesión**.
-- **[0,25]** `grub>` sale cuando falla la fase del **gestor de arranque**: GRUB arranca, pero no encuentra su configuración.
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-**16.** *(1,5 puntos)* ¿En qué archivo se cambia la configuración de GRUB y con qué orden se aplica? ¿Por qué no se edita `/boot/grub/grub.cfg` a mano?
+*Por qué:* Es de **entrada/salida**: imprime (salida) y escanea (entrada).
 
-- **[0,5]** En **`/etc/default/grub`**.
-- **[0,5]** Se aplica con **`sudo update-grub`**.
-- **[0,5]** Porque `update-grub` lo vuelve a generar, también en las actualizaciones, y se perdería lo escrito.
+**12.** Una pantalla táctil es un periférico de entrada/salida.
 
-**17.** *(1,5 puntos)* ¿Qué hacen `sudo apt update` y `sudo apt upgrade`? ¿Para qué hace falta `sudo`?
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-- **[0,5]** `apt update` descarga la lista actualizada de paquetes de los repositorios.
-- **[0,5]** `apt upgrade` actualiza los paquetes instalados.
-- **[0,5]** `sudo` ejecuta la orden con permisos de administrador (`root`), porque instalar y actualizar cambia el sistema.
+*Por qué:* Muestra la imagen (salida) y recibe los toques (entrada).
 
-### Instalar y actualizar sistemas libres y propietarios (3,5 puntos)
+## UD2 · Sistemas operativos. Instalación
 
-**18.** *(1,5 puntos)* ¿Qué es el TPM y qué versión pide Windows 11? ¿Con qué herramienta de Windows se comprueba si está listo para usarse?
+### Funciones, tipos, arquitectura, licencias y comparación de sistemas operativos
 
-- **[0,5]** Un chip de la placa base que guarda claves de cifrado y ayuda a comprobar que el equipo arranca sin manipulaciones.
-- **[0,5]** Windows 11 pide la **2.0**.
-- **[0,5]** Con **`tpm.msc`**.
+**13.** La única función de un sistema operativo es ofrecer una interfaz para usar el equipo.
 
-**19.** *(1 punto)* Un equipo tiene un procesador compatible con Windows 11 de cuatro núcleos a 2,5 GHz, 8 GB de RAM, un SSD de 256 GB y firmware UEFI con arranque seguro, pero no tiene TPM. ¿Puede instalar Windows 11? ¿Por qué?
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-- **[0,5]** **No**.
-- **[0,5]** Cumple el procesador, la memoria, el disco y UEFI con arranque seguro, pero le falta el **TPM 2.0**.
+*Por qué:* Tiene dos: ofrecer una **interfaz** para usar el equipo y **gestionar los recursos** (procesador, memoria, dispositivos, archivos) entre los programas.
 
-**20.** *(1 punto)* ¿Para qué sirven la partición EFI y la partición de recuperación que crea Windows 11?
+**14.** El kernel es la parte del sistema operativo que siempre está en memoria y que habla con el hardware.
 
-- **[0,5]** La **EFI** guarda los programas de arranque.
-- **[0,5]** La de **recuperación** tiene las herramientas para reparar Windows.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* Es la parte central del sistema operativo.
+
+**15.** Une cada término con lo que es.
+
+| | Término | | Qué es |
+|---|---|---|---|
+| 1 | Kernel monolítico | a | Un driver que el kernel carga solo cuando hace falta |
+| 2 | Microkernel | b | Todo el sistema, también los drivers, funciona dentro del kernel: rápido, pero un fallo puede tirarlo todo |
+| 3 | Kernel de Linux | c | El kernel hace lo mínimo y el resto son programas aparte: más estable, pero más lento |
+| 4 | Módulo del kernel | d | Monolítico, pero modular |
+| | | e | Un hipervisor que funciona directamente sobre el hardware |
+
+1 → **b** &nbsp;&nbsp;&nbsp; 2 → **c** &nbsp;&nbsp;&nbsp; 3 → **d** &nbsp;&nbsp;&nbsp; 4 → **a**
+
+*Por qué:* Linux es monolítico, pero muchos de sus drivers son **módulos** que el kernel carga solo cuando hacen falta. La e es un hipervisor de tipo 1, no una parte del kernel.
+
+**16.** El software libre se puede usar, estudiar, modificar y redistribuir.
+
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* Para poder estudiarlo, su código está disponible. El **propietario** no da el código y limita el uso.
+
+**17.** La versión base de VirtualBox tiene licencia GPL. Una versión modificada se puede publicar como software propietario, sin dar su código.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* La GPL obliga a que la versión modificada también sea **GPL** y se distribuya con su código fuente: es el *copyleft*.
+
+### Planificar, virtualizar, actualizar, recuperar e instalar aplicaciones
+
+**18.** VirtualBox es un hipervisor de tipo 1, porque funciona directamente sobre el hardware.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Es de **tipo 2**: funciona como un programa dentro de un sistema operativo. El de **tipo 1** funciona directamente sobre el hardware, sin sistema operativo debajo, y se usa en servidores.
+
+**19.** Un disco con tabla MBR admite como máximo 4 particiones principales.
+
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* MBR admite **4**; GPT, hasta **128** en Windows.
+
+**20.** En un disco GPT, para tener más de 4 particiones hay que crear particiones lógicas.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* GPT no las necesita: admite hasta 128 particiones. Las lógicas eran el truco de MBR para pasar de 4.
+
+**21.** Las fases del arranque de Ubuntu, en orden, son: firmware, gestor de arranque (GRUB), kernel, systemd e inicio de sesión.
+
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* El firmware hace el POST y busca en el orden de arranque; después vienen GRUB, el kernel, systemd y el inicio de sesión.
+
+**22.** Si al encender sale `grub>`, el fallo está en la fase del kernel.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Falla la fase del **gestor de arranque**: GRUB arranca, pero no encuentra su configuración.
+
+**23.** Para cambiar la configuración de GRUB, se edita `/boot/grub/grub.cfg` y después se ejecuta `sudo update-grub`.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Se edita **`/etc/default/grub`**. `update-grub` vuelve a generar `grub.cfg` (también en las actualizaciones), así que lo escrito a mano en él se perdería.
+
+**24.** Une cada orden con lo que hace.
+
+| | Orden | | Qué hace |
+|---|---|---|---|
+| 1 | `sudo apt update` | a | Ejecuta la orden con permisos de administrador (`root`) |
+| 2 | `sudo apt upgrade` | b | Vuelve a generar la configuración de arranque a partir de `/etc/default/grub` |
+| 3 | `sudo` | c | Descarga la lista actualizada de paquetes de los repositorios |
+| 4 | `sudo update-grub` | d | Actualiza los paquetes instalados |
+| | | e | Borra los paquetes que ya no hacen falta |
+
+1 → **c** &nbsp;&nbsp;&nbsp; 2 → **d** &nbsp;&nbsp;&nbsp; 3 → **a** &nbsp;&nbsp;&nbsp; 4 → **b**
+
+*Por qué:* `update` solo descarga la lista; `upgrade` es la que actualiza. Las dos necesitan `sudo` porque instalar y actualizar cambia el sistema.
+
+### Instalar y actualizar sistemas libres y propietarios
+
+**25.** Windows 11 pide un TPM 2.0, y con `tpm.msc` se comprueba si está listo para usarse.
+
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* El **TPM** es un chip de la placa base que guarda claves de cifrado y ayuda a comprobar que el equipo arranca sin manipulaciones.
+
+**26.** Un equipo tiene un procesador compatible con Windows 11 de cuatro núcleos a 2,5 GHz, 8 GB de RAM, un SSD de 256 GB y firmware UEFI con arranque seguro, pero no tiene TPM. Puede instalar Windows 11.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Cumple el procesador, la memoria, el disco y UEFI con arranque seguro, pero le falta el **TPM 2.0**.
+
+**27.** La partición EFI que crea Windows 11 tiene las herramientas para reparar Windows.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* La **EFI** guarda los programas de arranque. Las herramientas para reparar Windows están en la partición de **recuperación**.
 
 ## Preguntas adicionales
 
-Optativas, para sustituir preguntas del examen que no se sepan.
+Optativas, con las mismas reglas, para sustituir preguntas del examen que no se sepan.
 
-**21.** *(1 punto)* ¿Qué es WSL? ¿En qué se diferencia de una máquina virtual de VirtualBox?
+**28.** WSL ejecuta un Linux dentro de Windows sin crear un ordenador virtual completo, con su firmware, su disco y su arranque, como hace VirtualBox.
 
-- **[0,5]** WSL (*Windows Subsystem for Linux*) ejecuta un Linux de verdad dentro de Windows, sin máquina virtual aparte ni arranque dual.
-- **[0,5]** Con VirtualBox se crea un ordenador virtual completo, con su firmware, su disco y su arranque, y en él se instala el sistema.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-**22.** *(1 punto)* ¿Qué sale por pantalla al ejecutar estas órdenes? ¿Qué hace el `|` de la última?
+*Por qué:* **WSL** (*Windows Subsystem for Linux*) ejecuta un Linux de verdad dentro de Windows, sin máquina virtual aparte ni arranque dual. Con VirtualBox se crea un ordenador virtual completo y en él se instala el sistema.
+
+**29.** Al ejecutar estas órdenes, la última muestra las frutas en el orden en que se escribieron: pera, manzana y kiwi.
 
 ```bash
 echo "pera" > frutas.txt
@@ -162,38 +230,68 @@ echo "kiwi" >> frutas.txt
 cat frutas.txt | sort
 ```
 
-- **[0,5]** Las tres frutas ordenadas: `kiwi`, `manzana` y `pera`, cada una en una línea.
-- **[0,5]** Es una tubería: pasa lo que sale de `cat` (el contenido del archivo) como entrada de `sort`, que ordena las líneas.
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-**23.** *(1 punto)* En VirtualBox, ¿en qué modo de red tiene Internet la máquina, y en cuál se puede comunicar con Windows?
+*Por qué:* El `|` es una **tubería**: pasa lo que sale de `cat` (el contenido del archivo) como entrada de `sort`, que ordena las líneas. Sale `kiwi`, `manzana` y `pera`, cada una en una línea.
 
-- **[0,5]** En **NAT** tiene Internet: un router virtual de VirtualBox la saca a Internet por la tarjeta real de Windows.
-- **[0,5]** En **Host-only** se comunica con Windows, a través del adaptador *VirtualBox Host-Only*.
+**30.** En VirtualBox, la máquina virtual se comunica con Windows en el modo de red NAT, a través del adaptador *VirtualBox Host-Only*.
 
-**24.** *(1 punto)* ¿Qué tabla de particiones va con BIOS y cuál con UEFI?
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-- **[0,5]** Con BIOS, **MBR**.
-- **[0,5]** Con UEFI, **GPT**.
+*Por qué:* Ese es el modo **Host-only**. En **NAT**, la máquina tiene Internet: un router virtual de VirtualBox la saca a Internet por la tarjeta real de Windows.
 
-**25.** *(1 punto)* ¿Cuál es el tamaño máximo de un archivo en FAT32? ¿Cuál de los dos, FAT32 o NTFS, permite poner permisos a archivos y carpetas?
+**31.** Con firmware UEFI se usa la tabla de particiones GPT, y con BIOS, MBR.
 
-- **[0,5]** **4 GB**.
-- **[0,5]** **NTFS**.
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-**26.** *(1 punto)* Un procesador tiene 8 núcleos y 16 procesadores lógicos. ¿Qué es un procesador lógico? ¿Cuántos hilos lleva cada núcleo?
+*Por qué:* Cada firmware va con su tabla: BIOS con **MBR** y UEFI con **GPT**.
 
-- **[0,5]** Cada unidad de procesamiento que el sistema operativo reconoce y puede utilizar para ejecutar hilos de software.
-- **[0,5]** **2 hilos**: con 2 hilos por núcleo, el sistema reconoce 16 procesadores lógicos (8 × 2).
+**32.** Un archivo de 6 GB se puede guardar en un pendrive formateado en FAT32.
 
-**27.** *(1 punto)* ¿Qué es una distribución de Linux? Pon dos ejemplos.
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
 
-- **[0,5]** Un sistema operativo basado en el kernel Linux que incluye programas, herramientas, un sistema de gestión de paquetes y, normalmente, un entorno de escritorio.
-- **[0,25]** Una distribución, por ejemplo **Kali**.
-- **[0,25]** Otra distinta, por ejemplo **Arch**.
+*Por qué:* En FAT32, un archivo puede ocupar como máximo **4 GB**. NTFS no tiene ese límite y, además, permite poner permisos a archivos y carpetas.
 
-Vale cualquiera de los apuntes: Debian, Ubuntu, Linux Mint, Fedora, Arch, Manjaro, Kali o Parrot.
+**33.** Un procesador tiene 8 núcleos y 16 procesadores lógicos: cada núcleo lleva 2 hilos.
 
-**28.** *(1 punto)* Una empresa quiere cifrar los discos de sus portátiles con BitLocker. ¿Qué edición de Windows 11 no le sirve y cuál sí?
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
 
-- **[0,5]** No le sirve **Home**: no tiene BitLocker.
-- **[0,5]** Le sirve **Pro** (o Enterprise, si es una empresa mediana o grande).
+*Por qué:* Un **procesador lógico** es cada unidad de procesamiento que el sistema operativo reconoce y puede usar para ejecutar hilos. Con 2 hilos por núcleo, reconoce 8 × 2 = 16.
+
+**34.** Una distribución de Linux es el kernel Linux solo, sin programas ni gestor de paquetes.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Una **distribución** es un sistema operativo basado en el kernel Linux que incluye programas, herramientas, un sistema de gestión de paquetes y, normalmente, un entorno de escritorio: Debian, Ubuntu, Linux Mint, Fedora, Arch, Manjaro, Kali o Parrot.
+
+**35.** Una empresa quiere cifrar los discos de sus portátiles con BitLocker. Le sirve Windows 11 Home.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* Home no tiene BitLocker. Le sirve **Pro** (o Enterprise, si es una empresa mediana o grande).
+
+**36.** Una máquina virtual con Ubuntu tiene la IP `10.0.2.15` en NAT, y `192.168.56.101` en Host-only. Une cada `ping` con lo que pasa.
+
+| | `ping` | | Qué pasa |
+|---|---|---|---|
+| 1 | En NAT, desde Ubuntu: `ping -c 4 8.8.8.8` | a | Responde: el router virtual de VirtualBox saca la máquina a Internet por la tarjeta real de Windows |
+| 2 | En NAT, desde Windows: `ping 10.0.2.15` | b | No responde: Windows no tiene ninguna tarjeta en la red `10.0.2.0/24` |
+| 3 | En Host-only, desde Windows: `ping 192.168.56.101` | c | Responde: el adaptador *VirtualBox Host-Only* de Windows y la máquina están en la misma red, `192.168.56.0/24` |
+| 4 | En Host-only, desde Ubuntu: `ping -c 4 8.8.8.8` | d | `Network is unreachable`: sin puerta de enlace, Ubuntu no sabe por dónde enviar lo que no es de su red |
+| | | e | Responde: el adaptador *VirtualBox Host-Only* de Windows está conectado con la máquina en cualquier modo de red |
+
+1 → **a** &nbsp;&nbsp;&nbsp; 2 → **b** &nbsp;&nbsp;&nbsp; 3 → **c** &nbsp;&nbsp;&nbsp; 4 → **d**
+
+*Por qué:* En **NAT**, el otro extremo es un router virtual de VirtualBox (`10.0.2.2`), que saca la máquina a Internet, pero Windows no está en esa red. En **Host-only**, el otro extremo es el adaptador *VirtualBox Host-Only* de Windows (`192.168.56.1`): Windows y la máquina se ven, pero no hay salida a Internet. La e es falsa: ese adaptador sale siempre en `ipconfig`, pero con la máquina en NAT no hay nadie al otro extremo.
+
+**37.** Con la máquina en Host-only, `ping -c 4 192.168.56.1` desde Ubuntu no responde. Eso quiere decir que Ubuntu y Windows no están conectados.
+
+**V** ☐ &nbsp;&nbsp;&nbsp; **F** ☒
+
+*Por qué:* La conexión existe: desde Windows, `ping 192.168.56.101` sí responde. Lo normal es que el **cortafuegos de Windows** no conteste a los `ping` que le llegan, porque suele tratar el adaptador Host-Only como una red pública.
+
+**38.** Con la máquina en NAT, `ping -c 4 10.0.2.2` desde Ubuntu responde.
+
+**V** ☒ &nbsp;&nbsp;&nbsp; **F** ☐
+
+*Por qué:* `10.0.2.2` es el **router virtual de VirtualBox**, la puerta de enlace de la máquina en NAT (la línea `default via 10.0.2.2` de `ip route`). Por él sale todo lo que Ubuntu envía fuera de su red.
